@@ -14,6 +14,7 @@ import {
   X,
   ExternalLink,
   ChevronRight,
+  CalendarDays,
 } from "lucide-react";
 import { useState } from "react";
 
@@ -23,6 +24,7 @@ const navItems = [
   { href: "/admin/contatos", label: "Contatos", icon: Mail },
   { href: "/admin/portfolio", label: "Portfólio", icon: Briefcase },
   { href: "/admin/conhecimento", label: "Conhecimento", icon: BookOpen },
+  { href: "/admin/reunioes", label: "Reuniões", icon: CalendarDays },
   { href: "/admin/inteligencia", label: "Inteligência", icon: Brain },
 ];
 
@@ -32,6 +34,7 @@ const pageTitle: Record<string, string> = {
   "/admin/contatos": "Contatos",
   "/admin/portfolio": "Portfólio",
   "/admin/conhecimento": "Conhecimento",
+  "/admin/reunioes": "Reuniões",
   "/admin/inteligencia": "Inteligência",
 };
 
