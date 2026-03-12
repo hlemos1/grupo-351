@@ -1,0 +1,38 @@
+[
+  {
+    "id": "ct1-a2b3-c4d5-e6f7-a8b9c0d1e2f3",
+    "criadoEm": "2025-03-04T11:00:00.000Z",
+    "lido": true,
+    "arquivado": false,
+    "nome": "Pedro Gonçalves",
+    "email": "pedro.g@example.com",
+    "empresa": "DigitalFlow Agency",
+    "tipo": "fornecedor",
+    "mensagem": "Somos uma agência de marketing digital em Lisboa e gostaríamos de apresentar nossos serviços ao Grupo +351. Temos experiência com marcas B2C e e-commerce.",
+    "notas": "Contactar quando precisarmos de agência para Veeenha"
+  },
+  {
+    "id": "ct2-b3c4-d5e6-f7a8-b9c0d1e2f3a4",
+    "criadoEm": "2025-03-08T08:30:00.000Z",
+    "lido": false,
+    "arquivado": false,
+    "nome": "Sofia Martins",
+    "email": "sofia.m@example.com",
+    "empresa": "",
+    "tipo": "parceria",
+    "orcamento": "a-definir",
+    "mensagem": "Sou proprietária de 2 barbearias no Porto e vi o projeto Barbearia do Rão. Tenho interesse em entender melhor o modelo. Posso disponibilizar os meus espaços como pilotos."
+  },
+  {
+    "id": "ct3-c4d5-e6f7-a8b9-c0d1e2f3a4b5",
+    "criadoEm": "2025-03-10T18:45:00.000Z",
+    "lido": false,
+    "arquivado": false,
+    "nome": "Carlos Henrique Souza",
+    "email": "carlos.hs@example.com",
+    "empresa": "CH Importações",
+    "tipo": "joint-venture",
+    "orcamento": "50k-200k",
+    "mensagem": "Trabalho com importação de equipamentos industriais do China. Tenho interesse na Purple Party. Posso trazer know-how de supply chain e contactos com fornecedores em Yiwu e Guangzhou."
+  }
+]

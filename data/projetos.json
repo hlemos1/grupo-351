@@ -1,0 +1,132 @@
+[
+  {
+    "slug": "forge-and-flow-3d",
+    "name": "Forge and Flow 3D",
+    "tagline": "Manufatura distribuída + franquia leve + infoproduto",
+    "description": "Vertical de manufatura distribuída baseada em impressão 3D, venda de produtos próprios e licenciados, infoprodutos educacionais e modelo de franquias leves.",
+    "detalhes": [
+      "Farm própria de impressoras 3D com produção sob demanda",
+      "Catálogo de produtos utilitários, decoração e peças customizadas",
+      "Modelo de franquia leve — CAPEX baixo, sem logística pesada",
+      "Infoproduto obrigatório para franqueados (via Ruptfy)",
+      "Licenciamento de arquivos STL com controle centralizado",
+      "Integração com Veeenha!!! como canal de venda local"
+    ],
+    "tag": "Manufatura Digital",
+    "status": "Em operação",
+    "mercado": "Portugal / Europa",
+    "controle": "100% Holding",
+    "icon": "printer"
+  },
+  {
+    "slug": "veeenha",
+    "name": "Veeenha!!!",
+    "tagline": "Super app e marketplace regional de Cascais",
+    "description": "Super App que conecta comércio local, serviços e marcas próprias. Infraestrutura digital de economia local — não é e-commerce genérico.",
+    "detalhes": [
+      "Cadastro de lojistas e catálogo de produtos/serviços locais",
+      "Captura de dados de consumo, recorrência e preferências regionais",
+      "Sensor FIGITAL de consumo local para o ecossistema",
+      "Modelo replicável por cidade para expansão futura",
+      "Canal direto para marcas próprias do grupo"
+    ],
+    "tag": "Marketplace / Super App",
+    "status": "Em desenvolvimento",
+    "mercado": "Cascais, Portugal",
+    "controle": "100% Holding",
+    "icon": "shopping-bag"
+  },
+  {
+    "slug": "ruptfy",
+    "name": "Ruptfy",
+    "tagline": "Plataforma EdTech de cursos e consórcios educacionais",
+    "description": "Plataforma própria de educação digital. Não é um curso — é a fábrica de cursos do grupo. Motor de recorrência digital com margem alta.",
+    "detalhes": [
+      "Hospeda cursos próprios e de marcas do ecossistema",
+      "Modelo de consórcio de cursos e certificações",
+      "Infraestrutura para creators e experts parceiros",
+      "Base de treinamento obrigatório para franqueados",
+      "Sensor FIGITAL de aprendizado — captura progressão e retenção"
+    ],
+    "tag": "EdTech",
+    "status": "Em desenvolvimento",
+    "mercado": "Portugal / Brasil",
+    "parceiro": "Levi Guimarães",
+    "controle": "70% Holding / 30% Operador (vesting)",
+    "icon": "graduation-cap"
+  },
+  {
+    "slug": "purple-party",
+    "name": "Purple Party",
+    "tagline": "Franqueadora + plataforma atacadista China-Europa",
+    "description": "Plataforma que compra produtos na China com margem de atacado e distribui via lojas franqueadas, e-commerce B2C e canais digitais. Um Alibaba Express com franquia física.",
+    "detalhes": [
+      "Sourcing direto da China com controle de supply chain",
+      "Loja física piloto + e-commerce próprio",
+      "Modelo de franquia padronizada para expansão",
+      "Escala por poder de compra e giro de estoque",
+      "Integração com Forge and Flow 3D para know-how de franquia"
+    ],
+    "tag": "Franquia / Atacado",
+    "status": "Em desenvolvimento",
+    "mercado": "Portugal / Europa",
+    "parceiro": "Omari Bacel",
+    "controle": "50% Holding / 50% Operador",
+    "icon": "package"
+  },
+  {
+    "slug": "cortex-fc",
+    "name": "Córtex FC",
+    "tagline": "Infoproduto estratégico de gestão e decisão",
+    "description": "Produto de conhecimento aplicado sobre gestão, visão estratégica e tomada de decisão. Porta de entrada para comunidade, produtos premium e outros ativos do grupo.",
+    "detalhes": [
+      "Conteúdo com intenção econômica, não motivacional",
+      "Alimenta a Ruptfy como plataforma de distribuição",
+      "Gera audiência e autoridade para o ecossistema",
+      "Upsell para consultorias e produtos premium"
+    ],
+    "tag": "Infoproduto",
+    "status": "Em estruturação",
+    "mercado": "Global (PT/BR)",
+    "parceiro": "Tiago Silva",
+    "controle": "60% Holding / 40% Imagem (vesting)",
+    "icon": "brain"
+  },
+  {
+    "slug": "long-view",
+    "name": "Long View",
+    "tagline": "Autoridade, narrativa e visão de longo prazo",
+    "description": "Infoproduto de visão estratégica de longo prazo. Ativo de reputação construído sobre autoridade e percepção de valor intangível.",
+    "detalhes": [
+      "Produto premium de conteúdo intelectual",
+      "Distribuição via base do parceiro + canais próprios",
+      "Diferenciado do Córtex FC pela proposta intelectual",
+      "Formatos: curso, comunidade, mentorias"
+    ],
+    "tag": "Infoproduto",
+    "status": "Em estruturação",
+    "mercado": "Global (PT/BR)",
+    "parceiro": "Marcello Antony",
+    "controle": "60% Holding / 40% Imagem (vesting)",
+    "icon": "telescope"
+  },
+  {
+    "slug": "barbearia-do-rao",
+    "name": "Barbearia do Rão",
+    "tagline": "Marca física de barbearia com modelo híbrido",
+    "description": "Marca de barbearia com modelo societário híbrido: marca + operador + investidor. Plano de 3 unidades com padrão operacional definido.",
+    "detalhes": [
+      "€10.000 por unidade — modelo CAPEX controlado",
+      "Marca fornece nome, padrão, método e expansão",
+      "Operadores entram com trabalho, investidor com capital",
+      "Manual operacional e modelo financeiro por unidade",
+      "Dados FIGITAIS de fluxo, ticket e recorrência"
+    ],
+    "tag": "Franquia Física",
+    "status": "Em estruturação",
+    "mercado": "Portugal",
+    "parceiro": "Daniel Bittencourt, Everson Perninha, Dom Patrício",
+    "controle": "30% Marca + 30% Investidor + 40% Operadores",
+    "icon": "scissors"
+  }
+]

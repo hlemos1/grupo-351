@@ -1,0 +1,12 @@
+import type { Metadata } from "next";
+import { EcossistemaPage } from "./EcossistemaPage";
+
+export const metadata: Metadata = {
+  title: "Ecossistema FIGITAL — GRUPO +351",
+  description:
+    "Visualize como as marcas do Grupo +351 se conectam no ecossistema FIGITAL. Infraestrutura, neurônios e distribuição em rede.",
+};
+
+export default function Ecossistema() {
+  return <EcossistemaPage />;
+}
