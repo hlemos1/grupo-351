@@ -1,9 +1,7 @@
-import Anthropic from "@anthropic-ai/sdk";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 import { buildSystemPrompt } from "@/lib/ai-context";
 import { aiMessagesSchema } from "@/lib/validations";
 import { rateLimit, getClientIP } from "@/lib/rate-limit";
-
-const client = new Anthropic();
 
 export async function POST(request: Request) {
   const ip = getClientIP(request);
@@ -15,10 +13,10 @@ export async function POST(request: Request) {
     );
   }
 
-  const apiKey = process.env.ANTHROPIC_API_KEY;
+  const apiKey = process.env.GOOGLE_API_KEY;
   if (!apiKey) {
     return new Response(
-      JSON.stringify({ error: "ANTHROPIC_API_KEY não configurada no .env.local" }),
+      JSON.stringify({ error: "GOOGLE_API_KEY não configurada nas variáveis de ambiente" }),
       { status: 500, headers: { "Content-Type": "application/json" } }
     );
   }
@@ -35,27 +33,31 @@ export async function POST(request: Request) {
   const { messages } = parsed.data;
   const systemPrompt = await buildSystemPrompt();
 
-  const stream = client.messages.stream({
-    model: "claude-sonnet-4-20250514",
-    max_tokens: 4096,
-    system: systemPrompt,
-    messages: messages.map((m) => ({
-      role: m.role as "user" | "assistant",
-      content: m.content,
-    })),
+  const genAI = new GoogleGenerativeAI(apiKey);
+  const model = genAI.getGenerativeModel({
+    model: "gemini-2.5-flash",
+    systemInstruction: systemPrompt,
   });
+
+  // Convert messages to Gemini format (history + last user message)
+  const history = messages.slice(0, -1).map((m) => ({
+    role: m.role === "assistant" ? "model" : "user",
+    parts: [{ text: m.content }],
+  }));
+  const lastMessage = messages[messages.length - 1].content;
+
+  const chat = model.startChat({ history });
 
   const encoder = new TextEncoder();
   const readable = new ReadableStream({
     async start(controller) {
       try {
-        for await (const event of stream) {
-          if (
-            event.type === "content_block_delta" &&
-            event.delta.type === "text_delta"
-          ) {
+        const result = await chat.sendMessageStream(lastMessage);
+        for await (const chunk of result.stream) {
+          const text = chunk.text();
+          if (text) {
             controller.enqueue(
-              encoder.encode(`data: ${JSON.stringify({ text: event.delta.text })}\n\n`)
+              encoder.encode(`data: ${JSON.stringify({ text })}\n\n`)
             );
           }
         }
