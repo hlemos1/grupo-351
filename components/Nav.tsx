@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ArrowRight } from "lucide-react";
+import { Menu, X, ArrowRight, Shield } from "lucide-react";
 import { Logo } from "./Logo";
 
 const navLinks = [
@@ -71,6 +71,13 @@ export function Nav() {
           })}
           <div className="w-px h-5 bg-border mx-2" />
           <a
+            href="/admin"
+            className="p-2 rounded-full text-muted/40 hover:text-primary hover:bg-black/[0.04] transition-all duration-300"
+            title="Admin"
+          >
+            <Shield className="w-4 h-4" />
+          </a>
+          <a
             href="/aplicar"
             className="group inline-flex items-center gap-1.5 bg-primary text-white px-5 py-2 rounded-full text-[13px] font-medium hover:bg-primary-light hover:shadow-lg hover:shadow-primary/10 active:scale-[0.97] transition-all duration-300"
           >
@@ -122,7 +129,7 @@ export function Nav() {
             className="md:hidden overflow-hidden bg-white/95 backdrop-blur-2xl border-b border-black/[0.04]"
           >
             <div className="flex flex-col px-6 py-4 gap-1">
-              {[...navLinks, { href: "/aplicar", label: "Aplicar" }, { href: "/contato", label: "Contato" }].map((l, i) => (
+              {[...navLinks, { href: "/aplicar", label: "Aplicar" }, { href: "/contato", label: "Contato" }, { href: "/admin", label: "Admin" }].map((l, i) => (
                 <motion.a
                   key={l.href}
                   href={l.href}
