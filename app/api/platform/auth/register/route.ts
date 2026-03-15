@@ -3,6 +3,8 @@ import { prisma } from "@/lib/prisma";
 import { hashPassword, createUserSessionToken, USER_COOKIE } from "@/lib/auth";
 import { registerSchema } from "@/lib/validations";
 import { rateLimit, getClientIP } from "@/lib/rate-limit";
+import { sendWelcomeEmail } from "@/lib/email";
+import { createAdminNotification } from "@/lib/admin-notifications";
 
 export async function POST(request: Request) {
   const ip = getClientIP(request);
@@ -40,6 +42,15 @@ export async function POST(request: Request) {
     }
     throw err;
   }
+
+  // Email de boas-vindas + notificação admin (fire-and-forget)
+  sendWelcomeEmail({ nome: user.nome, email: user.email });
+  createAdminNotification({
+    tipo: "new-user",
+    titulo: `Novo utilizador: ${user.nome}`,
+    mensagem: `${user.nome} (${user.email}) registou-se na plataforma.`,
+    link: "/admin/usuarios",
+  });
 
   const { token, expires } = createUserSessionToken({ id: user.id, nome: user.nome, role: user.role });
 

@@ -179,3 +179,96 @@ export async function sendCandidaturaEmails(data: EmailCandidatura) {
     }).catch((err) => console.error("Email admin candidatura falhou:", err));
   }
 }
+
+// ─── Platform Workflow Emails ───
+
+const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || "https://grupo351.com";
+
+function emailWrapper(content: string): string {
+  return `
+    <div style="font-family: system-ui, sans-serif; max-width: 560px; margin: 0 auto; color: #1a1a1a;">
+      <div style="padding: 32px 0; border-bottom: 1px solid #eee;">
+        <h1 style="font-size: 20px; color: #0B1D32; margin: 0;">Grupo +351</h1>
+      </div>
+      <div style="padding: 32px 0;">
+        ${content}
+        <p style="color: #999; font-size: 12px; margin-top: 32px; border-top: 1px solid #eee; padding-top: 16px;">
+          Cascais, Portugal — <a href="${BASE_URL}" style="color: #D4A853;">grupo351.com</a>
+        </p>
+      </div>
+    </div>
+  `;
+}
+
+export async function sendWelcomeEmail(data: { nome: string; email: string }) {
+  if (!resend) return;
+  await resend.emails.send({
+    from: FROM_EMAIL,
+    to: data.email,
+    subject: "Bem-vindo à plataforma Grupo +351",
+    html: emailWrapper(`
+      <p>Olá <strong>${data.nome}</strong>,</p>
+      <p>Sua conta na plataforma Grupo +351 foi criada com sucesso.</p>
+      <div style="background: #f8f9fb; border-radius: 12px; padding: 20px; margin: 24px 0;">
+        <p style="margin: 0 0 8px; font-weight: bold;">Próximos passos:</p>
+        <p style="margin: 0 0 4px;">1. Complete o perfil da sua empresa</p>
+        <p style="margin: 0 0 4px;">2. Publique sua primeira oportunidade</p>
+        <p style="margin: 0;">3. Receba matches inteligentes</p>
+      </div>
+      <a href="${BASE_URL}/dashboard" style="display: inline-block; background: #D4A853; color: white; padding: 12px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px;">
+        Acessar Dashboard
+      </a>
+    `),
+  }).catch((err) => console.error("Email welcome falhou:", err));
+}
+
+export async function sendMatchFoundEmail(data: {
+  nome: string;
+  email: string;
+  oportunidade: string;
+  score: number;
+  matchId: string;
+}) {
+  if (!resend) return;
+  await resend.emails.send({
+    from: FROM_EMAIL,
+    to: data.email,
+    subject: `Novo match: ${data.oportunidade}`,
+    html: emailWrapper(`
+      <p>Olá <strong>${data.nome}</strong>,</p>
+      <p>Encontrámos um match para a sua oportunidade!</p>
+      <div style="background: #f8f9fb; border-radius: 12px; padding: 20px; margin: 24px 0;">
+        <p style="margin: 0 0 4px;"><strong>Oportunidade:</strong> ${data.oportunidade}</p>
+        <p style="margin: 0;"><strong>Score de compatibilidade:</strong> ${data.score}%</p>
+      </div>
+      <a href="${BASE_URL}/dashboard/matches" style="display: inline-block; background: #D4A853; color: white; padding: 12px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px;">
+        Ver match
+      </a>
+    `),
+  }).catch((err) => console.error("Email match falhou:", err));
+}
+
+export async function sendMessageReceivedEmail(data: {
+  nome: string;
+  email: string;
+  remetente: string;
+  preview: string;
+  matchId: string;
+}) {
+  if (!resend) return;
+  await resend.emails.send({
+    from: FROM_EMAIL,
+    to: data.email,
+    subject: `Nova mensagem de ${data.remetente}`,
+    html: emailWrapper(`
+      <p>Olá <strong>${data.nome}</strong>,</p>
+      <p><strong>${data.remetente}</strong> enviou-lhe uma mensagem:</p>
+      <div style="background: #f8f9fb; border-radius: 12px; padding: 20px; margin: 24px 0;">
+        <p style="margin: 0; color: #444; font-style: italic;">"${data.preview.slice(0, 200)}${data.preview.length > 200 ? "..." : ""}"</p>
+      </div>
+      <a href="${BASE_URL}/dashboard/matches" style="display: inline-block; background: #D4A853; color: white; padding: 12px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px;">
+        Responder
+      </a>
+    `),
+  }).catch((err) => console.error("Email message falhou:", err));
+}

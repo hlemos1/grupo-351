@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { getUserSession } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { opportunityCreateSchema } from "@/lib/validations";
+import { getCompanyLimits, formatLimitMessage } from "@/lib/plan-gates";
 
 // GET — listar oportunidades (público)
 export async function GET(request: Request) {
@@ -55,6 +56,15 @@ export async function POST(request: Request) {
   const company = await prisma.company.findUnique({ where: { ownerId: session.id } });
   if (!company) {
     return NextResponse.json({ error: "Crie uma empresa antes de publicar oportunidades" }, { status: 403 });
+  }
+
+  // Plan gate: verificar limite de oportunidades
+  const limits = await getCompanyLimits(company.id);
+  if (!limits.oportunidades.canCreate) {
+    return NextResponse.json({
+      error: formatLimitMessage("oportunidades", limits.oportunidades.max),
+      upgrade: true,
+    }, { status: 403 });
   }
 
   let body;
