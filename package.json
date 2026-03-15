@@ -11,7 +11,9 @@
     "db:generate": "prisma generate",
     "db:push": "prisma db push",
     "db:migrate": "npx tsx scripts/migrate-json-to-db.ts",
-    "db:studio": "prisma studio"
+    "db:studio": "prisma studio",
+    "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,tsx,js,jsx}\""
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.78.0",
