@@ -23,6 +23,8 @@ import {
   GitPullRequest,
   Wallet,
   FolderKanban,
+  BarChart3,
+  ScrollText,
 } from "lucide-react";
 import { useState } from "react";
 import { Logo } from "@/components/Logo";
@@ -41,8 +43,10 @@ const navItems = [
   { href: "/admin/conhecimento", label: "Conhecimento", icon: BookOpen },
   { href: "/admin/parceiros", label: "Parceiros", icon: Handshake },
   { href: "/admin/reunioes", label: "Reuniões", icon: CalendarDays },
+  { href: "/admin/analytics", label: "Analytics", icon: BarChart3 },
   { href: "/admin/inteligencia", label: "Inteligência", icon: Brain },
   { href: "/admin/equipe", label: "Equipe", icon: ShieldCheck },
+  { href: "/admin/auditoria", label: "Auditoria", icon: ScrollText },
 ];
 
 const pageTitle: Record<string, string> = {
@@ -59,8 +63,10 @@ const pageTitle: Record<string, string> = {
   "/admin/conhecimento": "Conhecimento",
   "/admin/parceiros": "Parceiros",
   "/admin/reunioes": "Reuniões",
+  "/admin/analytics": "Analytics",
   "/admin/inteligencia": "Inteligência",
   "/admin/equipe": "Equipe Admin",
+  "/admin/auditoria": "Auditoria",
 };
 
 export default function AdminLayout({
