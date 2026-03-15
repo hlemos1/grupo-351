@@ -129,6 +129,7 @@ export async function verifyUserCredentials(
     where: { email: email.toLowerCase() },
   });
   if (!user || !user.ativo) return { valid: false };
+  if (!user.senhaHash) return { valid: false }; // Google-only user
   const match = await bcrypt.compare(senha, user.senhaHash);
   if (!match) return { valid: false };
 

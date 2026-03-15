@@ -22,7 +22,8 @@ model User {
   id           String    @id @default(cuid())
   email        String    @unique
   nome         String
-  senhaHash    String    @map("senha_hash")
+  senhaHash    String?   @map("senha_hash")
+  googleId     String?   @unique @map("google_id")
   role         String    @default("empresa") // admin | empresa | parceiro
   avatar       String?
   ativo        Boolean   @default(true)
