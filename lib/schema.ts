@@ -3,7 +3,7 @@ import type { Artigo, Termo } from "./conhecimento-types";
 
 const SITE_URL = "https://grupo351.com";
 const ORG_NAME = "GRUPO +351";
-const ORG_LOGO = `${SITE_URL}/logo.png`;
+const ORG_LOGO = `${SITE_URL}/logo.svg`;
 
 // ── Shared org reference ──
 const orgRef = {
@@ -318,9 +318,17 @@ export function sobreSchema() {
       name: "Henrique Lemos",
       jobTitle: "Co-fundador do GRUPO +351",
       description:
-        "Co-fundador do Grupo Rão, maior rede de delivery do Brasil com 20+ marcas e 200+ unidades. Autor do livro Delivery Milionário.",
+        "Co-fundador do Grupo Rão, maior rede de delivery do Brasil com 20+ marcas, 200+ unidades em 10 estados e faturamento de R$220M+/ano. Co-fundador da Rob Food (holding de hamburgueres). Criador do super-app Mundo Rão (800k+ pedidos). Selo ABF de excelencia por 5 anos consecutivos. Autor do livro Delivery Milionario.",
       url: "https://www.linkedin.com/in/henrique-lemos-39712b22b/",
-      worksFor: { "@id": `${SITE_URL}/#organization` },
+      sameAs: [
+        "https://www.linkedin.com/in/henrique-lemos-39712b22b/",
+        "https://gruporaofranquias.com.br/",
+      ],
+      worksFor: [
+        { "@id": `${SITE_URL}/#organization` },
+        { "@type": "Organization", name: "Grupo Rão", url: "https://gruporaofranquias.com.br/" },
+        { "@type": "Organization", name: "Rob Food" },
+      ],
       nationality: { "@type": "Country", name: "BR" },
       knowsAbout: [
         "Franchising",
@@ -328,6 +336,9 @@ export function sobreSchema() {
         "Food Delivery",
         "Joint Ventures",
         "FIGITAL Business Model",
+        "International Expansion",
+        "Super Apps",
+        "Web3 Loyalty Programs",
       ],
     },
     breadcrumbSchema([

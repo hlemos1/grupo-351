@@ -21,17 +21,17 @@ export function Localizacao() {
             className="flex-1"
           >
             <p className="text-accent text-[13px] font-semibold tracking-[0.2em] uppercase mb-5">
-              Localizacao
+              Localização
             </p>
             <h2 className="text-3xl md:text-[2.75rem] font-bold text-primary font-display tracking-[-0.025em] leading-[1.1] mb-6">
               Cascais, Portugal
             </h2>
             <p className="text-muted text-lg leading-[1.7] mb-4 tracking-[-0.006em]">
-              Estamos sediados em Cascais, Portugal, com base na regiao da Panfilheira.
+              Estamos sediados em Cascais, Portugal, com base na região da Panfilheira.
             </p>
             <p className="text-muted text-lg leading-[1.7] mb-10 tracking-[-0.006em]">
-              A partir daqui estruturamos novos negocios e parcerias para Portugal,
-              Europa e conexoes com o Brasil.
+              A partir daqui estruturamos novos negócios e parcerias para Portugal,
+              Europa e conexões com o Brasil.
             </p>
 
             {/* Info card */}
@@ -43,9 +43,7 @@ export function Localizacao() {
                 <div>
                   <p className="font-semibold text-foreground mb-1 tracking-[-0.01em]">Sede</p>
                   <p className="text-muted text-[14px] leading-relaxed">
-                    Estoril, Cascais
-                    <br />
-                    Portugal
+                    Cascais, Portugal
                   </p>
                 </div>
               </div>
@@ -86,7 +84,7 @@ export function Localizacao() {
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="Localizacao do Grupo +351 em Cascais, Portugal"
+                title="Localização do Grupo +351 em Cascais, Portugal"
               />
             </div>
           </motion.div>

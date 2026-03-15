@@ -7,7 +7,7 @@ export interface Projeto {
   description: string;
   detalhes: string[];
   tag: string;
-  status: "Em operação" | "Em desenvolvimento" | "Em estruturação";
+  status: "Ideação" | "Em estruturação" | "Em desenvolvimento" | "Em operação" | "Consolidado";
   mercado: string;
   parceiro?: string;
   controle: string;

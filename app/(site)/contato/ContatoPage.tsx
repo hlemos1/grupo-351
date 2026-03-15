@@ -10,7 +10,6 @@ import {
   CheckCircle,
   AlertCircle,
   MapPin,
-  MessageCircle,
   Clock,
 } from "lucide-react";
 
@@ -67,23 +66,14 @@ export function ContatoPage() {
       ),
     },
     {
-      icon: MessageCircle,
-      title: "WhatsApp",
-      content: (
-        <a href="https://wa.me/351000000000" target="_blank" rel="noopener noreferrer" className="text-accent text-[14px] hover:underline underline-offset-4">
-          +351 000 000 000
-        </a>
-      ),
-    },
-    {
       icon: MapPin,
-      title: "Localizacao",
-      content: <p className="text-muted text-[14px]">Estoril, Cascais<br />Portugal</p>,
+      title: "Localização",
+      content: <p className="text-muted text-[14px]">Cascais, Portugal</p>,
     },
     {
       icon: Clock,
       title: "Tempo de resposta",
-      content: <p className="text-muted text-[14px]">Respondemos em ate 48 horas uteis</p>,
+      content: <p className="text-muted text-[14px]">Respondemos em até 48 horas úteis</p>,
     },
   ];
 
@@ -104,8 +94,8 @@ export function ContatoPage() {
               Vamos conversar
             </h1>
             <p className="text-muted text-xl leading-[1.7] max-w-3xl tracking-[-0.006em]">
-              Tem uma oportunidade, proposta ou pergunta? Preencha o formulario
-              abaixo ou utilize um dos nossos canais de contato.
+              Tem uma oportunidade, proposta ou pergunta? Preencha o formulário
+              abaixo ou utilize um dos nossos canais de contacto.
             </p>
           </motion.div>
         </div>
@@ -162,7 +152,7 @@ export function ContatoPage() {
                       Mensagem enviada!
                     </h2>
                     <p className="text-muted text-[15px] mb-6">
-                      Recebemos sua mensagem e entraremos em contato em ate 48 horas uteis.
+                      Recebemos sua mensagem e entraremos em contato em até 48 horas úteis.
                     </p>
                     <button
                       onClick={() => setStatus("idle")}
@@ -186,7 +176,7 @@ export function ContatoPage() {
                           Nome *
                         </label>
                         <input
-                          {...register("nome", { required: "Nome obrigatorio" })}
+                          {...register("nome", { required: "Nome obrigatório" })}
                           className={inputClass}
                           placeholder="Seu nome completo"
                         />
@@ -200,10 +190,10 @@ export function ContatoPage() {
                         </label>
                         <input
                           {...register("email", {
-                            required: "Email obrigatorio",
+                            required: "Email obrigatório",
                             pattern: {
                               value: /^\S+@\S+\.\S+$/,
-                              message: "Email invalido",
+                              message: "Email inválido",
                             },
                           })}
                           type="email"
@@ -238,9 +228,9 @@ export function ContatoPage() {
                         >
                           <option value="" disabled>Selecione...</option>
                           <option value="joint-venture">Joint Venture</option>
-                          <option value="parceria">Parceria Estrategica</option>
+                          <option value="parceria">Parceria Estratégica</option>
                           <option value="investimento">Investimento</option>
-                          <option value="fornecedor">Fornecedor / Servico</option>
+                          <option value="fornecedor">Fornecedor / Serviço</option>
                           <option value="outro">Outro</option>
                         </select>
                         {errors.tipo && (
@@ -251,7 +241,7 @@ export function ContatoPage() {
 
                     <div className="mb-5">
                       <label className="block text-[13px] font-medium text-foreground mb-2">
-                        Orcamento estimado
+                        Orçamento estimado
                       </label>
                       <select
                         {...register("orcamento")}
@@ -259,7 +249,7 @@ export function ContatoPage() {
                         defaultValue=""
                       >
                         <option value="" disabled>Selecione (opcional)</option>
-                        <option value="ate-10k">Ate 10.000 EUR</option>
+                        <option value="ate-10k">Até 10.000 EUR</option>
                         <option value="10k-50k">10.000 - 50.000 EUR</option>
                         <option value="50k-200k">50.000 - 200.000 EUR</option>
                         <option value="200k+">Acima de 200.000 EUR</option>
@@ -273,7 +263,7 @@ export function ContatoPage() {
                       </label>
                       <textarea
                         {...register("mensagem", {
-                          required: "Mensagem obrigatoria",
+                          required: "Mensagem obrigatória",
                           minLength: {
                             value: 10,
                             message: "Mensagem muito curta",

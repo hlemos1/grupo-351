@@ -45,11 +45,11 @@ const tagColors: Record<string, string> = {
   Paraguai: "bg-teal-500/10 text-teal-700 border-teal-500/20",
   Portugal: "bg-blue-500/10 text-blue-700 border-blue-500/20",
   Tecnologia: "bg-indigo-500/10 text-indigo-700 border-indigo-500/20",
-  Importacao: "bg-orange-500/10 text-orange-700 border-orange-500/20",
+  Importação: "bg-orange-500/10 text-orange-700 border-orange-500/20",
   Parceria: "bg-cyan-500/10 text-cyan-700 border-cyan-500/20",
   Brook: "bg-green-500/10 text-green-700 border-green-500/20",
   Franquia: "bg-emerald-500/10 text-emerald-700 border-emerald-500/20",
-  Estrategia: "bg-sky-500/10 text-sky-700 border-sky-500/20",
+  Estratégia: "bg-sky-500/10 text-sky-700 border-sky-500/20",
   Marketing: "bg-pink-500/10 text-pink-700 border-pink-500/20",
   Financeiro: "bg-lime-500/10 text-lime-700 border-lime-500/20",
   "E-Commerce": "bg-purple-500/10 text-purple-700 border-purple-500/20",
@@ -126,7 +126,7 @@ interface Analysis {
 }
 
 const catIcons: Record<string, string> = {
-  Estrategia: "text-sky-500",
+  Estratégia: "text-sky-500",
   Financeiro: "text-lime-600",
   Juridico: "text-amber-600",
   Marketing: "text-pink-500",
@@ -177,7 +177,7 @@ export default function InteligenciaPage() {
             <Shield className="w-7 h-7 text-red-500" />
           </div>
           <h1 className="text-xl font-bold text-foreground font-display tracking-tight mb-2">Acesso restrito</h1>
-          <p className="text-sm text-muted leading-relaxed">Token de acesso invalido.</p>
+          <p className="text-sm text-muted leading-relaxed">Token de acesso inválido.</p>
         </motion.div>
       </div>
     );
@@ -188,7 +188,7 @@ export default function InteligenciaPage() {
       <div className="min-h-screen bg-[#f5f5f7] flex items-center justify-center">
         <div className="text-center">
           <div className="w-10 h-10 border-2 border-accent/30 border-t-accent rounded-full animate-spin mx-auto mb-4" />
-          <p className="text-sm text-muted">Compilando inteligencia...</p>
+          <p className="text-sm text-muted">Compilando inteligência...</p>
         </div>
       </div>
     );
@@ -205,7 +205,7 @@ export default function InteligenciaPage() {
 
   return (
     <div className="min-h-screen bg-[#f5f5f7]">
-      <SharedHeader active="inteligencia" subtitle={`${data.totalReunioes} reunioes analisadas`} />
+      <SharedHeader active="inteligencia" subtitle={`${data.totalReunioes} reuniões analisadas`} />
 
       <main className="max-w-6xl mx-auto p-5 lg:p-8">
         <motion.div variants={stagger} initial="hidden" animate="show" className="space-y-6">
@@ -215,9 +215,9 @@ export default function InteligenciaPage() {
             {[
               { icon: GitBranch, label: "Threads ativas", value: data.threads.length, color: "from-indigo-500/10 to-indigo-600/5", iconColor: "text-indigo-500" },
               { icon: Users, label: "Pessoas mapeadas", value: data.pessoas.length, color: "from-violet-500/10 to-violet-600/5", iconColor: "text-violet-500" },
-              { icon: ListChecks, label: "Acoes totais", value: data.acoes.total, color: "from-emerald-500/10 to-emerald-600/5", iconColor: "text-emerald-500" },
+              { icon: ListChecks, label: "Ações totais", value: data.acoes.total, color: "from-emerald-500/10 to-emerald-600/5", iconColor: "text-emerald-500" },
               { icon: TrendingUp, label: "Temas emergentes", value: data.insights.temasEmergentes.length, color: "from-amber-500/10 to-amber-600/5", iconColor: "text-amber-500" },
-              { icon: Repeat, label: "Discussoes recorrentes", value: data.insights.discussoesRecorrentes.length, color: "from-red-500/10 to-red-600/5", iconColor: "text-red-500" },
+              { icon: Repeat, label: "Discussões recorrentes", value: data.insights.discussoesRecorrentes.length, color: "from-red-500/10 to-red-600/5", iconColor: "text-red-500" },
             ].map((kpi) => {
               const Icon = kpi.icon;
               return (
@@ -271,8 +271,8 @@ export default function InteligenciaPage() {
                           ))}
                         </div>
                         <div className="flex items-center gap-4 mt-2 text-[11px] text-muted">
-                          <span className="flex items-center gap-1"><CalendarDays className="w-3 h-3" />{thread.totalReunioes} reunioes</span>
-                          <span className="flex items-center gap-1"><ListChecks className="w-3 h-3" />{thread.totalAcoes} acoes</span>
+                          <span className="flex items-center gap-1"><CalendarDays className="w-3 h-3" />{thread.totalReunioes} reuniões</span>
+                          <span className="flex items-center gap-1"><ListChecks className="w-3 h-3" />{thread.totalAcoes} ações</span>
                           <span className="flex items-center gap-1"><Clock className="w-3 h-3" />{thread.periodo}</span>
                         </div>
                       </div>
@@ -330,7 +330,7 @@ export default function InteligenciaPage() {
                               {/* Actions from this thread */}
                               {thread.reunioes.some(m => m.acoes?.length > 0) && (
                                 <div>
-                                  <p className="text-[11px] font-semibold text-foreground uppercase tracking-wider mb-2">Acoes acumuladas ({thread.totalAcoes})</p>
+                                  <p className="text-[11px] font-semibold text-foreground uppercase tracking-wider mb-2">Ações acumuladas ({thread.totalAcoes})</p>
                                   <div className="max-h-48 overflow-y-auto space-y-1">
                                     {thread.reunioes.flatMap(m => (m.acoes || []).map(a => ({ acao: a, data: m.data }))).slice(0, 15).map((item, ai) => (
                                       <div key={ai} className="flex items-start gap-2">
@@ -356,7 +356,7 @@ export default function InteligenciaPage() {
           {/* ===================== PESSOAS TAB ===================== */}
           {tab === "pessoas" && (
             <div className="space-y-3">
-              <p className="text-[12px] text-muted">{data.pessoas.length} participantes frequentes com conexoes mapeadas</p>
+              <p className="text-[12px] text-muted">{data.pessoas.length} participantes frequentes com conexões mapeadas</p>
               <div className="grid lg:grid-cols-2 gap-3">
                 {data.pessoas.map((person, i) => {
                   const isOpen = expandedPerson === i;
@@ -368,7 +368,7 @@ export default function InteligenciaPage() {
                         </div>
                         <div className="flex-1 min-w-0">
                           <h3 className="text-[14px] font-semibold text-foreground">{person.nome}</h3>
-                          <p className="text-[11px] text-muted">{person.totalReunioes} reunioes · desde {formatDate(person.primeiraReuniao)}</p>
+                          <p className="text-[11px] text-muted">{person.totalReunioes} reuniões · desde {formatDate(person.primeiraReuniao)}</p>
                         </div>
                         <motion.div animate={{ rotate: isOpen ? 180 : 0 }} transition={{ duration: 0.2 }}>
                           <ChevronDown className="w-4 h-4 text-muted/40" />
@@ -391,7 +391,7 @@ export default function InteligenciaPage() {
 
                               {/* Connections */}
                               <div>
-                                <p className="text-[10px] font-semibold text-foreground uppercase tracking-wider mb-1.5">Conexoes frequentes</p>
+                                <p className="text-[10px] font-semibold text-foreground uppercase tracking-wider mb-1.5">Conexões frequentes</p>
                                 <div className="space-y-1">
                                   {person.conexoes.map((c) => (
                                     <div key={c.nome} className="flex items-center gap-2">
@@ -405,7 +405,7 @@ export default function InteligenciaPage() {
 
                               {/* Recent meetings */}
                               <div>
-                                <p className="text-[10px] font-semibold text-foreground uppercase tracking-wider mb-1.5">Reunioes recentes</p>
+                                <p className="text-[10px] font-semibold text-foreground uppercase tracking-wider mb-1.5">Reuniões recentes</p>
                                 <div className="space-y-1">
                                   {person.reunioesRecentes.map((r, ri) => (
                                     <div key={ri} className="flex items-center gap-2">
@@ -434,7 +434,7 @@ export default function InteligenciaPage() {
                 <div className="bg-white rounded-2xl border border-black/[0.04] p-6">
                   <div className="flex items-center gap-2 mb-4">
                     <BarChart3 className="w-4 h-4 text-emerald-500" />
-                    <h2 className="font-semibold text-foreground text-[15px]">Acoes por Categoria</h2>
+                    <h2 className="font-semibold text-foreground text-[15px]">Ações por Categoria</h2>
                   </div>
                   <div className="space-y-2">
                     {Object.entries(data.acoes.porCategoria).map(([cat, count]) => (
@@ -462,14 +462,14 @@ export default function InteligenciaPage() {
                 <div className="bg-white rounded-2xl border border-black/[0.04] p-6">
                   <div className="flex items-center gap-2 mb-4">
                     <User className="w-4 h-4 text-violet-500" />
-                    <h2 className="font-semibold text-foreground text-[15px]">Acoes por Responsavel</h2>
+                    <h2 className="font-semibold text-foreground text-[15px]">Ações por Responsável</h2>
                   </div>
                   <div className="space-y-2">
                     {Object.entries(data.acoes.porResponsavel).map(([name, count]) => (
                       <div key={name} className="flex items-center gap-3 px-2 py-1.5">
                         <div className="w-6 h-6 rounded-full bg-violet-500/10 flex items-center justify-center text-[9px] font-bold text-violet-600 shrink-0">{name.charAt(0)}</div>
                         <span className="text-[12px] text-foreground flex-1">{name}</span>
-                        <span className="text-[12px] font-semibold text-foreground">{count} acoes</span>
+                        <span className="text-[12px] font-semibold text-foreground">{count} ações</span>
                       </div>
                     ))}
                   </div>
@@ -479,7 +479,7 @@ export default function InteligenciaPage() {
               {/* Action list */}
               <motion.div variants={fadeUp} className="bg-white rounded-2xl border border-black/[0.04] p-6">
                 <div className="flex items-center gap-3 mb-4">
-                  <h2 className="font-semibold text-foreground text-[15px]">Acoes Recentes</h2>
+                  <h2 className="font-semibold text-foreground text-[15px]">Ações Recentes</h2>
                   <div className="flex-1" />
                   {selectedCat && (
                     <button onClick={() => setSelectedCat(null)} className="flex items-center gap-1 text-[11px] font-medium px-2 py-1 rounded-lg bg-accent/10 text-accent">
@@ -491,7 +491,7 @@ export default function InteligenciaPage() {
                     <input
                       value={search}
                       onChange={(e) => setSearch(e.target.value)}
-                      placeholder="Filtrar acoes..."
+                      placeholder="Filtrar ações..."
                       className="w-full pl-8 pr-3 py-1.5 rounded-lg border border-black/[0.06] bg-transparent text-[12px] focus:outline-none focus:ring-2 focus:ring-accent/20 transition-all"
                     />
                   </div>
@@ -515,7 +515,7 @@ export default function InteligenciaPage() {
                     </div>
                   ))}
                   {filteredActions.length === 0 && (
-                    <p className="text-center text-[12px] text-muted py-8">Nenhuma acao encontrada</p>
+                    <p className="text-center text-[12px] text-muted py-8">Nenhuma ação encontrada</p>
                   )}
                 </div>
               </motion.div>
@@ -532,7 +532,7 @@ export default function InteligenciaPage() {
                     <TrendingUp className="w-4 h-4 text-emerald-500" />
                     <h2 className="font-semibold text-foreground text-[15px]">Temas Emergentes</h2>
                   </div>
-                  <p className="text-[11px] text-muted mb-3">Topicos ganhando mais atencao nas ultimas semanas</p>
+                  <p className="text-[11px] text-muted mb-3">Tópicos ganhando mais atenção nas últimas semanas</p>
                   <div className="space-y-2">
                     {data.insights.temasEmergentes.slice(0, 10).map((t) => (
                       <div key={t.tema} className="flex items-center gap-3 px-2 py-1.5 rounded-lg hover:bg-[#f5f5f7] transition-colors">
@@ -553,9 +553,9 @@ export default function InteligenciaPage() {
                 <motion.div variants={fadeUp} className="bg-white rounded-2xl border border-black/[0.04] p-6">
                   <div className="flex items-center gap-2 mb-4">
                     <TrendingDown className="w-4 h-4 text-red-400" />
-                    <h2 className="font-semibold text-foreground text-[15px]">Temas em Declinio</h2>
+                    <h2 className="font-semibold text-foreground text-[15px]">Temas em Declínio</h2>
                   </div>
-                  <p className="text-[11px] text-muted mb-3">Topicos perdendo espaco nas discussoes recentes</p>
+                  <p className="text-[11px] text-muted mb-3">Tópicos perdendo espaço nas discussões recentes</p>
                   <div className="space-y-2">
                     {data.insights.temasDeclinando.slice(0, 10).map((t) => (
                       <div key={t.tema} className="flex items-center gap-3 px-2 py-1.5 rounded-lg hover:bg-[#f5f5f7] transition-colors">
@@ -576,8 +576,8 @@ export default function InteligenciaPage() {
                 <motion.div variants={fadeUp} className="bg-white rounded-2xl border border-black/[0.04] p-6 lg:col-span-2">
                   <div className="flex items-center gap-2 mb-4">
                     <AlertTriangle className="w-4 h-4 text-amber-500" />
-                    <h2 className="font-semibold text-foreground text-[15px]">Discussoes Recorrentes</h2>
-                    <span className="text-[10px] text-muted ml-1">Temas discutidos em 4+ reunioes ao longo de semanas — podem requerer decisao</span>
+                    <h2 className="font-semibold text-foreground text-[15px]">Discussões Recorrentes</h2>
+                    <span className="text-[10px] text-muted ml-1">Temas discutidos em 4+ reuniões ao longo de semanas — podem requerer decisão</span>
                   </div>
                   <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-2">
                     {data.insights.discussoesRecorrentes.slice(0, 12).map((d) => (
@@ -612,7 +612,7 @@ export default function InteligenciaPage() {
                       );
                     })}
                   </div>
-                  <p className="text-[10px] text-muted mt-3">Media: {data.insights.mediaSemanal} reunioes/semana em {data.insights.totalSemanas} semanas</p>
+                  <p className="text-[10px] text-muted mt-3">Média: {data.insights.mediaSemanal} reuniões/semana em {data.insights.totalSemanas} semanas</p>
                 </motion.div>
 
                 {/* Most active weeks */}
@@ -627,7 +627,7 @@ export default function InteligenciaPage() {
                         <CalendarDays className="w-3.5 h-3.5 text-amber-500 shrink-0" />
                         <span className="text-[12px] text-foreground">Semana de {formatDate(week)}</span>
                         <div className="flex-1" />
-                        <span className="text-[13px] font-bold text-foreground">{count} reunioes</span>
+                        <span className="text-[13px] font-bold text-foreground">{count} reuniões</span>
                       </div>
                     ))}
                   </div>
@@ -638,8 +638,8 @@ export default function InteligenciaPage() {
               <motion.div variants={fadeUp}>
                 <div className="flex items-center gap-2 mb-3">
                   <Brain className="w-4 h-4 text-indigo-500" />
-                  <h2 className="font-semibold text-foreground text-[15px]">Contexto para Decisao</h2>
-                  <span className="text-[11px] text-muted ml-1">Compilacao de todas as informacoes por projeto</span>
+                  <h2 className="font-semibold text-foreground text-[15px]">Contexto para Decisão</h2>
+                  <span className="text-[11px] text-muted ml-1">Compilação de todas as informações por projeto</span>
                 </div>
                 <div className="space-y-2">
                   {data.contextos.map((ctx, i) => {
@@ -652,7 +652,7 @@ export default function InteligenciaPage() {
                           </div>
                           <div className="flex-1 min-w-0">
                             <h3 className="text-[14px] font-semibold text-foreground">{ctx.projeto}</h3>
-                            <p className="text-[11px] text-muted">{ctx.totalReunioes} reunioes · {ctx.totalAcoes} acoes · {ctx.periodo}</p>
+                            <p className="text-[11px] text-muted">{ctx.totalReunioes} reuniões · {ctx.totalAcoes} ações · {ctx.periodo}</p>
                           </div>
                           <div className="flex flex-wrap gap-1 max-w-[200px] justify-end">
                             {ctx.participantesChave.slice(0, 3).map((p) => (
@@ -669,7 +669,7 @@ export default function InteligenciaPage() {
                             <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.3, ease }} className="overflow-hidden">
                               <div className="px-4 pb-4 border-t border-black/[0.04] pt-3 space-y-4">
                                 <div>
-                                  <p className="text-[10px] font-semibold text-foreground uppercase tracking-wider mb-2">Evolucao das Discussoes</p>
+                                  <p className="text-[10px] font-semibold text-foreground uppercase tracking-wider mb-2">Evolução das Discussões</p>
                                   {ctx.cronologia.map((ev, ei) => (
                                     <div key={ei} className="flex gap-3 mb-2">
                                       <span className="text-[10px] text-muted w-16 shrink-0 pt-0.5">{formatDate(ev.data)}</span>
@@ -682,7 +682,7 @@ export default function InteligenciaPage() {
                                 </div>
                                 {ctx.todasAcoes.length > 0 && (
                                   <div>
-                                    <p className="text-[10px] font-semibold text-foreground uppercase tracking-wider mb-2">Todas as Acoes ({ctx.totalAcoes})</p>
+                                    <p className="text-[10px] font-semibold text-foreground uppercase tracking-wider mb-2">Todas as Ações ({ctx.totalAcoes})</p>
                                     <div className="max-h-40 overflow-y-auto space-y-1">
                                       {ctx.todasAcoes.map((a, ai) => (
                                         <div key={ai} className="flex items-start gap-2">
@@ -709,7 +709,7 @@ export default function InteligenciaPage() {
       </main>
 
       <footer className="border-t border-black/[0.04] py-6 mt-12">
-        <p className="text-center text-[11px] text-muted/50">Grupo +351 · Inteligencia de Governanca · Acesso restrito por link</p>
+        <p className="text-center text-[11px] text-muted/50">Grupo +351 · Inteligência de Governança · Acesso restrito por link</p>
       </footer>
     </div>
   );

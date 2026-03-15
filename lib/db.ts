@@ -35,6 +35,13 @@ export async function addCandidatura(
       diferenciais: data.diferenciais,
       disponibilidade: data.disponibilidade || null,
       aceitaNDA: data.aceitaNDA,
+      score: data.score ?? null,
+      scoreTier: data.scoreTier ?? null,
+      scoreBreakdown: data.scoreBreakdown ?? undefined,
+      scoreFlags: data.scoreFlags ?? [],
+      ndaAceitoEm: data.ndaAceitoEm ? new Date(data.ndaAceitoEm) : null,
+      ndaIp: data.ndaIp ?? null,
+      ndaUserAgent: data.ndaUserAgent ?? null,
       status: "nova",
     },
   });
@@ -87,6 +94,13 @@ function mapCandidatura(row: Record<string, unknown>): Candidatura {
     aceitaNDA: row.aceitaNDA as boolean,
     notas: (row.notas as string) || undefined,
     atribuidoA: (row.atribuidoA as string) || undefined,
+    score: (row.score as number) ?? undefined,
+    scoreTier: (row.scoreTier as string) || undefined,
+    scoreBreakdown: (row.scoreBreakdown as Record<string, number>) || undefined,
+    scoreFlags: (row.scoreFlags as string[]) || [],
+    ndaAceitoEm: row.ndaAceitoEm ? (row.ndaAceitoEm as Date).toISOString() : undefined,
+    ndaIp: (row.ndaIp as string) || undefined,
+    ndaUserAgent: (row.ndaUserAgent as string) || undefined,
   };
 }
 

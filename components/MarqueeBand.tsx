@@ -9,11 +9,11 @@ const words = [
   "Veeenha!!!",
   "Ruptfy",
   "Purple Party",
-  "Cortex FC",
+  "Córtex FC",
   "Long View",
-  "Barbearia do Rao",
-  "Estoril",
-  "Governanca",
+  "Barbearia do Rão",
+  "Cascais",
+  "Governança",
   "Ativos que duram",
 ];
 

@@ -89,8 +89,12 @@ export function PortfolioPage({ projetos }: { projetos: Projeto[] }) {
                               className={`w-2 h-2 rounded-full ${
                                 projeto.status === "Em operação"
                                   ? "bg-success"
+                                  : projeto.status === "Consolidado"
+                                  ? "bg-blue-500"
                                   : projeto.status === "Em desenvolvimento"
                                   ? "bg-warning"
+                                  : projeto.status === "Ideação"
+                                  ? "bg-purple-400"
                                   : "bg-muted"
                               }`}
                             />

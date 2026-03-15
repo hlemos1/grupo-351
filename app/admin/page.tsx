@@ -13,6 +13,7 @@ import {
   ArrowUpRight,
   Brain,
   Sparkles,
+  CalendarDays,
 } from "lucide-react";
 import type { DashboardStats, Candidatura, Contato } from "@/lib/admin-types";
 
@@ -62,7 +63,7 @@ export default function AdminDashboard() {
     );
   }
 
-  const totalProjetos = (stats?.projetos.emOperacao || 0) + (stats?.projetos.emDesenvolvimento || 0) + (stats?.projetos.emEstruturacao || 0);
+  const totalProjetos = (stats?.projetos.ideacao || 0) + (stats?.projetos.emEstruturacao || 0) + (stats?.projetos.emDesenvolvimento || 0) + (stats?.projetos.emOperacao || 0) + (stats?.projetos.consolidado || 0);
 
   return (
     <motion.div
@@ -146,12 +147,13 @@ export default function AdminDashboard() {
       </motion.div>
 
       {/* Quick actions */}
-      <motion.div variants={fadeUp} className="grid grid-cols-2 lg:grid-cols-4 gap-2.5">
+      <motion.div variants={fadeUp} className="grid grid-cols-2 lg:grid-cols-5 gap-2.5">
         {[
           { href: "/admin/candidaturas", label: "Candidaturas", icon: Users, accent: "group-hover:text-blue-500" },
           { href: "/admin/contatos", label: "Contatos", icon: Mail, accent: "group-hover:text-rose-500" },
           { href: "/admin/portfolio", label: "Marcas", icon: Briefcase, accent: "group-hover:text-emerald-500" },
           { href: "/admin/inteligencia", label: "Inteligência IA", icon: Brain, accent: "group-hover:text-violet-500" },
+          { href: "/reunioes?token=r351-gov-2026", label: "Reuniões Gov", icon: CalendarDays, accent: "group-hover:text-amber-500" },
         ].map((action) => {
           const Icon = action.icon;
           return (

@@ -42,33 +42,33 @@ interface Edge {
 
 /* --- Data --- */
 const nodes: Node[] = [
-  { id: "holding", label: "GRUPO +351", icon: Layers, camada: "core", color: "#1e3a5f", x: 50, y: 50, desc: "Hub de governanca. Conecta todas as marcas, define estrategia e aloca recursos.", conexoes: ["forge", "veeenha", "ruptfy", "purple", "cortex", "longview", "barbearia"], href: "/sobre" },
+  { id: "holding", label: "GRUPO +351", icon: Layers, camada: "core", color: "#1e3a5f", x: 50, y: 50, desc: "Hub de governança. Conecta todas as marcas, define estratégia e aloca recursos.", conexoes: ["forge", "veeenha", "ruptfy", "purple", "cortex", "longview", "barbearia"], href: "/sobre" },
   { id: "veeenha", label: "Veeenha!!!", icon: ShoppingBag, camada: "infra", color: "#22c55e", x: 20, y: 22, desc: "Super app de consumo local. Sensor FIGITAL que captura dados de economia regional.", conexoes: ["forge", "purple", "barbearia", "holding"], href: "/portfolio/veeenha" },
-  { id: "ruptfy", label: "Ruptfy", icon: GraduationCap, camada: "infra", color: "#22c55e", x: 80, y: 22, desc: "Plataforma EdTech. Sensor FIGITAL de aprendizado — captura progressao e retencao.", conexoes: ["forge", "cortex", "longview", "holding"], href: "/portfolio/ruptfy" },
-  { id: "forge", label: "Forge & Flow 3D", icon: Printer, camada: "infra", color: "#22c55e", x: 50, y: 15, desc: "Manufatura distribuida. Sensor FIGITAL de producao — demanda, custos, customizacao.", conexoes: ["veeenha", "ruptfy", "purple", "holding"], href: "/portfolio/forge-and-flow-3d" },
-  { id: "cortex", label: "Cortex FC", icon: Brain, camada: "neuron", color: "#3b82f6", x: 28, y: 72, desc: "Neuronio de decisao. Infoproduto que transforma dados operacionais em conteudo estrategico.", conexoes: ["ruptfy", "longview", "holding"], href: "/portfolio/cortex-fc" },
-  { id: "longview", label: "Long View", icon: Telescope, camada: "neuron", color: "#3b82f6", x: 72, y: 72, desc: "Neuronio de percepcao. Autoridade e narrativa de longo prazo para o ecossistema.", conexoes: ["ruptfy", "cortex", "holding"], href: "/portfolio/long-view" },
-  { id: "purple", label: "Purple Party", icon: Package, camada: "neuron", color: "#3b82f6", x: 50, y: 82, desc: "Supply chain China-Europa. Conecta sourcing global com distribuicao local via franquias.", conexoes: ["forge", "veeenha", "holding"], href: "/portfolio/purple-party" },
-  { id: "barbearia", label: "Barbearia do Rao", icon: Scissors, camada: "distrib", color: "#f59e0b", x: 15, y: 50, desc: "Marca fisica de servico. Gera dados FIGITAIS de fluxo, ticket e recorrencia no ponto.", conexoes: ["veeenha", "holding"], href: "/portfolio/barbearia-do-rao" },
+  { id: "ruptfy", label: "Ruptfy", icon: GraduationCap, camada: "infra", color: "#22c55e", x: 80, y: 22, desc: "Plataforma EdTech. Sensor FIGITAL de aprendizado — captura progressão e retenção.", conexoes: ["forge", "cortex", "longview", "holding"], href: "/portfolio/ruptfy" },
+  { id: "forge", label: "Forge and Flow 3D", icon: Printer, camada: "infra", color: "#22c55e", x: 50, y: 15, desc: "Manufatura distribuída. Sensor FIGITAL de produção — demanda, custos, customização.", conexoes: ["veeenha", "ruptfy", "purple", "holding"], href: "/portfolio/forge-and-flow-3d" },
+  { id: "cortex", label: "Córtex FC", icon: Brain, camada: "neuron", color: "#3b82f6", x: 28, y: 72, desc: "Neurônio de decisão. Infoproduto que transforma dados operacionais em conteúdo estratégico.", conexoes: ["ruptfy", "longview", "holding"], href: "/portfolio/cortex-fc" },
+  { id: "longview", label: "Long View", icon: Telescope, camada: "neuron", color: "#3b82f6", x: 72, y: 72, desc: "Neurônio de percepção. Autoridade e narrativa de longo prazo para o ecossistema.", conexoes: ["ruptfy", "cortex", "holding"], href: "/portfolio/long-view" },
+  { id: "purple", label: "Purple Party", icon: Package, camada: "neuron", color: "#3b82f6", x: 50, y: 82, desc: "Supply chain China-Europa. Conecta sourcing global com distribuição local via franquias.", conexoes: ["forge", "veeenha", "holding"], href: "/portfolio/purple-party" },
+  { id: "barbearia", label: "Barbearia do Rão", icon: Scissors, camada: "distrib", color: "#f59e0b", x: 15, y: 50, desc: "Marca física de serviço. Gera dados FIGITAIS de fluxo, ticket e recorrência no ponto.", conexoes: ["veeenha", "holding"], href: "/portfolio/barbearia-do-rao" },
 ];
 
 const edges: Edge[] = [
   { from: "veeenha", to: "forge", label: "Canal de venda", type: "clientes" },
-  { from: "veeenha", to: "purple", label: "Distribuicao local", type: "clientes" },
-  { from: "veeenha", to: "barbearia", label: "Fluxo digital -> fisico", type: "clientes" },
-  { from: "ruptfy", to: "forge", label: "Formacao franqueados", type: "conteudo" },
+  { from: "veeenha", to: "purple", label: "Distribuição local", type: "clientes" },
+  { from: "veeenha", to: "barbearia", label: "Fluxo digital → físico", type: "clientes" },
+  { from: "ruptfy", to: "forge", label: "Formação franqueados", type: "conteudo" },
   { from: "ruptfy", to: "cortex", label: "Plataforma de cursos", type: "conteudo" },
-  { from: "ruptfy", to: "longview", label: "Distribuicao premium", type: "conteudo" },
+  { from: "ruptfy", to: "longview", label: "Distribuição premium", type: "conteudo" },
   { from: "forge", to: "purple", label: "Know-how franquia", type: "dados" },
-  { from: "cortex", to: "longview", label: "Cross-audiencia", type: "conteudo" },
+  { from: "cortex", to: "longview", label: "Cross-audiência", type: "conteudo" },
   { from: "purple", to: "forge", label: "Supply chain 3D", type: "supply" },
 ];
 
 const camadaLabels = {
   infra: { label: "Infraestrutura (Sensores)", color: "#22c55e", icon: Cpu },
-  neuron: { label: "Neuronios (Processamento)", color: "#3b82f6", icon: Brain },
-  distrib: { label: "Distribuicao (Retroalimentacao)", color: "#f59e0b", icon: RotateCcw },
-  core: { label: "Governanca", color: "#1e3a5f", icon: Layers },
+  neuron: { label: "Neurônios (Processamento)", color: "#3b82f6", icon: Brain },
+  distrib: { label: "Distribuição (Retroalimentação)", color: "#f59e0b", icon: RotateCcw },
+  core: { label: "Governança", color: "#1e3a5f", icon: Layers },
 };
 
 const edgeColors: Record<string, string> = {
@@ -132,8 +132,8 @@ export function EcossistemaPage() {
               Arquitetura FIGITAL
             </h1>
             <p className="text-muted text-lg leading-[1.7] max-w-3xl tracking-[-0.006em]">
-              Visualize como as 7 marcas se conectam. O fisico gera sinais, o
-              digital os organiza, e a governanca transforma sinais em decisao.
+              Visualize como as 7 marcas se conectam. O físico gera sinais, o
+              digital os organiza, e a governança transforma sinais em decisão.
             </p>
           </motion.div>
         </div>
@@ -157,7 +157,7 @@ export function EcossistemaPage() {
               {[
                 { type: "dados", label: "Dados" },
                 { type: "supply", label: "Supply chain" },
-                { type: "conteudo", label: "Conteudo" },
+                { type: "conteudo", label: "Conteúdo" },
                 { type: "clientes", label: "Clientes" },
               ].map(({ type, label }) => (
                 <div key={type} className="flex items-center gap-1.5">
@@ -231,6 +231,7 @@ export function EcossistemaPage() {
                     onClick={() => setSelected(node)}
                     onMouseEnter={() => setHoveredNode(node.id)}
                     onMouseLeave={() => setHoveredNode(null)}
+                    onTouchStart={() => setHoveredNode(hoveredNode === node.id ? null : node.id)}
                     opacity={connected ? 1 : 0.12}
                     style={{ transition: "opacity 0.4s" }}
                   >
@@ -265,7 +266,8 @@ export function EcossistemaPage() {
             </svg>
 
             <div className="absolute bottom-4 left-4 text-[11px] text-muted/30 font-medium">
-              Passe o mouse sobre um no para ver conexoes. Clique para detalhes.
+              <span className="hidden md:inline">Passe o mouse sobre um nó para ver conexões. Clique para detalhes.</span>
+              <span className="md:hidden">Toque num nó para ver conexões. Toque novamente para detalhes.</span>
             </div>
           </motion.div>
         </div>
@@ -349,9 +351,9 @@ export function EcossistemaPage() {
 
           <div className="grid md:grid-cols-3 gap-5">
             {[
-              { num: "01", title: "Sensores captam", desc: "Veeenha!!!, Ruptfy e Forge and Flow captam dados reais de consumo, aprendizado e producao.", color: "#22c55e" },
-              { num: "02", title: "Neuronios processam", desc: "Cortex FC, Long View e Purple Party transformam dados brutos em decisao, narrativa e supply chain.", color: "#3b82f6" },
-              { num: "03", title: "Distribuicao retroalimenta", desc: "Lojas, super app, e-commerce e franquias fecham o ciclo. Cada venda gera novo dado.", color: "#f59e0b" },
+              { num: "01", title: "Sensores captam", desc: "Veeenha!!!, Ruptfy e Forge and Flow captam dados reais de consumo, aprendizado e produção.", color: "#22c55e" },
+              { num: "02", title: "Neurônios processam", desc: "Córtex FC, Long View e Purple Party transformam dados brutos em decisão, narrativa e supply chain.", color: "#3b82f6" },
+              { num: "03", title: "Distribuição retroalimenta", desc: "Lojas, super app, e-commerce e franquias fecham o ciclo. Cada venda gera novo dado.", color: "#f59e0b" },
             ].map((item, i) => (
               <motion.div
                 key={item.num}
@@ -387,8 +389,8 @@ export function EcossistemaPage() {
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
             />
             <p className="relative text-white/60 text-lg leading-[1.7] max-w-2xl mx-auto tracking-[-0.006em]">
-              &ldquo;Concorrentes copiam produto. Nao copiam historico FIGITAL.
-              Cada ciclo sensor-neuronio-distribuicao gera um ativo que so existe
+              &ldquo;Concorrentes copiam produto. Não copiam histórico FIGITAL.
+              Cada ciclo sensor-neurônio-distribuição gera um ativo que só existe
               dentro do ecossistema.&rdquo;
             </p>
           </motion.div>

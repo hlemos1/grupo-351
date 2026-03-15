@@ -46,7 +46,21 @@ const iconMap: Record<string, LucideIcon> = {
 
 const iconOptions = Object.keys(iconMap);
 
-const statusOptions = ["Em operação", "Em desenvolvimento", "Em estruturação"] as const;
+const statusOptions = [
+  "Ideação",
+  "Em estruturação",
+  "Em desenvolvimento",
+  "Em operação",
+  "Consolidado",
+] as const;
+
+const statusColor: Record<string, string> = {
+  "Ideação": "bg-purple-400",
+  "Em estruturação": "bg-muted",
+  "Em desenvolvimento": "bg-warning",
+  "Em operação": "bg-success",
+  "Consolidado": "bg-blue-500",
+};
 
 interface Projeto {
   slug: string;
@@ -316,12 +330,7 @@ export default function PortfolioAdminPage() {
           const state = editState[p.slug];
           if (!state) return null;
 
-          const statusColor =
-            state.status === "Em operação"
-              ? "bg-success"
-              : state.status === "Em desenvolvimento"
-              ? "bg-warning"
-              : "bg-muted";
+          const statusDot = statusColor[state.status] || "bg-muted";
 
           return (
             <div
@@ -353,7 +362,7 @@ export default function PortfolioAdminPage() {
                 </div>
                 <div className="flex items-center gap-3 shrink-0">
                   <div className="flex items-center gap-1.5">
-                    <div className={`w-2 h-2 rounded-full ${statusColor}`} />
+                    <div className={`w-2 h-2 rounded-full ${statusDot}`} />
                     <span className="text-xs text-muted hidden sm:inline">{p.status}</span>
                   </div>
                   {isExpanded ? (

@@ -4,9 +4,9 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 
 const stats = [
-  { value: 10, suffix: "+", label: "Anos de experiencia combinada" },
+  { value: 10, suffix: "+", label: "Anos de experiência combinada" },
   { value: 200, suffix: "+", label: "Unidades criadas no Brasil" },
-  { value: 3, suffix: "", label: "Paises de atuacao" },
+  { value: 3, suffix: "", label: "Países de atuação" },
   { value: 20, suffix: "+", label: "Marcas desenvolvidas" },
 ];
 

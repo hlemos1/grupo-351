@@ -27,9 +27,11 @@ export async function GET() {
       naoLidos: contatos.filter((c) => !c.lido).length,
     },
     projetos: {
-      emOperacao: allProjetos.filter((p) => p.status === "Em operação").length,
-      emDesenvolvimento: allProjetos.filter((p) => p.status === "Em desenvolvimento").length,
+      ideacao: allProjetos.filter((p) => p.status === "Ideação").length,
       emEstruturacao: allProjetos.filter((p) => p.status === "Em estruturação").length,
+      emDesenvolvimento: allProjetos.filter((p) => p.status === "Em desenvolvimento").length,
+      emOperacao: allProjetos.filter((p) => p.status === "Em operação").length,
+      consolidado: allProjetos.filter((p) => p.status === "Consolidado").length,
     },
     conhecimento: {
       termos: glossario.length,

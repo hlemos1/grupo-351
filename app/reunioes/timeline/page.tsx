@@ -47,11 +47,11 @@ const tagColors: Record<string, string> = {
   "Supply Chain": "bg-cyan-500/10 text-cyan-700",
   Franquia: "bg-emerald-500/10 text-emerald-700",
   Parceria: "bg-blue-500/10 text-blue-700",
-  Importacao: "bg-orange-500/10 text-orange-700",
+  Importação: "bg-orange-500/10 text-orange-700",
   "Grupo Rao": "bg-primary/10 text-primary",
   Tecnologia: "bg-indigo-500/10 text-indigo-700",
   WhatsApp: "bg-green-500/10 text-green-700",
-  Estrategia: "bg-sky-500/10 text-sky-700",
+  Estratégia: "bg-sky-500/10 text-sky-700",
   Marketing: "bg-pink-500/10 text-pink-700",
   Financeiro: "bg-lime-500/10 text-lime-700",
 };
@@ -583,7 +583,7 @@ export default function ReunioesPublicPage() {
       {/* Footer */}
       <footer className="border-t border-black/[0.04] py-6 mt-12">
         <p className="text-center text-[11px] text-muted/50">
-          Grupo +351 · Relatorio de Governanca · Acesso restrito por link
+          Grupo +351 · Relatório de Governança · Acesso restrito por link
         </p>
       </footer>
     </div>

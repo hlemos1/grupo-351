@@ -3,14 +3,15 @@
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ArrowRight, Settings } from "lucide-react";
+import { Menu, X, ArrowRight } from "lucide-react";
 import { Logo } from "./Logo";
 
 const navLinks = [
   { href: "/sobre", label: "Sobre" },
   { href: "/portfolio", label: "Portfólio" },
   { href: "/ecossistema", label: "Ecossistema" },
-  { href: "/parceiros", label: "Parceiros" },
+  { href: "/empresas", label: "Empresas" },
+  { href: "/oportunidades", label: "Oportunidades" },
   { href: "/conhecimento", label: "Conhecimento" },
 ];
 
@@ -40,7 +41,7 @@ export function Nav() {
     >
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         <a href="/" className="relative z-10">
-          <Logo className={`text-xl transition-colors duration-300 ${scrolled ? "text-primary" : "text-primary"}`} />
+          <Logo className="text-primary transition-colors duration-300" size={28} />
         </a>
 
         {/* Desktop */}
@@ -75,13 +76,6 @@ export function Nav() {
           >
             Aplicar
             <ArrowRight className="w-3.5 h-3.5 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" />
-          </a>
-          <a
-            href="/admin"
-            className="ml-1 p-2 rounded-full text-muted hover:text-primary hover:bg-black/[0.05] transition-all duration-300"
-            title="Admin"
-          >
-            <Settings className="w-4.5 h-4.5" />
           </a>
         </div>
 
@@ -128,7 +122,7 @@ export function Nav() {
             className="md:hidden overflow-hidden bg-white/95 backdrop-blur-2xl border-b border-black/[0.04]"
           >
             <div className="flex flex-col px-6 py-4 gap-1">
-              {[...navLinks, { href: "/aplicar", label: "Aplicar" }, { href: "/contato", label: "Contato" }, { href: "/admin", label: "Admin" }].map((l, i) => (
+              {[...navLinks, { href: "/aplicar", label: "Aplicar" }, { href: "/contato", label: "Contato" }].map((l, i) => (
                 <motion.a
                   key={l.href}
                   href={l.href}

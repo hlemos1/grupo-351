@@ -10,25 +10,25 @@ const camadas = [
     num: "01",
     title: "Infraestrutura",
     subtitle: "Sensores FIGITAIS",
-    items: ["Veeenha!!! — consumo local", "Ruptfy — aprendizado", "Forge and Flow 3D — producao"],
-    desc: "Onde o mundo fisico vira dado.",
+    items: ["Veeenha!!! — consumo local", "Ruptfy — aprendizado", "Forge and Flow 3D — produção"],
+    desc: "Onde o mundo físico vira dado.",
     accent: "from-blue-500/10 to-blue-600/5",
     dot: "bg-blue-500",
   },
   {
     num: "02",
     title: "Marcas",
-    subtitle: "Neuronios FIGITAIS",
-    items: ["Cortex FC — decisao", "Long View — percepcao", "Purple Party — supply chain", "Barbearia do Rao — fluxo fisico"],
-    desc: "Transformam operacao em sinal interpretavel.",
+    subtitle: "Neurônios FIGITAIS",
+    items: ["Córtex FC — decisão", "Long View — percepção", "Purple Party — supply chain", "Barbearia do Rão — fluxo físico"],
+    desc: "Transformam operação em sinal interpretável.",
     accent: "from-violet-500/10 to-violet-600/5",
     dot: "bg-violet-500",
   },
   {
     num: "03",
-    title: "Distribuicao",
-    subtitle: "Retroalimentacao",
-    items: ["Lojas fisicas", "Super app", "E-commerce", "Franquias", "Conteudo"],
+    title: "Distribuição",
+    subtitle: "Retroalimentação",
+    items: ["Lojas físicas", "Super app", "E-commerce", "Franquias", "Conteúdo"],
     desc: "Fecha o ciclo do aprendizado.",
     accent: "from-emerald-500/10 to-emerald-600/5",
     dot: "bg-emerald-500",
@@ -58,11 +58,11 @@ export function Figital() {
             </span>
           </h2>
           <p className="text-muted text-lg leading-[1.7] mb-4 tracking-[-0.006em]">
-            FIGITAL nao e tendencia. E arquitetura. O fisico gera sinais.
-            O digital organiza esses sinais. A governanca transforma sinais em decisao.
+            FIGITAL não é tendência. É arquitetura. O físico gera sinais.
+            O digital organiza esses sinais. A governança transforma sinais em decisão.
           </p>
           <p className="text-foreground text-lg leading-[1.7] font-medium tracking-[-0.006em]">
-            Concorrentes copiam produto. Nao copiam historico FIGITAL.
+            Concorrentes copiam produto. Não copiam histórico FIGITAL.
           </p>
         </motion.div>
 

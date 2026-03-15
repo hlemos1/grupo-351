@@ -10,23 +10,23 @@ const socios = [
   {
     name: "Henrique Lemos",
     initials: "HL",
-    role: "Socio Fundador",
-    bio: "CEO do Grupo Rao — maior rede de delivery do Brasil com 200+ unidades, 20+ marcas e super-app proprio. Food tech, Web3, IA e expansao internacional.",
+    role: "Sócio Fundador",
+    bio: "CEO do Grupo Rão — maior rede de delivery do Brasil com 200+ unidades, 20+ marcas e super-app próprio. Food tech, Web3, IA e expansão internacional.",
     linkedin: "https://www.linkedin.com/in/henrique-lemos-39712b22b/",
     gradient: "from-blue-500 to-indigo-600",
   },
   {
     name: "Fernando Vieira",
     initials: "FV",
-    role: "Socio Fundador",
-    bio: "Socio-administrador da Casarao Lustres — referencia em iluminacao decorativa e tecnica no Brasil com mais de 4 decadas de atuacao no Rio de Janeiro.",
+    role: "Sócio Fundador",
+    bio: "Sócio-administrador da Casarão Lustres — referência em iluminação decorativa e técnica no Brasil com mais de 4 décadas de atuação no Rio de Janeiro.",
     gradient: "from-emerald-500 to-teal-600",
   },
   {
     name: "Herson Rosa",
     initials: "HR",
-    role: "Socio Fundador",
-    bio: "Administrador da Imperio dos Freios — lider no mercado de autopecas para linha pesada ha mais de 16 anos, referencia na regiao Sudeste do Brasil.",
+    role: "Sócio Fundador",
+    bio: "Administrador da Império dos Freios — líder no mercado de autopeças para linha pesada há mais de 16 anos, referência na região Sudeste do Brasil.",
     gradient: "from-amber-500 to-orange-600",
   },
 ];
@@ -48,23 +48,23 @@ export function QuemSomos() {
               Quem Somos
             </p>
             <h2 className="text-3xl md:text-[2.75rem] font-bold text-primary font-display tracking-[-0.025em] leading-[1.1] mb-8">
-              Tres empreendedores,{" "}
+              Três empreendedores,{" "}
               <span className="bg-gradient-to-r from-accent to-accent-light bg-clip-text text-transparent">
-                uma visao comum
+                uma visão comum
               </span>
             </h2>
             <p className="text-muted text-lg leading-[1.7] mb-4 tracking-[-0.006em]">
-              O Grupo +351 e uma holding empresarial fundada por tres empresarios
-              com historico comprovado de criacao, operacao e escala de negocios
+              O Grupo +351 é uma holding empresarial fundada por três empresários
+              com histórico comprovado de criação, operação e escala de negócios
               no Brasil e em Portugal.
             </p>
             <p className="text-muted text-lg leading-[1.7] mb-4 tracking-[-0.006em]">
-              Nao existimos para testar ideias. Existimos para criar ativos.
-              Cada marca precisa gerar caixa, reputacao e recorrencia.
+              Não existimos para testar ideias. Existimos para criar ativos.
+              Cada marca precisa gerar caixa, reputação e recorrência.
             </p>
             <p className="text-foreground text-lg leading-[1.7] font-medium tracking-[-0.006em]">
-              Capital controla a arquitetura. Execucao gera dados.
-              Permanencia consolida aprendizado.
+              Capital controla a arquitetura. Execução gera dados.
+              Permanência consolida aprendizado.
             </p>
           </div>
         </motion.div>
@@ -115,7 +115,7 @@ export function QuemSomos() {
             href="/sobre"
             className="inline-flex items-center gap-1.5 text-accent text-[14px] font-medium hover:underline underline-offset-4 group"
           >
-            Ver perfis completos e trajetoria
+            Ver perfis completos e trajetória
             <span className="group-hover:translate-x-0.5 transition-transform duration-300">&rarr;</span>
           </a>
         </motion.div>

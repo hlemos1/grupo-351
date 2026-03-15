@@ -16,6 +16,178 @@ model AdminUser {
   @@map("admin_users")
 }
 
+// ─── Plataforma Multi-Sided ───
+
+model User {
+  id           String    @id @default(cuid())
+  email        String    @unique
+  nome         String
+  senhaHash    String    @map("senha_hash")
+  role         String    @default("empresa") // admin | empresa | parceiro
+  avatar       String?
+  ativo        Boolean   @default(true)
+  criadoEm     DateTime  @default(now()) @map("criado_em")
+  ultimoLogin  DateTime? @map("ultimo_login")
+
+  company      Company?  @relation("CompanyOwner")
+  memberships  CompanyMember[]
+  opportunities Opportunity[]
+  matchesFrom  Match[]   @relation("MatchFrom")
+  matchesTo    Match[]   @relation("MatchTo")
+  messages     Message[]
+  apiKeys      ApiKey[]
+
+  @@map("users")
+}
+
+model Company {
+  id          String    @id @default(cuid())
+  slug        String    @unique
+  nome        String
+  tagline     String?
+  descricao   String?   @db.Text
+  setor       String
+  pais        String
+  cidade      String?
+  website     String?
+  linkedin    String?
+  logo        String?
+  estagio     String    @default("operando") // ideacao | validacao | operando | escala | consolidado
+  faturamento String?   // faixa: "ate-100k" | "100k-500k" | "500k-1m" | "1m-5m" | "5m+"
+  interesses  String[]  // tags: ["expansao", "investimento", "fornecedor", "franquia", "mentoria"]
+  verificada  Boolean   @default(false)
+  ativa       Boolean   @default(true)
+  criadoEm    DateTime  @default(now()) @map("criado_em")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+
+  ownerId     String    @unique @map("owner_id")
+  owner       User      @relation("CompanyOwner", fields: [ownerId], references: [id])
+  members     CompanyMember[]
+  opportunities Opportunity[]
+  projects    ProjectMember[]
+  subscription Subscription?
+
+  @@map("companies")
+}
+
+model CompanyMember {
+  id        String   @id @default(cuid())
+  role      String   @default("membro") // dono | admin | membro
+  criadoEm  DateTime @default(now()) @map("criado_em")
+
+  userId    String   @map("user_id")
+  user      User     @relation(fields: [userId], references: [id])
+  companyId String   @map("company_id")
+  company   Company  @relation(fields: [companyId], references: [id])
+
+  @@unique([userId, companyId])
+  @@map("company_members")
+}
+
+model Opportunity {
+  id          String    @id @default(cuid())
+  titulo      String
+  tipo        String    // franquia | investimento | parceria | fornecedor | expansao
+  setor       String
+  descricao   String    @db.Text
+  requisitos  String?   @db.Text
+  budget      String?   // faixa de investimento
+  localizacao String?
+  status      String    @default("aberta") // aberta | em-negociacao | fechada | cancelada
+  destaque    Boolean   @default(false)
+  criadoEm    DateTime  @default(now()) @map("criado_em")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+  expiraEm    DateTime? @map("expira_em")
+
+  companyId   String    @map("company_id")
+  company     Company   @relation(fields: [companyId], references: [id])
+  userId      String    @map("user_id")
+  user        User      @relation(fields: [userId], references: [id])
+  matches     Match[]
+
+  @@map("opportunities")
+}
+
+model Match {
+  id          String    @id @default(cuid())
+  status      String    @default("sugerido") // sugerido | aceito | recusado | em-conversa | fechado
+  score       Int?      // 0-100 match score da IA
+  motivo      String?   @db.Text // razão da sugestão da IA
+  criadoEm    DateTime  @default(now()) @map("criado_em")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+
+  opportunityId String  @map("opportunity_id")
+  opportunity   Opportunity @relation(fields: [opportunityId], references: [id])
+  fromUserId    String  @map("from_user_id")
+  fromUser      User    @relation("MatchFrom", fields: [fromUserId], references: [id])
+  toUserId      String  @map("to_user_id")
+  toUser        User    @relation("MatchTo", fields: [toUserId], references: [id])
+  messages      Message[]
+  project       PlatformProject?
+
+  @@unique([opportunityId, fromUserId, toUserId])
+  @@map("matches")
+}
+
+model PlatformProject {
+  id          String    @id @default(cuid())
+  nome        String
+  descricao   String?   @db.Text
+  status      String    @default("ativo") // ativo | pausado | concluido | cancelado
+  criadoEm    DateTime  @default(now()) @map("criado_em")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+
+  matchId     String    @unique @map("match_id")
+  match       Match     @relation(fields: [matchId], references: [id])
+  members     ProjectMember[]
+  tasks       ProjectTask[]
+
+  @@map("platform_projects")
+}
+
+model ProjectMember {
+  id        String   @id @default(cuid())
+  role      String   @default("membro") // lider | membro
+  criadoEm  DateTime @default(now()) @map("criado_em")
+
+  projectId String   @map("project_id")
+  project   PlatformProject @relation(fields: [projectId], references: [id])
+  companyId String   @map("company_id")
+  company   Company  @relation(fields: [companyId], references: [id])
+
+  @@unique([projectId, companyId])
+  @@map("project_members")
+}
+
+model ProjectTask {
+  id          String    @id @default(cuid())
+  titulo      String
+  descricao   String?   @db.Text
+  status      String    @default("pendente") // pendente | em-progresso | concluida
+  prioridade  String    @default("media") // baixa | media | alta
+  prazo       DateTime?
+  criadoEm    DateTime  @default(now()) @map("criado_em")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+
+  projectId   String    @map("project_id")
+  project     PlatformProject @relation(fields: [projectId], references: [id])
+
+  @@map("project_tasks")
+}
+
+model Message {
+  id        String   @id @default(cuid())
+  conteudo  String   @db.Text
+  criadoEm  DateTime @default(now()) @map("criado_em")
+
+  userId    String   @map("user_id")
+  user      User     @relation(fields: [userId], references: [id])
+  matchId   String   @map("match_id")
+  match     Match    @relation(fields: [matchId], references: [id])
+
+  @@map("messages")
+}
+
 model Candidatura {
   id                String   @id @default(cuid())
   criadoEm          DateTime @default(now()) @map("criado_em")
@@ -40,6 +212,13 @@ model Candidatura {
   aceitaNDA         Boolean  @default(false) @map("aceita_nda")
   notas             String?  @db.Text
   atribuidoA        String?  @map("atribuido_a")
+  score             Int?
+  scoreTier         String?  @map("score_tier")
+  scoreBreakdown    Json?    @map("score_breakdown")
+  scoreFlags        String[] @map("score_flags")
+  ndaAceitoEm       DateTime? @map("nda_aceito_em")
+  ndaIp             String?   @map("nda_ip")
+  ndaUserAgent      String?   @map("nda_user_agent")
 
   @@map("candidaturas")
 }
@@ -111,6 +290,21 @@ model AiConversa {
   @@map("ai_conversas")
 }
 
+model Parceiro {
+  id            String   @id @default(cuid())
+  nome          String
+  email         String   @unique
+  token         String   @unique
+  projetoSlug   String   @map("projeto_slug")
+  papel         String   @default("operador")
+  ativo         Boolean  @default(true)
+  criadoEm      DateTime @default(now()) @map("criado_em")
+  ultimoAcesso  DateTime? @map("ultimo_acesso")
+  metricas      Json?
+
+  @@map("parceiros")
+}
+
 model ReuniaoDataset {
   id        String   @id @default(cuid())
   tipo      String   @unique
@@ -118,4 +312,55 @@ model ReuniaoDataset {
   updatedAt DateTime @updatedAt @map("updated_at")
 
   @@map("reuniao_datasets")
+}
+
+// ─── Pagamentos e Assinaturas ───
+
+model Subscription {
+  id              String    @id @default(cuid())
+  plano           String    // free | growth | enterprise
+  status          String    @default("active") // active | canceled | past_due | trialing
+  stripeCustomerId    String?   @unique @map("stripe_customer_id")
+  stripeSubscriptionId String?  @unique @map("stripe_subscription_id")
+  currentPeriodEnd    DateTime? @map("current_period_end")
+  cancelAtPeriodEnd   Boolean   @default(false) @map("cancel_at_period_end")
+  criadoEm        DateTime  @default(now()) @map("criado_em")
+  updatedAt       DateTime  @updatedAt @map("updated_at")
+
+  companyId       String    @unique @map("company_id")
+  company         Company   @relation(fields: [companyId], references: [id])
+
+  @@map("subscriptions")
+}
+
+model Payment {
+  id              String    @id @default(cuid())
+  amount          Int       // centavos
+  currency        String    @default("eur")
+  status          String    // succeeded | pending | failed
+  tipo            String    // subscription | commission | service
+  descricao       String?
+  stripePaymentId String?   @unique @map("stripe_payment_id")
+  criadoEm        DateTime  @default(now()) @map("criado_em")
+
+  companyId       String    @map("company_id")
+
+  @@map("payments")
+}
+
+// ─── API Keys (acesso externo) ───
+
+model ApiKey {
+  id          String    @id @default(cuid())
+  key         String    @unique
+  nome        String    // nome descritivo
+  scopes      String[]  // companies:read | opportunities:read | opportunities:write | matches:read
+  ativa       Boolean   @default(true)
+  ultimoUso   DateTime? @map("ultimo_uso")
+  criadoEm    DateTime  @default(now()) @map("criado_em")
+
+  userId      String    @map("user_id")
+  user        User      @relation(fields: [userId], references: [id])
+
+  @@map("api_keys")
 }

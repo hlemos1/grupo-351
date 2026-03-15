@@ -50,11 +50,13 @@ export const projetoSchema = z.object({
   description: z.string().max(10000),
   detalhes: z.array(z.string()),
   tag: z.string(),
-  status: z.enum(["Em operação", "Em desenvolvimento", "Em estruturação"]),
+  status: z.enum(["Ideação", "Em estruturação", "Em desenvolvimento", "Em operação", "Consolidado"]),
   mercado: z.string(),
   parceiro: z.string().optional(),
   controle: z.string(),
   icon: z.string(),
+  socio: z.string().optional(),
+  porcentagem: z.number().min(0).max(100).optional(),
   notasInternas: z.string().optional(),
 });
 
@@ -84,4 +86,45 @@ export const aiMessagesSchema = z.object({
     role: z.enum(["user", "assistant"]),
     content: z.string().max(50000),
   })).min(1),
+});
+
+// ─── Plataforma ───
+
+export const registerSchema = z.object({
+  nome: z.string().min(2).max(200),
+  email: z.string().email(),
+  senha: z.string().min(8).max(128),
+  role: z.enum(["empresa", "parceiro"]).default("empresa"),
+});
+
+export const companyCreateSchema = z.object({
+  nome: z.string().min(2).max(200),
+  slug: z.string().min(2).max(100).regex(/^[a-z0-9-]+$/),
+  tagline: z.string().max(300).optional(),
+  descricao: z.string().max(10000).optional(),
+  setor: z.string().min(2),
+  pais: z.string().min(2),
+  cidade: z.string().optional(),
+  website: z.string().url().optional().or(z.literal("")),
+  linkedin: z.string().url().optional().or(z.literal("")),
+  estagio: z.enum(["ideacao", "validacao", "operando", "escala", "consolidado"]).default("operando"),
+  faturamento: z.enum(["ate-100k", "100k-500k", "500k-1m", "1m-5m", "5m+"]).optional(),
+  interesses: z.array(z.string()).default([]),
+});
+
+export const companyUpdateSchema = companyCreateSchema.partial().omit({ slug: true });
+
+export const opportunityCreateSchema = z.object({
+  titulo: z.string().min(5).max(300),
+  tipo: z.enum(["franquia", "investimento", "parceria", "fornecedor", "expansao"]),
+  setor: z.string().min(2),
+  descricao: z.string().min(20).max(10000),
+  requisitos: z.string().max(5000).optional(),
+  budget: z.string().optional(),
+  localizacao: z.string().optional(),
+  expiraEm: z.string().datetime().optional(),
+});
+
+export const opportunityUpdateSchema = opportunityCreateSchema.partial().extend({
+  status: z.enum(["aberta", "em-negociacao", "fechada", "cancelada"]).optional(),
 });

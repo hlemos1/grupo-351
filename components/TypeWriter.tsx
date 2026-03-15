@@ -37,11 +37,15 @@ export function TypeWriter({
 
     const timeout = setTimeout(
       () => {
-        setText(
-          isDeleting ? current.slice(0, text.length - 1) : current.slice(0, text.length + 1)
-        );
+        if (isDeleting) {
+          // Delete by word: find the last space before current position
+          const lastSpace = current.lastIndexOf(" ", text.length - 2);
+          setText(lastSpace > 0 ? current.slice(0, lastSpace) : "");
+        } else {
+          setText(current.slice(0, text.length + 1));
+        }
       },
-      isDeleting ? deletingSpeed : typingSpeed
+      isDeleting ? deletingSpeed * 2 : typingSpeed
     );
 
     return () => clearTimeout(timeout);

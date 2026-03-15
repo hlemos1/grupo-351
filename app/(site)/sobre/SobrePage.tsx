@@ -10,6 +10,8 @@ import {
   Users,
   ArrowRight,
   Linkedin,
+  ExternalLink,
+  Award,
 } from "lucide-react";
 
 const ease = [0.16, 1, 0.3, 1] as const;
@@ -17,27 +19,27 @@ const ease = [0.16, 1, 0.3, 1] as const;
 const timeline = [
   {
     year: "2013",
-    title: "Inicio da trajetoria",
+    title: "Início da trajetória",
     description:
-      "Os fundadores comecam suas jornadas empresariais no Brasil, construindo negocios do zero em diversos setores.",
+      "Os fundadores começam suas jornadas empresariais no Brasil, construindo negócios do zero em diversos setores.",
   },
   {
     year: "2018",
     title: "Escala nacional",
     description:
-      "Expansao dos negocios para multiplos estados brasileiros, consolidando experiencia em franquias, food service e operacoes complexas.",
+      "Expansão dos negócios para múltiplos estados brasileiros, consolidando experiência em franquias, food service e operações complexas.",
   },
   {
     year: "2023",
     title: "Olhar para Portugal",
     description:
-      "Identificacao de Portugal como hub estrategico para internacionalizacao e criacao de novos negocios com ponte Brasil-Europa.",
+      "Identificação de Portugal como hub estratégico para internacionalização e criação de novos negócios com ponte Brasil-Europa.",
   },
   {
     year: "2024",
-    title: "Fundacao do Grupo +351",
+    title: "Fundação do Grupo +351",
     description:
-      "Estabelecimento em Cascais. Inicio das operacoes com Print Lab 3D e Axes como primeiros projetos do portfolio.",
+      "Estabelecimento em Cascais. Início das operações com Forge and Flow 3D e Veeenha!!! como primeiros projetos do portfólio.",
   },
 ];
 
@@ -45,26 +47,36 @@ const socios = [
   {
     name: "Henrique Lemos",
     initials: "HL",
-    role: "Socio Fundador",
-    bio: "Co-fundador do Grupo Rao, maior rede de delivery do Brasil com mais de 200 unidades em 10 estados e faturamento superior a R$200 milhoes/ano. Criou o super-app Mundo Rao com 800k+ pedidos processados. Atua no conselho estrategico e na expansao internacional do grupo. Autor do livro 'Delivery Milionario'.",
+    role: "Sócio Fundador",
+    bio: "Co-fundador do Grupo Rão ao lado do irmão Guilherme Lemos em 2013, com R$40 mil emprestados e uma cozinha em Botafogo. Construiu a maior rede de delivery do Brasil: 20+ marcas, 200+ unidades em 10 estados e faturamento de R$220 milhões/ano. Criador do super-app Mundo Rão (800k+ pedidos) e da Rob Food, holding de hambúrgueres com 4 redes. Selo ABF de excelência por 5 anos consecutivos. Autor do livro 'Delivery Milionário'. Lidera o conselho estratégico e a expansão internacional do grupo.",
     linkedin: "https://www.linkedin.com/in/henrique-lemos-39712b22b/",
-    expertise: ["Franchising", "Food Tech", "Estrategia", "Internacionalizacao"],
+    press: [
+      { label: "InfoMoney", url: "https://www.infomoney.com.br/negocios/delivery-sushi-rao/" },
+      { label: "Exame", url: "https://exame.com/negocios/grupo-rao-franquias/" },
+      { label: "Podcast Guelt", url: "https://www.youtube.com/@guaboraempreender" },
+    ],
+    badges: ["Selo ABF 5x"],
+    expertise: ["Franchising", "Food Tech", "Estratégia", "Internacionalização"],
     gradient: "from-blue-500 to-indigo-600",
   },
   {
     name: "Fernando Vieira",
     initials: "FV",
-    role: "Socio Fundador",
-    bio: "Socio-administrador da Casarao Lustres, empresa de referencia no mercado de iluminacao decorativa e tecnica no Brasil com mais de 4 decadas de atuacao. Fundada pelo patriarca Fernando Alexandre Vieira em Benfica, Rio de Janeiro. Especializada em curadoria de produtos nacionais e importados, citada pela Forbes pelo trabalho com iluminacao de luxo.",
-    expertise: ["Iluminacao & Design", "Gestao familiar", "Curadoria", "Importacao"],
+    role: "Sócio Fundador",
+    bio: "Sócio-administrador da Casarão Lustres, empresa de referência no mercado de iluminação decorativa e técnica no Brasil com mais de 4 décadas de atuação. Fundada pelo patriarca Fernando Alexandre Vieira em Benfica, Rio de Janeiro. Especialista em curadoria de produtos nacionais e importados para projetos de alto padrão. Traz ao grupo a experiência de gestão familiar multigeracional e relacionamento com fornecedores internacionais.",
+    press: [],
+    badges: [],
+    expertise: ["Iluminação & Design", "Gestão familiar", "Curadoria", "Importação"],
     gradient: "from-emerald-500 to-teal-600",
   },
   {
     name: "Herson Rosa",
     initials: "HR",
-    role: "Socio Fundador",
-    bio: "Principal administrador e socio da Imperio dos Freios Pecas e Servicos, empresa que lidera ha mais de 16 anos o mercado de autopecas para linha pesada (camioes e autocarros) na regiao Sudeste do Brasil. Sede estrategica na Avenida Brasil (Penha Circular), ponto neuralgico da logistica de transportes. Referencia em qualidade tecnica e oferta de marcas lideres no setor automotivo.",
-    expertise: ["Autopecas", "Logistica pesada", "Operacoes", "Atacarejo"],
+    role: "Sócio Fundador",
+    bio: "Principal administrador e sócio da Império dos Freios Peças e Serviços, empresa que lidera há mais de 16 anos o mercado de autopeças para linha pesada (camiões e autocarros) na região Sudeste do Brasil. Sede estratégica na Avenida Brasil (Penha Circular), ponto nevrálgico da logística de transportes. Referência em qualidade técnica, gestão de estoque de alto giro e relacionamento com frotas e transportadoras.",
+    press: [],
+    badges: [],
+    expertise: ["Autopeças", "Logística pesada", "Operações", "Atacarejo"],
     gradient: "from-amber-500 to-orange-600",
   },
 ];
@@ -72,23 +84,23 @@ const socios = [
 const valores = [
   {
     icon: Building2,
-    title: "Construcao real",
-    description: "Nao fazemos consultoria. Construimos empresas e operamos junto com nossos parceiros.",
+    title: "Construção real",
+    description: "Não fazemos consultoria. Construímos empresas e operamos junto com nossos parceiros.",
   },
   {
     icon: Users,
-    title: "Parceria genuina",
-    description: "Buscamos relacoes de longo prazo baseadas em confianca, transparencia e resultados compartilhados.",
+    title: "Parceria genuína",
+    description: "Buscamos relações de longo prazo baseadas em confiança, transparência e resultados compartilhados.",
   },
   {
     icon: Globe,
-    title: "Visao internacional",
+    title: "Visão internacional",
     description: "Conectamos o melhor do empreendedorismo brasileiro com as oportunidades do mercado europeu.",
   },
   {
     icon: Rocket,
-    title: "Execucao focada",
-    description: "Priorizamos acao sobre planejamento. Cada projeto e tratado com urgencia e pragmatismo.",
+    title: "Execução focada",
+    description: "Priorizamos ação sobre planeamento. Cada projeto é tratado com urgência e pragmatismo.",
   },
 ];
 
@@ -114,13 +126,13 @@ export function SobrePage() {
               Sobre o Grupo
             </p>
             <h1 className="text-4xl md:text-[3.5rem] font-bold text-primary font-display tracking-[-0.03em] leading-[1.05] mb-6">
-              Quem esta por tras <br className="hidden md:block" />
+              Quem está por trás <br className="hidden md:block" />
               do Grupo +351
             </h1>
             <p className="text-muted text-xl leading-[1.7] max-w-3xl tracking-[-0.006em]">
-              Tres empreendedores brasileiros que decidiram unir experiencias
-              complementares para construir negocios em Portugal — combinando
-              execucao pratica, visao estrategica e parcerias de qualidade.
+              Três empreendedores brasileiros que decidiram unir experiências
+              complementares para construir negócios em Portugal — combinando
+              execução prática, visão estratégica e parcerias de qualidade.
             </p>
           </motion.div>
         </div>
@@ -130,9 +142,9 @@ export function SobrePage() {
       <section className="py-20 bg-white border-y border-black/[0.04]">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            <Counter value={10} suffix="+" label="Anos de experiencia combinada" className="text-center text-4xl md:text-5xl font-bold text-primary font-display tracking-[-0.03em]" />
+            <Counter value={60} suffix="+" label="Anos de experiência combinada" className="text-center text-4xl md:text-5xl font-bold text-primary font-display tracking-[-0.03em]" />
             <Counter value={200} suffix="+" label="Unidades criadas no Brasil" className="text-center text-4xl md:text-5xl font-bold text-primary font-display tracking-[-0.03em]" />
-            <Counter value={3} label="Paises de atuacao" className="text-center text-4xl md:text-5xl font-bold text-primary font-display tracking-[-0.03em]" />
+            <Counter value={3} label="Países de atuação" className="text-center text-4xl md:text-5xl font-bold text-primary font-display tracking-[-0.03em]" />
             <Counter value={20} suffix="+" label="Marcas desenvolvidas" className="text-center text-4xl md:text-5xl font-bold text-primary font-display tracking-[-0.03em]" />
           </div>
         </div>
@@ -188,7 +200,41 @@ export function SobrePage() {
                           </a>
                         )}
                       </div>
-                      <p className="text-muted text-[14px] leading-[1.75] mb-5">{socio.bio}</p>
+                      <p className="text-muted text-[14px] leading-[1.75] mb-4">{socio.bio}</p>
+
+                      {/* Badges */}
+                      {socio.badges && socio.badges.length > 0 && (
+                        <div className="flex flex-wrap gap-2 mb-4">
+                          {socio.badges.map((badge) => (
+                            <span
+                              key={badge}
+                              className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-amber-700 bg-amber-50 border border-amber-200/60 px-3 py-1 rounded-full"
+                            >
+                              <Award className="w-3 h-3" />
+                              {badge}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+
+                      {/* Press links */}
+                      {socio.press && socio.press.length > 0 && (
+                        <div className="flex flex-wrap gap-3 mb-4">
+                          {socio.press.map((p) => (
+                            <a
+                              key={p.label}
+                              href={p.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1 text-[12px] text-muted hover:text-accent transition-colors"
+                            >
+                              <ExternalLink className="w-3 h-3" />
+                              {p.label}
+                            </a>
+                          ))}
+                        </div>
+                      )}
+
                       <div className="flex flex-wrap gap-2">
                         {socio.expertise.map((e) => (
                           <span
@@ -217,10 +263,10 @@ export function SobrePage() {
             transition={{ duration: 0.8, ease }}
           >
             <p className="text-accent text-[13px] font-semibold tracking-[0.2em] uppercase mb-5">
-              Trajetoria
+              Trajetória
             </p>
             <h2 className="text-3xl md:text-[2.75rem] font-bold text-primary font-display tracking-[-0.025em] leading-[1.1] mb-16">
-              Nossa historia
+              Nossa história
             </h2>
           </motion.div>
 
@@ -275,13 +321,13 @@ export function SobrePage() {
             className="max-w-3xl mb-16"
           >
             <p className="text-accent text-[13px] font-semibold tracking-[0.2em] uppercase mb-5">
-              Principios
+              Princípios
             </p>
             <h2 className="text-3xl md:text-[2.75rem] font-bold text-primary font-display tracking-[-0.025em] leading-[1.1] mb-6">
               Nossos valores
             </h2>
             <p className="text-muted text-lg leading-[1.7] tracking-[-0.006em]">
-              O que guia cada decisao e cada parceria do Grupo +351.
+              O que guia cada decisão e cada parceria do Grupo +351.
             </p>
           </motion.div>
 
@@ -323,10 +369,10 @@ export function SobrePage() {
             transition={{ duration: 0.8, ease }}
           >
             <h2 className="text-3xl md:text-[2.75rem] font-bold text-white font-display tracking-[-0.025em] leading-[1.1] mb-5">
-              Quer fazer parte desta historia?
+              Quer fazer parte desta história?
             </h2>
             <p className="text-white/50 text-lg mb-10 tracking-[-0.006em]">
-              Conheca nosso modelo e descubra como podemos construir juntos.
+              Conheça nosso modelo e descubra como podemos construir juntos.
             </p>
             <a
               href="/contato"

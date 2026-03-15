@@ -6,6 +6,7 @@ const navLinks = [
   { href: "/ecossistema", label: "Ecossistema" },
   { href: "/parceiros", label: "Parceiros" },
   { href: "/conhecimento", label: "Conhecimento" },
+  { href: "/imprensa", label: "Imprensa" },
   { href: "/aplicar", label: "Aplicar" },
   { href: "/contato", label: "Contato" },
 ];
@@ -20,7 +21,7 @@ export function Footer() {
           {/* Brand */}
           <div>
             <a href="/">
-              <Logo className="text-xl text-white" />
+              <Logo className="text-white" size={28} />
             </a>
             <p className="text-white/40 text-[13px] mt-3 leading-relaxed max-w-xs">
               Hub de Negócios e Joint Ventures sediado em Cascais, Portugal. Arquitetura FIGITAL.
@@ -52,9 +53,7 @@ export function Footer() {
               Contacto
             </p>
             <p className="text-[13px] text-white/50 leading-relaxed">
-              Estoril, Cascais
-              <br />
-              Portugal
+              Cascais, Portugal
             </p>
             <a
               href="mailto:contato@grupo351.com"

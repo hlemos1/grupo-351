@@ -69,7 +69,7 @@ export function Hero() {
             <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
           </span>
           <span className="text-muted text-[13px] font-medium tracking-wide">
-            Estoril, Portugal
+            Cascais, Portugal
           </span>
         </motion.div>
 
@@ -98,14 +98,14 @@ export function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.7, duration: 0.8 }}
-          className="h-8 mt-5 mb-10"
+          className="min-h-[2rem] md:min-h-[2.5rem] mt-5 mb-10"
         >
           <TypeWriter
             words={[
               "Estrutura que aprende. Ativos que duram.",
               "Holding FIGITAL luso-brasileira",
-              "Onde operacao vira inteligencia",
-              "Construido para aprender. Desenhado para durar.",
+              "Onde operação vira inteligência",
+              "Construído para aprender. Desenhado para durar.",
             ]}
             className="text-xl md:text-2xl text-muted font-light tracking-[-0.01em]"
           />
@@ -117,8 +117,8 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 0.45, ease }}
           className="text-lg md:text-xl text-foreground/90 leading-[1.65] max-w-2xl mx-auto mb-5 tracking-[-0.01em]"
         >
-          Construimos, operamos e escalamos marcas proprias com fundamento
-          economico real, governanca solida e visao de longo prazo.
+          Construímos, operamos e escalamos marcas próprias com fundamento
+          económico real, governança sólida e visão de longo prazo.
         </motion.p>
 
         <motion.p
@@ -127,9 +127,9 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 0.6, ease }}
           className="text-base text-muted leading-[1.7] max-w-2xl mx-auto mb-14 tracking-[-0.006em]"
         >
-          Somos uma holding FIGITAL sediada no Estoril, Portugal. Integramos
-          operacoes fisicas, plataformas digitais e sistemas de software proprios
-          para criar, operar e escalar ativos reais entre Europa, America Latina e Asia.
+          Somos uma holding FIGITAL sediada em Cascais, Portugal. Integramos
+          operações físicas, plataformas digitais e sistemas de software próprios
+          para criar, operar e escalar ativos reais entre Europa, América Latina e Ásia.
         </motion.p>
 
         <motion.div

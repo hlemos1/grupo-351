@@ -30,6 +30,13 @@ export interface Candidatura {
   aceitaNDA: boolean;
   notas?: string;
   atribuidoA?: string;
+  score?: number;
+  scoreTier?: string;
+  scoreBreakdown?: Record<string, number>;
+  scoreFlags?: string[];
+  ndaAceitoEm?: string;
+  ndaIp?: string;
+  ndaUserAgent?: string;
 }
 
 export interface Contato {
@@ -53,7 +60,7 @@ export interface ProjetoAdmin {
   description: string;
   detalhes: string[];
   tag: string;
-  status: "Em operação" | "Em desenvolvimento" | "Em estruturação";
+  status: "Ideação" | "Em estruturação" | "Em desenvolvimento" | "Em operação" | "Consolidado";
   mercado: string;
   parceiro?: string;
   controle: string;
@@ -76,9 +83,11 @@ export interface DashboardStats {
     naoLidos: number;
   };
   projetos: {
-    emOperacao: number;
-    emDesenvolvimento: number;
+    ideacao: number;
     emEstruturacao: number;
+    emDesenvolvimento: number;
+    emOperacao: number;
+    consolidado: number;
   };
   conhecimento: {
     termos: number;

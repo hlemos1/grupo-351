@@ -22,11 +22,11 @@ const iconMap = {
 const projetos = [
   {
     name: "Forge and Flow 3D",
-    desc: "Manufatura distribuida via impressao 3D. Producao, franquia leve e infoproduto.",
+    desc: "Manufatura distribuida via impressão 3D. Produção, franquia leve e infoproduto.",
     icon: "printer" as const,
     tag: "Manufatura Digital",
-    status: "Em operacao",
-    statusColor: "bg-emerald-500",
+    status: "Em operação",
+    statusColor: "bg-success",
     href: "/portfolio/forge-and-flow-3d",
   },
   {
@@ -35,7 +35,7 @@ const projetos = [
     icon: "shopping-bag" as const,
     tag: "Marketplace",
     status: "Em desenvolvimento",
-    statusColor: "bg-amber-500",
+    statusColor: "bg-warning",
     href: "/portfolio/veeenha",
   },
   {
@@ -44,7 +44,7 @@ const projetos = [
     icon: "graduation-cap" as const,
     tag: "EdTech",
     status: "Em desenvolvimento",
-    statusColor: "bg-amber-500",
+    statusColor: "bg-warning",
     href: "/portfolio/ruptfy",
   },
   {
@@ -53,7 +53,7 @@ const projetos = [
     icon: "package" as const,
     tag: "Franquia / Atacado",
     status: "Em desenvolvimento",
-    statusColor: "bg-amber-500",
+    statusColor: "bg-warning",
     href: "/portfolio/purple-party",
   },
 ];
@@ -133,7 +133,7 @@ export function Negocios() {
           transition={{ delay: 0.5, duration: 0.6 }}
           className="flex flex-wrap gap-2.5"
         >
-          {["Cortex FC", "Long View", "Barbearia do Rao"].map((name) => (
+          {["Córtex FC", "Long View", "Barbearia do Rão"].map((name) => (
             <a
               key={name}
               href="/portfolio"

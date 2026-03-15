@@ -9,18 +9,18 @@ const ease = [0.16, 1, 0.3, 1] as const;
 const etapas = [
   {
     step: "01",
-    title: "Identificacao",
+    title: "Identificação",
     subtitle: "de oportunidade",
-    description: "Analisamos mercados e identificamos oportunidades reais de negocio com potencial de escala.",
+    description: "Analisamos mercados e identificamos oportunidades reais de negócio com potencial de escala.",
     icon: Lightbulb,
     gradient: "from-amber-500/10 to-amber-600/5",
     iconColor: "text-amber-500",
   },
   {
     step: "02",
-    title: "Estruturacao",
+    title: "Estruturação",
     subtitle: "do projeto",
-    description: "Desenhamos o modelo de negocio, estrategia comercial e estrutura societaria otimizada.",
+    description: "Desenhamos o modelo de negócio, estratégia comercial e estrutura societária otimizada.",
     icon: Building2,
     gradient: "from-blue-500/10 to-blue-600/5",
     iconColor: "text-blue-500",
@@ -29,7 +29,7 @@ const etapas = [
     step: "03",
     title: "Joint Venture",
     subtitle: "com operadores",
-    description: "Trazemos parceiros especialistas para operar o negocio e crescer juntos com skin in the game.",
+    description: "Trazemos parceiros especialistas para operar o negócio e crescer juntos com skin in the game.",
     icon: Handshake,
     gradient: "from-emerald-500/10 to-emerald-600/5",
     iconColor: "text-emerald-500",
@@ -54,11 +54,11 @@ export function Modelo() {
               Como Funciona
             </p>
             <h2 className="text-3xl md:text-[2.75rem] font-bold text-primary font-display tracking-[-0.025em] leading-[1.1]">
-              Nosso modelo de negocio
+              Nosso modelo de negócio
             </h2>
           </div>
           <p className="text-muted text-lg leading-[1.7] max-w-md tracking-[-0.006em]">
-            Tres etapas claras. Complementaridade de competencias. Negocios reais.
+            Três etapas claras. Complementaridade de competências. Negócios reais.
           </p>
         </motion.div>
 

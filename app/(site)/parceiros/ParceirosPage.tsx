@@ -55,25 +55,25 @@ const modelos: ModeloJV[] = [
     name: "Forge and Flow 3D",
     icon: "printer",
     tag: "Manufatura Digital",
-    status: "Em operacao",
-    perfilIdeal: "Maker, designer ou empreendedor com interesse em impressao 3D e franquias leves",
+    status: "Em operação",
+    perfilIdeal: "Maker, designer ou empreendedor com interesse em impressão 3D e franquias leves",
     estrutura: { holding: "100%", operador: "Franqueado" },
     investimento: { min: 5000, max: 15000 },
     retornoEstimado: "25-40% margem bruta",
     prazoRetorno: "6-12 meses",
     destaques: [
       "CAPEX mais baixo do portfolio",
-      "Modelo replicavel sem ponto fisico",
+      "Modelo replicável sem ponto físico",
       "Infoproduto obrigatorio gera recorrencia",
     ],
     oQueHoldingFornece: [
       "Farm de impressoras e STL library",
       "Marca e identidade visual",
-      "Formacao via Ruptfy",
+      "Formação via Ruptfy",
       "Canal de vendas via Veeenha!!!",
     ],
     oQueOperadorFaz: [
-      "Opera a producao local",
+      "Opera a produção local",
       "Atende clientes e demanda customizada",
       "Segue padrao operacional definido",
     ],
@@ -84,18 +84,18 @@ const modelos: ModeloJV[] = [
     icon: "shopping-bag",
     tag: "Marketplace",
     status: "Em desenvolvimento",
-    perfilIdeal: "Profissional de tecnologia ou marketing digital com experiencia em marketplaces ou apps",
-    estrutura: { holding: "100%", operador: "Parceiro por cidade", nota: "Modelo de expansao city-by-city" },
+    perfilIdeal: "Profissional de tecnologia ou marketing digital com experiência em marketplaces ou apps",
+    estrutura: { holding: "100%", operador: "Parceiro por cidade", nota: "Modelo de expansão city-by-city" },
     investimento: { min: 20000, max: 50000 },
     retornoEstimado: "Variavel por GMV",
     prazoRetorno: "12-18 meses",
     destaques: [
       "Super app com dados FIGITAIS de consumo",
-      "Modelo replicavel por cidade",
+      "Modelo replicável por cidade",
       "Hub digital para todas as marcas do grupo",
     ],
     oQueHoldingFornece: [
-      "Plataforma tecnologica",
+      "Plataforma tecnológica",
       "Marcas proprias como catalogo",
       "Framework de lancamento por cidade",
       "Data analytics e BI",
@@ -112,14 +112,14 @@ const modelos: ModeloJV[] = [
     icon: "package",
     tag: "Franquia / Atacado",
     status: "Em desenvolvimento",
-    perfilIdeal: "Empreendedor com experiencia em varejo, importacao ou e-commerce",
+    perfilIdeal: "Empreendedor com experiência em varejo, importação ou e-commerce",
     estrutura: { holding: "50%", operador: "50%" },
     investimento: { min: 30000, max: 100000 },
-    retornoEstimado: "30-50% margem por operacao",
+    retornoEstimado: "30-50% margem por operação",
     prazoRetorno: "12-18 meses",
     destaques: [
       "Sourcing direto da China com escala",
-      "Loja fisica + e-commerce B2C",
+      "Loja física + e-commerce B2C",
       "Poder de compra do grupo como vantagem",
     ],
     oQueHoldingFornece: [
@@ -136,13 +136,13 @@ const modelos: ModeloJV[] = [
   },
   {
     slug: "barbearia-do-rao",
-    name: "Barbearia do Rao",
+    name: "Barbearia do Rão",
     icon: "scissors",
     tag: "Franquia Fisica",
     status: "Em estruturacao",
     perfilIdeal: "Barbeiro experiente ou investidor com interesse em servicos e marca forte",
     estrutura: { holding: "30%", operador: "40%", nota: "+ 30% Investidor" },
-    investimento: { min: 10000, max: 10000 },
+    investimento: { min: 10000, max: 30000 },
     retornoEstimado: "Ticket medio x recorrencia",
     prazoRetorno: "8-14 meses",
     destaques: [
@@ -179,13 +179,13 @@ const modelos: ModeloJV[] = [
       "Modelo de consorcio educacional",
     ],
     oQueHoldingFornece: [
-      "Plataforma tecnologica",
+      "Plataforma tecnológica",
       "Base de franqueados como alunos cativos",
       "Conteudo das marcas proprias",
-      "Infraestrutura de producao",
+      "Infraestrutura de produção",
     ],
     oQueOperadorFaz: [
-      "Curadoria e producao de conteudo",
+      "Curadoria e produção de conteudo",
       "Gestao da plataforma e suporte",
       "Desenvolvimento de novos cursos",
     ],
@@ -291,7 +291,7 @@ function ModeloCard({ modelo }: { modelo: ModeloJV }) {
                   {modelo.investimento.min.toLocaleString("pt-PT")} - {modelo.investimento.max.toLocaleString("pt-PT")} EUR
                 </div>
                 <div className="flex items-center gap-1.5 text-[12px] text-muted">
-                  <div className={`w-2 h-2 rounded-full ${modelo.status === "Em operacao" ? "bg-emerald-500" : modelo.status === "Em desenvolvimento" ? "bg-amber-500" : "bg-muted"}`} />
+                  <div className={`w-2 h-2 rounded-full ${modelo.status === "Em operação" ? "bg-emerald-500" : modelo.status === "Em desenvolvimento" ? "bg-amber-500" : "bg-muted"}`} />
                   {modelo.status}
                 </div>
               </div>
@@ -512,7 +512,7 @@ export function ParceirosPage() {
             {[
               {
                 icon: Shield,
-                title: "Governanca real",
+                title: "Governança real",
                 desc: "Acordos de socios claros, vesting, metricas e conselho ativo. Nao e promessa — e estrutura.",
               },
               {
@@ -522,7 +522,7 @@ export function ParceirosPage() {
               },
               {
                 icon: TrendingUp,
-                title: "Experiencia comprovada",
+                title: "Experiência comprovada",
                 desc: "Fundadores com 200+ unidades criadas no Brasil. O metodo foi testado antes de chegar aqui.",
               },
             ].map(({ icon: VIcon, title, desc }, i) => (

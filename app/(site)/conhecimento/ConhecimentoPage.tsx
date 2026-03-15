@@ -158,17 +158,20 @@ export function ConhecimentoPage({ glossario, artigos }: { glossario: Termo[]; a
                     <a
                       key={artigo.slug}
                       href={`/conhecimento/${artigo.slug}`}
-                      className="group flex items-center gap-4 p-4 rounded-xl border border-border hover:border-accent/20 hover:bg-surface transition-all"
+                      className="group flex items-start gap-4 p-5 rounded-xl border border-border hover:border-accent/20 hover:bg-surface transition-all"
                     >
                       <div className="flex-1">
-                        <span className="text-[10px] font-medium text-muted uppercase tracking-wider">
+                        <span className="text-[10px] font-medium text-accent bg-accent/5 px-2 py-0.5 rounded-full uppercase tracking-wider">
                           {artigoCategoriaLabels[artigo.categoria]}
                         </span>
-                        <h3 className="text-sm font-semibold text-foreground mt-1 group-hover:text-primary transition-colors">
+                        <h3 className="text-sm font-semibold text-foreground mt-2 group-hover:text-primary transition-colors">
                           {artigo.titulo}
                         </h3>
+                        <p className="text-muted text-[13px] leading-relaxed mt-1">
+                          {artigo.resumo}
+                        </p>
                       </div>
-                      <ArrowRight className="w-4 h-4 text-muted group-hover:text-accent transition-colors shrink-0" />
+                      <ArrowRight className="w-4 h-4 text-muted group-hover:text-accent transition-colors shrink-0 mt-1" />
                     </a>
                   ))}
               </div>

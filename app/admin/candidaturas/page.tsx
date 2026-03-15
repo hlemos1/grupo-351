@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Search, Filter, ArrowRight } from "lucide-react";
+import { Search, ArrowRight, ArrowUpDown } from "lucide-react";
 import type { Candidatura, CandidaturaStatus } from "@/lib/admin-types";
 
 const statusColors: Record<string, string> = {
@@ -28,12 +28,20 @@ const perfilLabels: Record<string, string> = {
   ambos: "Ambos",
 };
 
+const tierColors: Record<string, string> = {
+  A: "bg-emerald-100 text-emerald-700 border-emerald-200",
+  B: "bg-blue-100 text-blue-700 border-blue-200",
+  C: "bg-amber-100 text-amber-700 border-amber-200",
+  D: "bg-red-100 text-red-700 border-red-200",
+};
+
 export default function CandidaturasPage() {
   const [candidaturas, setCandidaturas] = useState<Candidatura[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [filterStatus, setFilterStatus] = useState<CandidaturaStatus | "todas">("todas");
   const [filterPerfil, setFilterPerfil] = useState<string>("todos");
+  const [sortByScore, setSortByScore] = useState(false);
 
   useEffect(() => {
     fetch("/api/admin/candidaturas")
@@ -57,6 +65,10 @@ export default function CandidaturasPage() {
     }
     return true;
   });
+
+  const sorted = sortByScore
+    ? [...filtered].sort((a, b) => (b.score ?? 0) - (a.score ?? 0))
+    : filtered;
 
   if (loading) {
     return (
@@ -119,6 +131,15 @@ export default function CandidaturasPage() {
               <thead>
                 <tr className="border-b border-border bg-surface">
                   <th className="text-left py-3 px-4 font-medium text-muted text-xs uppercase tracking-wider">Nome</th>
+                  <th
+                    className="text-left py-3 px-4 font-medium text-muted text-xs uppercase tracking-wider hidden md:table-cell cursor-pointer hover:text-foreground transition-colors"
+                    onClick={() => setSortByScore(!sortByScore)}
+                  >
+                    <span className="inline-flex items-center gap-1">
+                      Score
+                      <ArrowUpDown className="w-3 h-3" />
+                    </span>
+                  </th>
                   <th className="text-left py-3 px-4 font-medium text-muted text-xs uppercase tracking-wider hidden md:table-cell">Perfil</th>
                   <th className="text-left py-3 px-4 font-medium text-muted text-xs uppercase tracking-wider hidden lg:table-cell">Marcas</th>
                   <th className="text-left py-3 px-4 font-medium text-muted text-xs uppercase tracking-wider hidden md:table-cell">Capital</th>
@@ -128,13 +149,25 @@ export default function CandidaturasPage() {
                 </tr>
               </thead>
               <tbody>
-                {filtered.map((c) => (
+                {sorted.map((c) => (
                   <tr key={c.id} className="border-b border-border last:border-0 hover:bg-surface/50 transition-colors">
                     <td className="py-3 px-4">
                       <div>
                         <p className="font-medium text-foreground">{c.nome}</p>
                         <p className="text-xs text-muted">{c.email}</p>
                       </div>
+                    </td>
+                    <td className="py-3 px-4 hidden md:table-cell">
+                      {c.score != null ? (
+                        <div className="flex items-center gap-2">
+                          <span className={`text-[10px] font-bold px-2 py-0.5 rounded border ${tierColors[c.scoreTier || "D"]}`}>
+                            {c.scoreTier}
+                          </span>
+                          <span className="text-xs text-muted">{c.score}</span>
+                        </div>
+                      ) : (
+                        <span className="text-xs text-muted">—</span>
+                      )}
                     </td>
                     <td className="py-3 px-4 hidden md:table-cell">
                       <span className="text-xs font-medium text-muted bg-surface px-2 py-1 rounded">

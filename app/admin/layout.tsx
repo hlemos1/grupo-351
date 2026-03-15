@@ -15,8 +15,10 @@ import {
   ExternalLink,
   ChevronRight,
   CalendarDays,
+  Handshake,
 } from "lucide-react";
 import { useState } from "react";
+import { Logo } from "@/components/Logo";
 
 const navItems = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
@@ -24,6 +26,7 @@ const navItems = [
   { href: "/admin/contatos", label: "Contatos", icon: Mail },
   { href: "/admin/portfolio", label: "Portfólio", icon: Briefcase },
   { href: "/admin/conhecimento", label: "Conhecimento", icon: BookOpen },
+  { href: "/admin/parceiros", label: "Parceiros", icon: Handshake },
   { href: "/admin/reunioes", label: "Reuniões", icon: CalendarDays },
   { href: "/admin/inteligencia", label: "Inteligência", icon: Brain },
 ];
@@ -34,6 +37,7 @@ const pageTitle: Record<string, string> = {
   "/admin/contatos": "Contatos",
   "/admin/portfolio": "Portfólio",
   "/admin/conhecimento": "Conhecimento",
+  "/admin/parceiros": "Parceiros",
   "/admin/reunioes": "Reuniões",
   "/admin/inteligencia": "Inteligência",
 };
@@ -91,13 +95,8 @@ export default function AdminLayout({
 
           {/* Brand */}
           <div className="relative px-6 py-5 flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-white/10 flex items-center justify-center backdrop-blur-sm">
-              <span className="text-white font-bold text-sm font-display">+</span>
-            </div>
+            <Logo className="text-white" size={24} />
             <div>
-              <p className="text-white font-display font-bold text-[15px] tracking-tight">
-                Grupo +351
-              </p>
               <p className="text-white/40 text-[11px] font-medium tracking-wide">
                 PAINEL DE GOVERNANÇA
               </p>

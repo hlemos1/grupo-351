@@ -14,6 +14,7 @@ import {
   Wallet,
   FileText,
   Shield,
+  Download,
 } from "lucide-react";
 import { AnimatedSection } from "@/components/AnimatedSection";
 
@@ -630,38 +631,67 @@ export function AplicarPage({ modelos: modelosProp }: { modelos?: ModeloOption[]
                           Último passo antes de enviar.
                         </p>
 
-                        <div className="bg-white rounded-xl border border-border p-6 mb-8">
-                          <h3 className="font-semibold text-foreground mb-3">
-                            Termos de Confidencialidade Preliminar
-                          </h3>
-                          <div className="text-muted text-sm leading-relaxed space-y-3 max-h-48 overflow-y-auto pr-2">
+                        <div className="bg-white rounded-xl border border-border p-6 mb-6">
+                          <div className="flex items-start justify-between mb-3">
+                            <h3 className="font-semibold text-foreground">
+                              Acordo de Confidencialidade Preliminar (NDA)
+                            </h3>
+                            <a
+                              href="/api/nda"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1.5 text-xs text-accent hover:underline shrink-0"
+                            >
+                              <Download className="w-3.5 h-3.5" />
+                              Ver documento completo
+                            </a>
+                          </div>
+                          <div className="text-muted text-sm leading-relaxed space-y-3 max-h-56 overflow-y-auto pr-2">
                             <p>
                               Ao submeter esta candidatura, o candidato declara e concorda que:
                             </p>
                             <p>
-                              1. Todas as informações fornecidas neste formulário são verdadeiras
-                              e podem ser verificadas pelo Grupo +351.
+                              <strong>1. Veracidade.</strong> Todas as informações fornecidas neste
+                              formulário são verdadeiras, completas e podem ser verificadas pelo
+                              Grupo +351.
                             </p>
                             <p>
-                              2. O candidato compreende que esta candidatura não constitui, por
-                              si só, uma oferta vinculativa nem garantia de parceria.
+                              <strong>2. Não vinculação.</strong> Esta candidatura não constitui,
+                              por si só, uma oferta vinculativa nem garantia de parceria.
                             </p>
                             <p>
-                              3. Caso a candidatura avance para a fase de análise detalhada, o
-                              Grupo +351 poderá solicitar a assinatura de um Acordo de
-                              Confidencialidade (NDA) formal antes de partilhar informações
-                              financeiras, operacionais ou estratégicas sobre os modelos de negócio.
+                              <strong>3. Confidencialidade.</strong> O candidato compromete-se a
+                              manter sigilo absoluto sobre quaisquer informações comerciais,
+                              financeiras, operacionais ou estratégicas recebidas durante o
+                              processo de avaliação, por um período de 2 (dois) anos.
                             </p>
                             <p>
-                              4. O candidato compromete-se a não divulgar a terceiros quaisquer
-                              informações recebidas durante o processo de avaliação.
+                              <strong>4. Uso restrito.</strong> As informações confidenciais
+                              serão utilizadas exclusivamente para avaliação da parceria, não
+                              podendo ser divulgadas, reproduzidas ou transmitidas a terceiros.
                             </p>
                             <p>
-                              5. Os dados pessoais fornecidos serão tratados nos termos da Política
-                              de Privacidade do Grupo +351 e do Regulamento Geral de Proteção de
-                              Dados (RGPD).
+                              <strong>5. Devolução.</strong> Caso o processo não avance, o
+                              candidato compromete-se a devolver ou destruir quaisquer materiais
+                              confidenciais recebidos.
+                            </p>
+                            <p>
+                              <strong>6. RGPD.</strong> Os dados pessoais serão tratados nos
+                              termos do Regulamento Geral de Proteção de Dados (UE 2016/679) e
+                              da legislação portuguesa aplicável.
+                            </p>
+                            <p>
+                              <strong>7. Lei aplicável.</strong> Este acordo é regido pela
+                              legislação portuguesa, com foro em Cascais.
                             </p>
                           </div>
+                        </div>
+
+                        <div className="bg-amber-50 border border-amber-200/60 rounded-lg p-4 mb-6 text-sm text-amber-800">
+                          <p>
+                            Ao aceitar, o seu endereço IP, data/hora e identificação do
+                            navegador serão registados como prova digital de aceite deste NDA.
+                          </p>
                         </div>
 
                         <label className="flex items-start gap-3 cursor-pointer">

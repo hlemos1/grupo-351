@@ -4,7 +4,9 @@ import { motion } from "framer-motion";
 import { MessageCircle } from "lucide-react";
 
 export function WhatsAppButton() {
-  const phone = "351000000000";
+  const phone = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
+  if (!phone) return null;
+
   const message = encodeURIComponent(
     "Olá! Gostaria de saber mais sobre as oportunidades do Grupo +351."
   );

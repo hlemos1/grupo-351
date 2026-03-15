@@ -7,10 +7,10 @@ import { useRef } from "react";
 const ease = [0.16, 1, 0.3, 1] as const;
 
 const ideal = [
-  "Operadores com experiencia no setor e vontade de empreender em Portugal",
-  "Empresarios que querem expandir para o mercado europeu",
-  "Profissionais tecnicos com know-how para operar um negocio estruturado",
-  "Investidores que buscam participacao ativa em projetos reais",
+  "Operadores com experiência no setor e vontade de empreender em Portugal",
+  "Empresários que querem expandir para o mercado europeu",
+  "Profissionais técnicos com know-how para operar um negócio estruturado",
+  "Investidores que buscam participação ativa em projetos reais",
 ];
 
 const naoIdeal = [
@@ -36,11 +36,11 @@ export function ParaQuem() {
             Perfil de Parceiro
           </p>
           <h2 className="text-3xl md:text-[2.75rem] font-bold text-primary font-display tracking-[-0.025em] leading-[1.1] mb-6">
-            Para quem e o Grupo +351
+            Para quem é o Grupo +351
           </h2>
           <p className="text-muted text-lg leading-[1.7] tracking-[-0.006em]">
-            Buscamos parceiros que queiram construir junto. Nao oferecemos
-            oportunidades de investimento passivo — oferecemos sociedade em negocios reais.
+            Buscamos parceiros que queiram construir junto. Não oferecemos
+            oportunidades de investimento passivo — oferecemos sociedade em negócios reais.
           </p>
         </motion.div>
 
@@ -84,7 +84,7 @@ export function ParaQuem() {
                 <div className="w-9 h-9 rounded-xl bg-rose-500/[0.08] flex items-center justify-center">
                   <XCircle className="w-4.5 h-4.5 text-rose-500" />
                 </div>
-                Nao e para quem busca
+                Não é para quem busca
               </h3>
               <div className="space-y-4">
                 {naoIdeal.map((item, i) => (

@@ -474,9 +474,9 @@ export default function KanbanPage() {
                       onChange={(e) => setEditForm({ ...editForm, prioridade: e.target.value })}
                       className="w-full px-3 py-2 rounded-xl border border-black/[0.06] text-[12px] focus:outline-none focus:ring-2 focus:ring-accent/20 transition-all bg-white"
                     >
-                      <option value="critica">Critica</option>
+                      <option value="critica">Crítica</option>
                       <option value="alta">Alta</option>
-                      <option value="media">Media</option>
+                      <option value="media">Média</option>
                       <option value="baixa">Baixa</option>
                     </select>
                   </div>
@@ -499,7 +499,7 @@ export default function KanbanPage() {
                     value={editForm.notas || ""}
                     onChange={(e) => setEditForm({ ...editForm, notas: e.target.value })}
                     rows={3}
-                    placeholder="Anotacoes, decisoes pendentes, observacoes..."
+                    placeholder="Anotações, decisões pendentes, observações..."
                     className="w-full px-3 py-2 rounded-xl border border-black/[0.06] text-[12px] focus:outline-none focus:ring-2 focus:ring-accent/20 transition-all resize-none placeholder:text-muted/30"
                   />
                 </div>

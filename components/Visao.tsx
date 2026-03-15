@@ -6,11 +6,11 @@ import { useRef } from "react";
 const ease = [0.16, 1, 0.3, 1] as const;
 
 const valores = [
-  { title: "Negocio antes do discurso", desc: "Resultado valida narrativa" },
-  { title: "Longo prazo nao e slogan", desc: "Decisoes pensadas em ciclos" },
-  { title: "Governanca e vantagem", desc: "Regra clara, papel definido" },
-  { title: "Marca e ativo", desc: "Caixa, reputacao e recorrencia" },
-  { title: "Execucao disciplinada", desc: "Boa ideia sem execucao e hobby" },
+  { title: "Negócio antes do discurso", desc: "Resultado valida narrativa" },
+  { title: "Longo prazo não é slogan", desc: "Decisões pensadas em ciclos" },
+  { title: "Governança é vantagem", desc: "Regra clara, papel definido" },
+  { title: "Marca é ativo", desc: "Caixa, reputação e recorrência" },
+  { title: "Execução disciplinada", desc: "Boa ideia sem execução é hobby" },
   { title: "Internacional por natureza", desc: "Pensamento global, controle central" },
 ];
 
@@ -51,7 +51,7 @@ export function Visao() {
             O que nos guia
           </h2>
           <p className="text-white/50 text-lg mb-14 tracking-[-0.006em]">
-            Cultura nao se discute, se vive. Quem vive, fica. Quem forca encaixe, sai.
+            Cultura não se discute, se vive. Quem vive, fica. Quem força encaixe, sai.
           </p>
         </motion.div>
 
@@ -78,7 +78,7 @@ export function Visao() {
           className="mt-16 max-w-2xl mx-auto text-center"
         >
           <p className="text-white/30 text-[14px] italic leading-relaxed tracking-[-0.006em]">
-            &ldquo;Enquanto outros contam historias, o Grupo +351 constroi sistemas.&rdquo;
+            &ldquo;Enquanto outros contam histórias, o Grupo +351 constrói sistemas.&rdquo;
           </p>
         </motion.div>
       </div>

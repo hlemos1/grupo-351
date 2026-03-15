@@ -46,7 +46,7 @@ const tagColors: Record<string, string> = {
   "Supply Chain": "bg-cyan-500/10 text-cyan-700",
   Franquia: "bg-emerald-500/10 text-emerald-700",
   Parceria: "bg-blue-500/10 text-blue-700",
-  Importacao: "bg-orange-500/10 text-orange-700",
+  Importação: "bg-orange-500/10 text-orange-700",
   "Grupo Rao": "bg-primary/10 text-primary",
   Tecnologia: "bg-indigo-500/10 text-indigo-700",
   WhatsApp: "bg-green-500/10 text-green-700",

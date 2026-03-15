@@ -9,36 +9,36 @@ const ease = [0.16, 1, 0.3, 1] as const;
 
 const faqs = [
   {
-    q: "O que e FIGITAL?",
-    a: "FIGITAL e a arquitetura central do Grupo +351 — a integracao estrutural entre operacoes fisicas, plataformas digitais e software proprietario. Nao e tendencia, e infraestrutura. O fisico gera sinais, o digital organiza, a governanca transforma em decisao. Saiba mais na nossa Base de Conhecimento (/conhecimento).",
+    q: "O que é FIGITAL?",
+    a: "FIGITAL é a arquitetura central do Grupo +351 — a integração estrutural entre operações físicas, plataformas digitais e software proprietário. Não é tendência, é infraestrutura. O físico gera sinais, o digital organiza, a governança transforma em decisão. Saiba mais na nossa Base de Conhecimento (/conhecimento).",
   },
   {
-    q: "O que e uma Joint Venture no +351?",
-    a: "E uma parceria societaria real. A holding entra com marca, metodo, capital e governanca. O operador entra com execucao e know-how. Estruturas variam de 50/50 a 70/30 com vesting. Cada marca tem seu modelo — veja detalhes no Portal do Parceiro (/parceiros).",
+    q: "O que é uma Joint Venture no +351?",
+    a: "É uma parceria societária real. A holding entra com marca, método, capital e governança. O operador entra com execução e know-how. Estruturas variam de 50/50 a 70/30 com vesting. Cada marca tem seu modelo — veja detalhes no Portal do Parceiro (/parceiros).",
   },
   {
     q: "Preciso ter capital para ser parceiro?",
-    a: "Depende do modelo. Forge and Flow 3D comeca com 5.000 EUR. Purple Party pode chegar a 100.000 EUR. Para operadores sem capital, existem modelos com vesting progressivo onde a participacao e conquistada com performance. Use o simulador em /parceiros para estimar.",
+    a: "Depende do modelo. Forge and Flow 3D começa com 5.000 EUR. Purple Party pode chegar a 100.000 EUR. Para operadores sem capital, existem modelos com vesting progressivo onde a participação é conquistada com performance. Use o simulador em /parceiros para estimar.",
   },
   {
     q: "Como me candidato?",
-    a: "Atraves do formulario estruturado em /aplicar. Sao 5 etapas: perfil pessoal, experiencia, modelo de interesse, proposta e aceite de NDA preliminar. Candidaturas sao analisadas pela equipa de governanca em ate 5 dias uteis.",
+    a: "Através do formulário estruturado em /aplicar. São 5 etapas: perfil pessoal, experiência, modelo de interesse, proposta e aceite de NDA preliminar. Candidaturas são analisadas pela equipa de governança em até 5 dias úteis.",
   },
   {
-    q: "Voces atuam apenas em Portugal?",
-    a: "Estamos sediados no Estoril, Cascais, mas o ecossistema e global. Sourcing da China (Purple Party), marcas validadas no Brasil, distribuicao europeia. Veja o mapa completo em /ecossistema.",
+    q: "Vocês atuam apenas em Portugal?",
+    a: "Estamos sediados em Cascais, Portugal, mas o ecossistema é global. Sourcing da China (Purple Party), marcas validadas no Brasil, distribuição europeia. Veja o mapa completo em /ecossistema.",
   },
   {
     q: "Como as 7 marcas se conectam?",
-    a: "Cada marca e um no no ecossistema FIGITAL. Sensores (Veeenha, Ruptfy, Forge and Flow) captam dados. Neuronios (Cortex FC, Long View, Purple Party) processam. Distribuicao (lojas, app, franquias) retroalimenta. Visualize tudo em /ecossistema.",
+    a: "Cada marca é um nó no ecossistema FIGITAL. Sensores (Veeenha, Ruptfy, Forge and Flow) captam dados. Neurônios (Córtex FC, Long View, Purple Party) processam. Distribuição (lojas, app, franquias) retroalimenta. Visualize tudo em /ecossistema.",
   },
   {
-    q: "Qual a diferenca entre operador e investidor?",
-    a: "Operador executa o dia-a-dia do negocio e conquista participacao via vesting. Investidor entra com capital e tem retorno passivo. O modelo 'ambos' combina os dois — voce opera e investe. Cada perfil tem acesso a modelos diferentes.",
+    q: "Qual a diferença entre operador e investidor?",
+    a: "Operador executa o dia-a-dia do negócio e conquista participação via vesting. Investidor entra com capital e tem retorno passivo. O modelo 'ambos' combina os dois — você opera e investe. Cada perfil tem acesso a modelos diferentes.",
   },
   {
-    q: "O Grupo +351 participa da operacao diaria?",
-    a: "Nao. A operacao e do parceiro. A holding fornece marca, metodo, governanca, conexao com o ecossistema e reuniao de conselho mensal. Sem microgestao — com metricas compartilhadas e decisoes baseadas em dados FIGITAIS.",
+    q: "O Grupo +351 participa da operação diária?",
+    a: "Não. A operação é do parceiro. A holding fornece marca, método, governança, conexão com o ecossistema e reunião de conselho mensal. Sem microgestão — com métricas compartilhadas e decisões baseadas em dados FIGITAIS.",
   },
 ];
 
@@ -96,7 +96,7 @@ export function FAQ() {
             Perguntas Frequentes
           </p>
           <h2 className="text-3xl md:text-[2.75rem] font-bold text-primary font-display tracking-[-0.025em] leading-[1.1]">
-            Duvidas comuns
+            Dúvidas comuns
           </h2>
         </motion.div>
 

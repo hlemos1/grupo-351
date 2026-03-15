@@ -13,6 +13,7 @@ interface FormData {
   email: string;
   empresa: string;
   tipo: string;
+  orcamento: string;
   mensagem: string;
 }
 
@@ -212,6 +213,26 @@ export function Contato() {
                         </motion.p>
                       )}
                     </div>
+                  </div>
+
+                  <div className="mb-6">
+                    <label className="block text-sm font-medium text-foreground mb-2">
+                      Orçamento estimado
+                    </label>
+                    <select
+                      {...register("orcamento")}
+                      className={inputClass}
+                      defaultValue=""
+                      onFocus={() => setFocusedField("orcamento")}
+                      onBlur={() => setFocusedField(null)}
+                    >
+                      <option value="" disabled>Selecione (opcional)</option>
+                      <option value="ate-10k">Até 10.000 EUR</option>
+                      <option value="10k-50k">10.000 - 50.000 EUR</option>
+                      <option value="50k-200k">50.000 - 200.000 EUR</option>
+                      <option value="200k+">Acima de 200.000 EUR</option>
+                      <option value="a-definir">A definir</option>
+                    </select>
                   </div>
 
                   <div className="mb-8">

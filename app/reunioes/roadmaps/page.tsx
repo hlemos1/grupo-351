@@ -83,9 +83,9 @@ const statusConfig: Record<string, { label: string; color: string; bg: string; i
 };
 
 const prioridadeConfig: Record<string, { label: string; color: string; dot: string }> = {
-  critica: { label: "Critica", color: "text-red-600 bg-red-500/10", dot: "bg-red-500" },
+  critica: { label: "Crítica", color: "text-red-600 bg-red-500/10", dot: "bg-red-500" },
   alta: { label: "Alta", color: "text-orange-600 bg-orange-500/10", dot: "bg-orange-500" },
-  media: { label: "Media", color: "text-blue-600 bg-blue-500/10", dot: "bg-blue-500" },
+  media: { label: "Média", color: "text-blue-600 bg-blue-500/10", dot: "bg-blue-500" },
   baixa: { label: "Baixa", color: "text-muted bg-black/[0.04]", dot: "bg-muted" },
 };
 
@@ -220,7 +220,7 @@ export default function RoadmapsPage() {
 
           {/* Overview grid - mini cards */}
           <motion.div variants={fadeUp} className="bg-white rounded-2xl border border-black/[0.04] p-6">
-            <h2 className="text-[15px] font-semibold text-foreground mb-4">Visao Geral</h2>
+            <h2 className="text-[15px] font-semibold text-foreground mb-4">Visão Geral</h2>
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
               {data.roadmaps.map((rm) => {
                 const prio = prioridadeConfig[rm.prioridade];
@@ -439,7 +439,7 @@ export default function RoadmapsPage() {
                               {/* Key decisions */}
                               {rm.decisoesChave.length > 0 && (
                                 <div>
-                                  <p className="text-[11px] font-semibold text-foreground uppercase tracking-wider mb-2">Decisoes-chave</p>
+                                  <p className="text-[11px] font-semibold text-foreground uppercase tracking-wider mb-2">Decisões-chave</p>
                                   <div className="space-y-2">
                                     {rm.decisoesChave.map((d, di) => (
                                       <div key={di} className="flex gap-3 p-3 rounded-xl bg-amber-500/[0.04] border border-amber-500/10">
@@ -514,7 +514,7 @@ export default function RoadmapsPage() {
                                   </div>
                                   <div>
                                     <p className="text-lg font-bold text-foreground">{rm.decisoesChave.length}</p>
-                                    <p className="text-[9px] text-muted uppercase">Decisoes</p>
+                                    <p className="text-[9px] text-muted uppercase">Decisões</p>
                                   </div>
                                 </div>
                               </div>
@@ -540,7 +540,7 @@ export default function RoadmapsPage() {
       </main>
 
       <footer className="border-t border-black/[0.04] py-6 mt-12">
-        <p className="text-center text-[11px] text-muted/50">Grupo +351 · Roadmaps de Governanca · Acesso restrito por link</p>
+        <p className="text-center text-[11px] text-muted/50">Grupo +351 · Roadmaps de Governança · Acesso restrito por link</p>
       </footer>
     </div>
   );
