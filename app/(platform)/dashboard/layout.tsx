@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { Logo } from "@/components/Logo";
 import {
@@ -16,6 +16,7 @@ import {
   User,
   Menu,
   X,
+  Bell,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -25,6 +26,16 @@ interface UserData {
   email: string;
   role: string;
   company?: { slug: string; nome: string } | null;
+}
+
+interface Notification {
+  id: string;
+  tipo: string;
+  titulo: string;
+  mensagem: string;
+  link: string | null;
+  lida: boolean;
+  criadoEm: string;
 }
 
 const navItems = [
@@ -44,6 +55,9 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   const [user, setUser] = useState<UserData | null>(null);
   const [loading, setLoading] = useState(true);
   const [mobileNav, setMobileNav] = useState(false);
+  const [notifCount, setNotifCount] = useState(0);
+  const [notifOpen, setNotifOpen] = useState(false);
+  const [notifications, setNotifications] = useState<Notification[]>([]);
 
   useEffect(() => {
     fetch("/api/platform/me")
@@ -55,6 +69,34 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       .catch(() => router.push("/login"))
       .finally(() => setLoading(false));
   }, [router]);
+
+  const fetchNotifications = useCallback(() => {
+    fetch("/api/platform/notifications")
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.notifications) setNotifications(data.notifications.slice(0, 10));
+        if (typeof data.unreadCount === "number") setNotifCount(data.unreadCount);
+      })
+      .catch(() => {});
+  }, []);
+
+  useEffect(() => {
+    if (user) {
+      fetchNotifications();
+      const interval = setInterval(fetchNotifications, 30000);
+      return () => clearInterval(interval);
+    }
+  }, [user, fetchNotifications]);
+
+  async function markAllRead() {
+    await fetch("/api/platform/notifications", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ markAllRead: true }),
+    });
+    setNotifCount(0);
+    setNotifications((prev) => prev.map((n) => ({ ...n, lida: true })));
+  }
 
   async function handleLogout() {
     await fetch("/api/platform/auth/logout", { method: "POST" });
@@ -90,6 +132,56 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           </div>
 
           <div className="flex items-center gap-3">
+            {/* Notifications bell */}
+            <div className="relative">
+              <button
+                onClick={() => setNotifOpen(!notifOpen)}
+                className="relative text-gray-400 hover:text-gray-600 transition-colors p-1.5"
+              >
+                <Bell className="w-4.5 h-4.5" />
+                {notifCount > 0 && (
+                  <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-red-500 text-white text-[9px] font-bold rounded-full flex items-center justify-center">
+                    {notifCount > 9 ? "9+" : notifCount}
+                  </span>
+                )}
+              </button>
+              {notifOpen && (
+                <>
+                  <div className="fixed inset-0 z-40" onClick={() => setNotifOpen(false)} />
+                  <div className="absolute right-0 top-full mt-2 w-80 bg-white rounded-xl border border-gray-200 shadow-xl z-50 overflow-hidden">
+                    <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100">
+                      <p className="text-xs font-semibold text-gray-900">Notificações</p>
+                      {notifCount > 0 && (
+                        <button onClick={markAllRead} className="text-[10px] text-amber-600 hover:underline">
+                          Marcar todas como lidas
+                        </button>
+                      )}
+                    </div>
+                    <div className="max-h-72 overflow-y-auto">
+                      {notifications.length === 0 ? (
+                        <p className="text-xs text-gray-400 text-center py-8">Sem notificações</p>
+                      ) : (
+                        notifications.map((n) => (
+                          <Link
+                            key={n.id}
+                            href={n.link || "#"}
+                            className={`block px-4 py-3 hover:bg-gray-50 transition-colors border-b border-gray-50 last:border-0 ${!n.lida ? "bg-amber-50/50" : ""}`}
+                            onClick={() => setNotifOpen(false)}
+                          >
+                            <p className="text-xs font-medium text-gray-900">{n.titulo}</p>
+                            <p className="text-[10px] text-gray-500 mt-0.5 line-clamp-2">{n.mensagem}</p>
+                            <p className="text-[9px] text-gray-400 mt-1">
+                              {new Date(n.criadoEm).toLocaleString("pt-PT")}
+                            </p>
+                          </Link>
+                        ))
+                      )}
+                    </div>
+                  </div>
+                </>
+              )}
+            </div>
+
             <div className="hidden md:flex items-center gap-2">
               <div className="w-7 h-7 rounded-full bg-amber-100 flex items-center justify-center">
                 <User className="w-3.5 h-3.5 text-amber-700" />

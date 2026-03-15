@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { getUserSession } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { createUserNotification } from "@/lib/user-notifications";
+import { sendMessageReceivedEmail } from "@/lib/email";
 
 // GET — mensagens de um match
 export async function GET(request: Request) {
@@ -80,6 +82,27 @@ export async function POST(request: Request) {
       user: { select: { id: true, nome: true } },
     },
   });
+
+  // Notificar o outro participante (fire-and-forget)
+  const recipientId = match.fromUserId === session.id ? match.toUserId : match.fromUserId;
+  const recipient = await prisma.user.findUnique({ where: { id: recipientId }, select: { nome: true, email: true } });
+
+  if (recipient) {
+    createUserNotification({
+      userId: recipientId,
+      tipo: "message",
+      titulo: `Nova mensagem de ${session.nome}`,
+      mensagem: conteudo.trim().slice(0, 100),
+      link: `/dashboard/matches`,
+    });
+    sendMessageReceivedEmail({
+      nome: recipient.nome,
+      email: recipient.email,
+      remetente: session.nome,
+      preview: conteudo.trim(),
+      matchId,
+    });
+  }
 
   return NextResponse.json(message, { status: 201 });
 }

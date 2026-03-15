@@ -38,8 +38,9 @@ model User {
   opportunities Opportunity[]
   matchesFrom  Match[]   @relation("MatchFrom")
   matchesTo    Match[]   @relation("MatchTo")
-  messages     Message[]
-  apiKeys      ApiKey[]
+  messages      Message[]
+  apiKeys       ApiKey[]
+  notifications UserNotification[]
 
   @@map("users")
 }
@@ -426,4 +427,22 @@ model TeamInvite {
   @@map("team_invites")
   @@index([token])
   @@index([empresaId])
+}
+
+// ─── User Notifications ───
+
+model UserNotification {
+  id       String   @id @default(cuid())
+  tipo     String   // match | message | invite | review | system
+  titulo   String
+  mensagem String
+  link     String?
+  lida     Boolean  @default(false)
+  criadoEm DateTime @default(now()) @map("criado_em")
+
+  userId   String   @map("user_id")
+  user     User     @relation(fields: [userId], references: [id])
+
+  @@map("user_notifications")
+  @@index([userId, lida, criadoEm])
 }
