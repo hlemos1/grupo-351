@@ -2,18 +2,36 @@ import { NextResponse } from "next/server";
 import { getCandidaturas, getContatos } from "@/lib/db";
 import { getProjetos } from "@/lib/projetos";
 import { getGlossario, getArtigos } from "@/lib/conhecimento";
-import type { DashboardStats } from "@/lib/admin-types";
+import { prisma } from "@/lib/prisma";
 
 export async function GET() {
-  const [candidaturas, contatos, allProjetos, glossario, artigos] = await Promise.all([
+  const [candidaturas, contatos, allProjetos, glossario, artigos, userCount, companyCount, oppCount, matchCount, subCount, activeSubCount, projectCount] = await Promise.all([
     getCandidaturas(),
     getContatos(),
     getProjetos(),
     getGlossario(),
     getArtigos(),
+    prisma.user.count(),
+    prisma.company.count(),
+    prisma.opportunity.count(),
+    prisma.match.count(),
+    prisma.subscription.count(),
+    prisma.subscription.count({ where: { status: "active" } }),
+    prisma.platformProject.count(),
   ]);
 
-  const stats: DashboardStats = {
+  // Growth: users e companies criados nos ultimos 7 dias
+  const seteDiasAtras = new Date();
+  seteDiasAtras.setDate(seteDiasAtras.getDate() - 7);
+
+  const [newUsers7d, newCompanies7d, newOpps7d, closedDeals] = await Promise.all([
+    prisma.user.count({ where: { criadoEm: { gte: seteDiasAtras } } }),
+    prisma.company.count({ where: { criadoEm: { gte: seteDiasAtras } } }),
+    prisma.opportunity.count({ where: { criadoEm: { gte: seteDiasAtras } } }),
+    prisma.match.count({ where: { status: "fechado" } }),
+  ]);
+
+  const stats = {
     candidaturas: {
       total: candidaturas.length,
       novas: candidaturas.filter((c) => c.status === "nova").length,
@@ -36,6 +54,21 @@ export async function GET() {
     conhecimento: {
       termos: glossario.length,
       artigos: artigos.length,
+    },
+    plataforma: {
+      users: userCount,
+      companies: companyCount,
+      opportunities: oppCount,
+      matches: matchCount,
+      subscriptions: subCount,
+      activeSubscriptions: activeSubCount,
+      projects: projectCount,
+      closedDeals,
+      growth7d: {
+        users: newUsers7d,
+        companies: newCompanies7d,
+        opportunities: newOpps7d,
+      },
     },
   };
 

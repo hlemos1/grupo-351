@@ -14,8 +14,31 @@ import {
   Brain,
   Sparkles,
   CalendarDays,
+  Building2,
+  Target,
+  GitPullRequest,
+  Wallet,
+  UserPlus,
 } from "lucide-react";
-import type { DashboardStats, Candidatura, Contato } from "@/lib/admin-types";
+import type { Candidatura, Contato } from "@/lib/admin-types";
+
+interface DashboardStatsV2 {
+  candidaturas: { total: number; novas: number; emAnalise: number; entrevista: number; aprovadas: number; recusadas: number };
+  contatos: { total: number; naoLidos: number };
+  projetos: { ideacao: number; emEstruturacao: number; emDesenvolvimento: number; emOperacao: number; consolidado: number };
+  conhecimento: { termos: number; artigos: number };
+  plataforma: {
+    users: number;
+    companies: number;
+    opportunities: number;
+    matches: number;
+    subscriptions: number;
+    activeSubscriptions: number;
+    projects: number;
+    closedDeals: number;
+    growth7d: { users: number; companies: number; opportunities: number };
+  };
+}
 
 const statusColors: Record<string, string> = {
   nova: "bg-accent text-white",
@@ -37,7 +60,7 @@ const fadeUp = {
 };
 
 export default function AdminDashboard() {
-  const [stats, setStats] = useState<DashboardStats | null>(null);
+  const [stats, setStats] = useState<DashboardStatsV2 | null>(null);
   const [candidaturas, setCandidaturas] = useState<Candidatura[]>([]);
   const [contatos, setContatos] = useState<Contato[]>([]);
   const [loading, setLoading] = useState(true);
@@ -63,7 +86,7 @@ export default function AdminDashboard() {
     );
   }
 
-  const totalProjetos = (stats?.projetos.ideacao || 0) + (stats?.projetos.emEstruturacao || 0) + (stats?.projetos.emDesenvolvimento || 0) + (stats?.projetos.emOperacao || 0) + (stats?.projetos.consolidado || 0);
+  const p = stats?.plataforma;
 
   return (
     <motion.div
@@ -75,107 +98,122 @@ export default function AdminDashboard() {
       {/* Welcome */}
       <motion.div variants={fadeUp}>
         <h1 className="text-2xl font-bold text-foreground font-display tracking-tight">
-          Bom dia, Henrique
+          Centro de Comando
         </h1>
         <p className="text-muted text-sm mt-0.5">
-          Visão geral do ecossistema Grupo +351
+          Visão 360° do ecossistema Grupo +351
         </p>
       </motion.div>
 
-      {/* KPI Grid */}
-      <motion.div variants={fadeUp} className="grid grid-cols-2 lg:grid-cols-5 gap-3">
+      {/* Platform Health — Top KPIs */}
+      <motion.div variants={fadeUp} className="grid grid-cols-2 lg:grid-cols-4 gap-3">
         {[
           {
             icon: Users,
-            label: "Candidaturas",
-            value: stats?.candidaturas.total || 0,
-            sub: `${stats?.candidaturas.novas || 0} novas`,
+            label: "Utilizadores",
+            value: p?.users || 0,
+            sub: p?.growth7d.users ? `+${p.growth7d.users} esta semana` : "plataforma",
             color: "from-blue-500/10 to-blue-600/5",
             iconColor: "text-blue-500",
+            href: "/admin/usuarios",
           },
           {
-            icon: Clock,
-            label: "Em análise",
-            value: (stats?.candidaturas.emAnalise || 0) + (stats?.candidaturas.entrevista || 0),
-            sub: "pipeline ativo",
-            color: "from-amber-500/10 to-amber-600/5",
-            iconColor: "text-amber-500",
+            icon: Building2,
+            label: "Empresas",
+            value: p?.companies || 0,
+            sub: p?.growth7d.companies ? `+${p.growth7d.companies} esta semana` : "registradas",
+            color: "from-purple-500/10 to-purple-600/5",
+            iconColor: "text-purple-500",
+            href: "/admin/empresas",
           },
           {
-            icon: Mail,
-            label: "Contatos",
-            value: stats?.contatos.naoLidos || 0,
-            sub: "não lidos",
-            color: "from-rose-500/10 to-rose-600/5",
-            iconColor: "text-rose-500",
-          },
-          {
-            icon: Briefcase,
-            label: "Projetos",
-            value: totalProjetos,
-            sub: `${stats?.projetos.emOperacao || 0} em operação`,
+            icon: Target,
+            label: "Oportunidades",
+            value: p?.opportunities || 0,
+            sub: p?.growth7d.opportunities ? `+${p.growth7d.opportunities} esta semana` : "marketplace",
             color: "from-emerald-500/10 to-emerald-600/5",
             iconColor: "text-emerald-500",
+            href: "/admin/oportunidades",
           },
           {
-            icon: BookOpen,
-            label: "Conhecimento",
-            value: stats?.conhecimento?.termos || 0,
-            sub: `${stats?.conhecimento?.artigos || 0} artigos`,
-            color: "from-violet-500/10 to-violet-600/5",
-            iconColor: "text-violet-500",
+            icon: GitPullRequest,
+            label: "Deals Fechados",
+            value: p?.closedDeals || 0,
+            sub: `${p?.matches || 0} matches total`,
+            color: "from-amber-500/10 to-amber-600/5",
+            iconColor: "text-amber-500",
+            href: "/admin/deals",
           },
         ].map((kpi) => {
           const Icon = kpi.icon;
           return (
-            <div
+            <a
               key={kpi.label}
+              href={kpi.href}
               className="bg-white rounded-2xl border border-black/[0.04] p-5 hover:shadow-md transition-all duration-300 group"
             >
-              <div className="flex items-center gap-3 mb-3">
+              <div className="flex items-center justify-between mb-3">
                 <div className={`w-9 h-9 rounded-xl bg-gradient-to-br ${kpi.color} flex items-center justify-center`}>
                   <Icon className={`w-[18px] h-[18px] ${kpi.iconColor}`} />
                 </div>
+                <ArrowUpRight className="w-3.5 h-3.5 text-muted/30 group-hover:text-muted transition-colors" />
               </div>
               <p className="text-2xl font-bold text-foreground tracking-tight">{kpi.value}</p>
-              <p className="text-[11px] text-muted mt-0.5 uppercase tracking-wider font-medium">
-                {kpi.sub}
-              </p>
-            </div>
+              <p className="text-[11px] text-muted mt-0.5 font-medium">{kpi.sub}</p>
+            </a>
           );
         })}
       </motion.div>
 
-      {/* Quick actions */}
-      <motion.div variants={fadeUp} className="grid grid-cols-2 lg:grid-cols-5 gap-2.5">
+      {/* Secondary KPIs */}
+      <motion.div variants={fadeUp} className="grid grid-cols-3 lg:grid-cols-6 gap-3">
         {[
-          { href: "/admin/candidaturas", label: "Candidaturas", icon: Users, accent: "group-hover:text-blue-500" },
-          { href: "/admin/contatos", label: "Contatos", icon: Mail, accent: "group-hover:text-rose-500" },
-          { href: "/admin/portfolio", label: "Marcas", icon: Briefcase, accent: "group-hover:text-emerald-500" },
-          { href: "/admin/inteligencia", label: "Inteligência IA", icon: Brain, accent: "group-hover:text-violet-500" },
-          { href: "/reunioes?token=r351-gov-2026", label: "Reuniões Gov", icon: CalendarDays, accent: "group-hover:text-amber-500" },
+          { label: "Candidaturas", value: stats?.candidaturas.total || 0, sub: `${stats?.candidaturas.novas || 0} novas`, color: "text-blue-600" },
+          { label: "Contatos", value: stats?.contatos.naoLidos || 0, sub: "não lidos", color: "text-rose-500" },
+          { label: "Assinaturas", value: p?.activeSubscriptions || 0, sub: `de ${p?.subscriptions || 0}`, color: "text-emerald-600" },
+          { label: "Projetos", value: p?.projects || 0, sub: "plataforma", color: "text-purple-600" },
+          { label: "Portfólio", value: (stats?.projetos.emOperacao || 0) + (stats?.projetos.consolidado || 0), sub: "em operação", color: "text-amber-600" },
+          { label: "Conhecimento", value: (stats?.conhecimento?.termos || 0) + (stats?.conhecimento?.artigos || 0), sub: "termos+artigos", color: "text-violet-600" },
+        ].map((kpi) => (
+          <div key={kpi.label} className="bg-white rounded-xl border border-black/[0.04] p-4 text-center">
+            <p className={`text-xl font-bold ${kpi.color}`}>{kpi.value}</p>
+            <p className="text-[10px] text-muted mt-0.5 uppercase tracking-wider font-medium">{kpi.label}</p>
+            <p className="text-[9px] text-muted/60 mt-0.5">{kpi.sub}</p>
+          </div>
+        ))}
+      </motion.div>
+
+      {/* Quick Navigation */}
+      <motion.div variants={fadeUp} className="grid grid-cols-2 lg:grid-cols-6 gap-2.5">
+        {[
+          { href: "/admin/usuarios", label: "Utilizadores", icon: Users, accent: "group-hover:text-blue-500" },
+          { href: "/admin/empresas", label: "Empresas", icon: Building2, accent: "group-hover:text-purple-500" },
+          { href: "/admin/oportunidades", label: "Oportunidades", icon: Target, accent: "group-hover:text-emerald-500" },
+          { href: "/admin/deals", label: "Pipeline", icon: GitPullRequest, accent: "group-hover:text-amber-500" },
+          { href: "/admin/financeiro", label: "Financeiro", icon: Wallet, accent: "group-hover:text-green-500" },
+          { href: "/admin/inteligencia", label: "IA", icon: Brain, accent: "group-hover:text-violet-500" },
         ].map((action) => {
           const Icon = action.icon;
           return (
             <a
               key={action.href}
               href={action.href}
-              className="group flex items-center gap-3 bg-white rounded-2xl border border-black/[0.04] px-4 py-3.5 hover:shadow-md hover:border-black/[0.06] transition-all duration-300"
+              className="group flex items-center gap-2.5 bg-white rounded-xl border border-black/[0.04] px-3.5 py-3 hover:shadow-md hover:border-black/[0.06] transition-all duration-300"
             >
-              <Icon className={`w-[18px] h-[18px] text-muted transition-colors ${action.accent}`} />
-              <span className="text-sm font-medium text-foreground">{action.label}</span>
-              <ArrowUpRight className="w-3.5 h-3.5 text-muted/40 ml-auto opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              <Icon className={`w-4 h-4 text-muted transition-colors ${action.accent}`} />
+              <span className="text-xs font-medium text-foreground">{action.label}</span>
+              <ArrowUpRight className="w-3 h-3 text-muted/30 ml-auto opacity-0 group-hover:opacity-100 transition-all" />
             </a>
           );
         })}
       </motion.div>
 
-      {/* Pipeline */}
+      {/* Candidaturas Pipeline */}
       {stats && stats.candidaturas.total > 0 && (
         <motion.div variants={fadeUp} className="bg-white rounded-2xl border border-black/[0.04] p-6">
           <div className="flex items-center gap-2 mb-5">
             <TrendingUp className="w-4 h-4 text-accent" />
-            <h2 className="font-semibold text-foreground text-[15px]">Pipeline</h2>
+            <h2 className="font-semibold text-foreground text-[15px]">Pipeline de Candidaturas</h2>
           </div>
           <div className="flex gap-3">
             {[
@@ -290,7 +328,7 @@ export default function AdminDashboard() {
         <div className="flex-1">
           <p className="text-white font-semibold text-[15px]">Assistente de Inteligência</p>
           <p className="text-white/50 text-xs mt-0.5">
-            Peça análises do pipeline, gere artigos ou identifique sinergias do ecossistema
+            Análises do pipeline, artigos, sinergias e métricas do ecossistema
           </p>
         </div>
         <ArrowRight className="w-5 h-5 text-white/30 group-hover:text-white/60 group-hover:translate-x-1 transition-all duration-300 shrink-0" />

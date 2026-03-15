@@ -22,6 +22,7 @@ import {
   Target,
   GitPullRequest,
   Wallet,
+  FolderKanban,
 } from "lucide-react";
 import { useState } from "react";
 import { Logo } from "@/components/Logo";
@@ -33,6 +34,7 @@ const navItems = [
   { href: "/admin/oportunidades", label: "Oportunidades", icon: Target },
   { href: "/admin/deals", label: "Pipeline Deals", icon: GitPullRequest },
   { href: "/admin/financeiro", label: "Financeiro", icon: Wallet },
+  { href: "/admin/projetos-plataforma", label: "Projetos", icon: FolderKanban },
   { href: "/admin/candidaturas", label: "Candidaturas", icon: Users },
   { href: "/admin/contatos", label: "Contatos", icon: Mail },
   { href: "/admin/portfolio", label: "Portfólio", icon: Briefcase },
@@ -50,6 +52,7 @@ const pageTitle: Record<string, string> = {
   "/admin/oportunidades": "Oportunidades",
   "/admin/deals": "Pipeline de Deals",
   "/admin/financeiro": "Financeiro",
+  "/admin/projetos-plataforma": "Projetos Plataforma",
   "/admin/candidaturas": "Candidaturas",
   "/admin/contatos": "Contatos",
   "/admin/portfolio": "Portfólio",
