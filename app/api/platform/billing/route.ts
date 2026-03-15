@@ -68,11 +68,15 @@ export async function POST(request: Request) {
 
     if (action === "checkout" && planId) {
       const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+      console.log("[billing] baseUrl:", baseUrl, "planId:", planId, "companyId:", company.id);
+      const successUrl = `${baseUrl}/dashboard/plano?success=true`;
+      const cancelUrl = `${baseUrl}/dashboard/plano?canceled=true`;
+      console.log("[billing] successUrl:", successUrl, "cancelUrl:", cancelUrl);
       const url = await createCheckoutSession(
         company.id,
         planId,
-        `${baseUrl}/dashboard/plano?success=true`,
-        `${baseUrl}/dashboard/plano?canceled=true`
+        successUrl,
+        cancelUrl
       );
       return NextResponse.json({ url });
     }
