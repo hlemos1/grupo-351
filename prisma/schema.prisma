@@ -38,9 +38,11 @@ model User {
   opportunities Opportunity[]
   matchesFrom  Match[]   @relation("MatchFrom")
   matchesTo    Match[]   @relation("MatchTo")
-  messages      Message[]
-  apiKeys       ApiKey[]
-  notifications UserNotification[]
+  messages        Message[]
+  apiKeys         ApiKey[]
+  notifications   UserNotification[]
+  reviewsFeitas   Review[] @relation("ReviewsFeitas")
+  reviewsRecebidas Review[] @relation("ReviewsRecebidas")
 
   @@map("users")
 }
@@ -72,6 +74,7 @@ model Company {
   projects    ProjectMember[]
   subscription Subscription?
   teamInvites TeamInvite[]
+  documents   Document[]
 
   @@map("companies")
 }
@@ -147,6 +150,7 @@ model PlatformProject {
   match       Match     @relation(fields: [matchId], references: [id])
   members     ProjectMember[]
   tasks       ProjectTask[]
+  reviews     Review[]
 
   @@map("platform_projects")
 }
@@ -445,4 +449,41 @@ model UserNotification {
 
   @@map("user_notifications")
   @@index([userId, lida, criadoEm])
+}
+
+// ─── Reviews ───
+
+model Review {
+  id          String   @id @default(cuid())
+  nota        Int      // 1-5
+  comentario  String?  @db.Text
+  criadoEm    DateTime @default(now()) @map("criado_em")
+
+  projetoId   String   @map("projeto_id")
+  projeto     PlatformProject @relation(fields: [projetoId], references: [id])
+  autorId     String   @map("autor_id")
+  autor       User     @relation("ReviewsFeitas", fields: [autorId], references: [id])
+  avaliadoId  String   @map("avaliado_id")
+  avaliado    User     @relation("ReviewsRecebidas", fields: [avaliadoId], references: [id])
+
+  @@unique([projetoId, autorId])
+  @@map("reviews")
+  @@index([avaliadoId])
+}
+
+// ─── Documents (verificacao) ───
+
+model Document {
+  id        String   @id @default(cuid())
+  tipo      String   // nif | certidao | contrato | outro
+  nome      String
+  url       String
+  status    String   @default("pendente") // pendente | aprovado | rejeitado
+  criadoEm  DateTime @default(now()) @map("criado_em")
+
+  empresaId String   @map("empresa_id")
+  empresa   Company  @relation(fields: [empresaId], references: [id])
+
+  @@map("documents")
+  @@index([empresaId])
 }
