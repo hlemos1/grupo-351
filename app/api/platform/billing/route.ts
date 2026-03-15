@@ -79,7 +79,8 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ error: "action (checkout|manage) obrigatória" }, { status: 400 });
   } catch (err) {
+    console.error("[billing]", err);
     const msg = err instanceof Error ? err.message : "Erro no pagamento";
-    return NextResponse.json({ error: msg }, { status: 500 });
+    return NextResponse.json({ error: msg, detail: err instanceof Error ? err.stack?.split("\n")[1]?.trim() : undefined }, { status: 500 });
   }
 }

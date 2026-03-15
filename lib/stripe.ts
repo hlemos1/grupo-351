@@ -28,18 +28,23 @@ function getStripe(): Stripe {
   });
 }
 
-// Fallback: chamada direta à API Stripe via fetch (evita problemas do SDK em serverless)
+// Chamada direta à API Stripe via fetch (evita problemas do SDK em serverless)
 async function stripeAPI(endpoint: string, params: Record<string, string>): Promise<Record<string, unknown>> {
+  const body = new URLSearchParams(params).toString();
+
   const res = await fetch(`https://api.stripe.com/v1/${endpoint}`, {
     method: "POST",
     headers: {
       "Authorization": `Bearer ${getStripeKey()}`,
       "Content-Type": "application/x-www-form-urlencoded",
     },
-    body: new URLSearchParams(params).toString(),
+    body,
   });
-  const data = await res.json();
-  if (data.error) throw new Error(data.error.message || "Stripe API error");
+  const data = await res.json() as Record<string, unknown>;
+  if (data.error) {
+    const err = data.error as Record<string, string>;
+    throw new Error(err.message || "Stripe API error");
+  }
   return data;
 }
 
