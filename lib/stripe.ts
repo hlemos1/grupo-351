@@ -103,18 +103,11 @@ export async function createCheckoutSession(
   });
   if (!company) throw new Error("Empresa não encontrada");
 
-  // Reutilizar customer se existir
-  let customerId = company.subscription?.stripeCustomerId;
-  if (!customerId) {
-    const customer = await stripe.customers.create({
-      email: company.owner.email,
-      metadata: { companyId, companyName: company.nome },
-    });
-    customerId = customer.id;
-  }
+  // Reutilizar customer se existir, senão usar customer_email no checkout
+  const customerId = company.subscription?.stripeCustomerId;
 
   const session = await stripe.checkout.sessions.create({
-    customer: customerId,
+    ...(customerId ? { customer: customerId } : { customer_email: company.owner.email }),
     mode: "subscription",
     line_items: [
       {
