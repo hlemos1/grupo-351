@@ -3,7 +3,7 @@
 import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Logo } from "@/components/Logo";
-import { ArrowRight, Eye, EyeOff } from "lucide-react";
+import { ArrowRight, Eye, EyeOff, Sparkles } from "lucide-react";
 import Link from "next/link";
 
 function LoginForm() {
@@ -53,14 +53,11 @@ function LoginForm() {
     }
   }
 
-  const inputClass =
-    "w-full px-4 py-3 rounded-xl border border-white/[0.08] bg-white/[0.04] text-white text-sm placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-amber-500/30 focus:border-amber-500/30 transition-all";
-
   return (
-    <>
+    <form onSubmit={handleSubmit} className="space-y-5">
       <a
         href="/api/platform/auth/google"
-        className="w-full flex items-center justify-center gap-3 bg-white text-gray-700 py-3 rounded-xl font-medium text-sm hover:bg-gray-100 transition-all mb-6"
+        className="w-full flex items-center justify-center gap-3 bg-white text-gray-700 py-3.5 rounded-2xl font-medium text-sm hover:bg-gray-50 active:scale-[0.98] transition-all shadow-sm border border-gray-100"
       >
         <svg className="w-5 h-5" viewBox="0 0 24 24">
           <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" />
@@ -71,18 +68,18 @@ function LoginForm() {
         Continuar com Google
       </a>
 
-      <div className="flex items-center gap-3 mb-6">
-        <div className="flex-1 h-px bg-white/[0.08]" />
-        <span className="text-white/20 text-xs">ou</span>
-        <div className="flex-1 h-px bg-white/[0.08]" />
+      <div className="flex items-center gap-4">
+        <div className="flex-1 h-px bg-white/[0.06]" />
+        <span className="text-white/20 text-[11px] font-medium uppercase tracking-widest">ou</span>
+        <div className="flex-1 h-px bg-white/[0.06]" />
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <div className="space-y-4">
         <div>
-          <label className="block text-xs font-medium text-white/50 mb-1.5">Email</label>
+          <label className="block text-[11px] font-semibold text-white/40 mb-2 uppercase tracking-wider">Email</label>
           <input
             type="email"
-            className={inputClass}
+            className="w-full px-4 py-3.5 rounded-2xl border border-white/[0.06] bg-white/[0.03] text-white text-sm placeholder:text-white/20 focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500/20 focus:bg-white/[0.05] transition-all"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="seu@email.com"
@@ -91,11 +88,11 @@ function LoginForm() {
         </div>
 
         <div>
-          <label className="block text-xs font-medium text-white/50 mb-1.5">Senha</label>
+          <label className="block text-[11px] font-semibold text-white/40 mb-2 uppercase tracking-wider">Senha</label>
           <div className="relative">
             <input
               type={showSenha ? "text" : "password"}
-              className={inputClass}
+              className="w-full px-4 py-3.5 rounded-2xl border border-white/[0.06] bg-white/[0.03] text-white text-sm placeholder:text-white/20 focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500/20 focus:bg-white/[0.05] transition-all pr-11"
               value={senha}
               onChange={(e) => setSenha(e.target.value)}
               placeholder="Sua senha"
@@ -104,57 +101,87 @@ function LoginForm() {
             <button
               type="button"
               onClick={() => setShowSenha(!showSenha)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-white/30 hover:text-white/60 transition-colors"
+              className="absolute right-3.5 top-1/2 -translate-y-1/2 text-white/20 hover:text-white/50 transition-colors"
             >
               {showSenha ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
             </button>
           </div>
         </div>
+      </div>
 
-        {error && (
+      {error && (
+        <div className="bg-red-500/10 border border-red-500/20 rounded-xl px-4 py-3">
           <p className="text-red-400 text-sm text-center">{error}</p>
+        </div>
+      )}
+
+      <button
+        type="submit"
+        disabled={loading}
+        className="w-full bg-gradient-to-r from-amber-600 to-amber-500 text-white py-3.5 rounded-2xl font-semibold text-sm hover:from-amber-500 hover:to-amber-400 active:scale-[0.98] transition-all disabled:opacity-50 flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20"
+      >
+        {loading ? (
+          <div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+        ) : (
+          <>
+            Entrar
+            <ArrowRight className="w-4 h-4" />
+          </>
         )}
+      </button>
 
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full bg-amber-600 text-white py-3 rounded-xl font-medium text-sm hover:bg-amber-500 transition-all disabled:opacity-50 flex items-center justify-center gap-2"
-        >
-          {loading ? "Entrando..." : "Entrar"}
-          {!loading && <ArrowRight className="w-4 h-4" />}
-        </button>
-      </form>
-
-      <p className="text-center text-white/30 text-sm mt-8">
+      <p className="text-center text-white/25 text-sm pt-2">
         Ainda não tem conta?{" "}
-        <Link href="/register" className="text-amber-500 hover:text-amber-400 transition-colors">
+        <Link href="/register" className="text-amber-400 hover:text-amber-300 font-medium transition-colors">
           Criar conta
         </Link>
       </p>
-
-      <div className="text-center mt-4">
-        <Link href="/" className="text-white/20 text-xs hover:text-white/40 transition-colors">
-          Voltar ao site
-        </Link>
-      </div>
-    </>
+    </form>
   );
 }
 
 export default function LoginPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0a1628] via-[#111d2e] to-[#0d1f35] flex items-center justify-center px-6">
-      <div className="w-full max-w-sm">
+    <div className="min-h-screen bg-[#080e1a] flex items-center justify-center px-6 relative overflow-hidden">
+      {/* Ambient orbs */}
+      <div className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] bg-amber-500/[0.04] rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-[-20%] right-[-10%] w-[400px] h-[400px] bg-blue-500/[0.03] rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute top-[40%] right-[20%] w-[300px] h-[300px] bg-purple-500/[0.02] rounded-full blur-[80px] pointer-events-none" />
+
+      {/* Noise texture */}
+      <div className="absolute inset-0 opacity-[0.015] pointer-events-none" style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E\")" }} />
+
+      {/* Grid lines */}
+      <div className="absolute inset-0 pointer-events-none opacity-[0.02]" style={{ backgroundImage: "linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)", backgroundSize: "64px 64px" }} />
+
+      <div className="w-full max-w-[400px] relative z-10">
+        {/* Header */}
         <div className="text-center mb-10">
-          <Logo className="text-white mx-auto mb-4" size={32} />
-          <h1 className="text-xl font-bold text-white">Entrar na plataforma</h1>
-          <p className="text-white/40 text-sm mt-2">
-            Acesse seu dashboard e oportunidades
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-3xl bg-white/[0.04] border border-white/[0.06] mb-6 backdrop-blur-sm">
+            <Logo className="text-white" size={28} />
+          </div>
+          <h1 className="text-2xl font-bold text-white tracking-tight">
+            Entrar na plataforma
+          </h1>
+          <p className="text-white/30 text-sm mt-2.5 flex items-center justify-center gap-1.5">
+            <Sparkles className="w-3.5 h-3.5 text-amber-500/50" />
+            Acesse o ecossistema +351
           </p>
         </div>
-        <Suspense>
-          <LoginForm />
-        </Suspense>
+
+        {/* Glass card */}
+        <div className="bg-white/[0.03] backdrop-blur-xl border border-white/[0.06] rounded-3xl p-8 shadow-2xl shadow-black/20">
+          <Suspense>
+            <LoginForm />
+          </Suspense>
+        </div>
+
+        {/* Back link */}
+        <div className="text-center mt-6">
+          <Link href="/" className="text-white/15 text-xs hover:text-white/30 transition-colors">
+            Voltar ao site
+          </Link>
+        </div>
       </div>
     </div>
   );
