@@ -7,11 +7,14 @@ datasource db {
 }
 
 model AdminUser {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  nome      String
-  senhaHash String   @map("senha_hash")
-  criadoEm  DateTime @default(now()) @map("criado_em")
+  id          String    @id @default(cuid())
+  email       String    @unique
+  nome        String
+  senhaHash   String    @map("senha_hash")
+  role        String    @default("admin") // superadmin | admin | viewer
+  ativo       Boolean   @default(true)
+  ultimoLogin DateTime? @map("ultimo_login")
+  criadoEm    DateTime  @default(now()) @map("criado_em")
 
   @@map("admin_users")
 }
@@ -364,4 +367,43 @@ model ApiKey {
   user        User      @relation(fields: [userId], references: [id])
 
   @@map("api_keys")
+}
+
+// ─── Admin Enterprise ───
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  acao       String   // create | update | delete | login | export
+  recurso    String   // user | company | opportunity | match | subscription | admin
+  resourceId String?  @map("resource_id")
+  adminId    String   @map("admin_id")
+  adminNome  String   @map("admin_nome")
+  detalhes   Json?
+  ip         String?
+  criadoEm   DateTime @default(now()) @map("criado_em")
+
+  @@map("audit_logs")
+  @@index([recurso, criadoEm])
+  @@index([adminId, criadoEm])
+}
+
+model AdminNotification {
+  id       String   @id @default(cuid())
+  tipo     String   // new-user | new-candidatura | deal-closed | payment
+  titulo   String
+  mensagem String
+  link     String?
+  lida     Boolean  @default(false)
+  criadoEm DateTime @default(now()) @map("criado_em")
+
+  @@map("admin_notifications")
+  @@index([lida, criadoEm])
+}
+
+model PlatformConfig {
+  chave     String   @id
+  valor     Json
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("platform_config")
 }

@@ -16,12 +16,17 @@ import {
   ChevronRight,
   CalendarDays,
   Handshake,
+  UserCog,
+  Building2,
+  ShieldCheck,
 } from "lucide-react";
 import { useState } from "react";
 import { Logo } from "@/components/Logo";
 
 const navItems = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/admin/usuarios", label: "Utilizadores", icon: UserCog, section: "plataforma" },
+  { href: "/admin/empresas", label: "Empresas", icon: Building2, section: "plataforma" },
   { href: "/admin/candidaturas", label: "Candidaturas", icon: Users },
   { href: "/admin/contatos", label: "Contatos", icon: Mail },
   { href: "/admin/portfolio", label: "Portfólio", icon: Briefcase },
@@ -29,10 +34,13 @@ const navItems = [
   { href: "/admin/parceiros", label: "Parceiros", icon: Handshake },
   { href: "/admin/reunioes", label: "Reuniões", icon: CalendarDays },
   { href: "/admin/inteligencia", label: "Inteligência", icon: Brain },
+  { href: "/admin/equipe", label: "Equipe", icon: ShieldCheck, section: "config" },
 ];
 
 const pageTitle: Record<string, string> = {
   "/admin": "Dashboard",
+  "/admin/usuarios": "Utilizadores",
+  "/admin/empresas": "Empresas",
   "/admin/candidaturas": "Candidaturas",
   "/admin/contatos": "Contatos",
   "/admin/portfolio": "Portfólio",
@@ -40,6 +48,7 @@ const pageTitle: Record<string, string> = {
   "/admin/parceiros": "Parceiros",
   "/admin/reunioes": "Reuniões",
   "/admin/inteligencia": "Inteligência",
+  "/admin/equipe": "Equipe Admin",
 };
 
 export default function AdminLayout({

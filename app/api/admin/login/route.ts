@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { verifyCredentials, createSessionToken, COOKIE_NAME } from "@/lib/auth";
 import { loginSchema } from "@/lib/validations";
 import { rateLimit, getClientIP } from "@/lib/rate-limit";
+import { prisma } from "@/lib/prisma";
+import { logAudit } from "@/lib/audit";
 
 export async function POST(request: Request) {
   try {
@@ -22,6 +24,23 @@ export async function POST(request: Request) {
 
     if (!result.valid) {
       return NextResponse.json({ error: "Email ou senha inválidos" }, { status: 401 });
+    }
+
+    // Atualizar ultimo login
+    const admin = await prisma.adminUser.findUnique({ where: { email: email.toLowerCase() } });
+    if (admin) {
+      await prisma.adminUser.update({
+        where: { id: admin.id },
+        data: { ultimoLogin: new Date() },
+      }).catch(() => {});
+
+      await logAudit({
+        acao: "login",
+        recurso: "admin",
+        resourceId: admin.id,
+        adminId: admin.id,
+        adminNome: admin.nome,
+      }).catch(() => {});
     }
 
     const { token, expires } = createSessionToken(result.nome!);
