@@ -9,7 +9,7 @@ import { ServiceWorker } from "@/components/ServiceWorker";
 import { organizationSchema, webSiteSchema } from "@/lib/schema";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
-import { Analytics } from "@vercel/analytics/react";
+import { Analytics as VercelAnalytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const inter = Inter({
@@ -102,7 +102,7 @@ export default async function RootLayout({
         <SpeedInsights />
         <WebVitals />
         <ServiceWorker />
-              <Analytics />
+        <VercelAnalytics />
         <SpeedInsights />
       </body>
     </html>
