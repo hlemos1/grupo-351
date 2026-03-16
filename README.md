@@ -2,6 +2,8 @@
 
 ![CI](https://github.com/institutoveigacabral-maker/grupo-351/actions/workflows/ci.yml/badge.svg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+![Tests](https://img.shields.io/badge/tests-308%20passing-brightgreen)
+![TypeScript](https://img.shields.io/badge/TypeScript-strict-blue)
 
 Hub de negocios e joint ventures sediado em Cascais, Portugal. Plataforma multi-sided que conecta empresas, parceiros estrategicos e oportunidades reais de mercado, combinando IA, CRM e pagamentos num unico ecossistema digital.
 
@@ -11,32 +13,65 @@ Hub de negocios e joint ventures sediado em Cascais, Portugal. Plataforma multi-
 
 ## Tech Stack
 
-- **Framework:** Next.js 16 + React 19 + TypeScript
-- **Banco de Dados:** PostgreSQL serverless (Neon) + Prisma ORM
-- **Autenticacao:** HMAC-SHA256 (admin) + sessoes JWT (plataforma)
-- **IA:** Google Gemini + Anthropic Claude (matching, copilot, analise)
-- **Pagamentos:** Stripe (assinaturas e comissoes)
-- **E-mail:** Resend (transacional)
-- **Observabilidade:** Sentry (client, server, edge)
-- **Cache:** Upstash Redis
-- **Estilo:** Tailwind CSS 4 + Framer Motion
-- **i18n:** next-intl (PT-PT, PT-BR, EN, ES)
-- **Testes:** Vitest + Testing Library
-- **Validacao:** Zod
+| Camada | Tecnologia |
+|--------|-----------|
+| **Framework** | Next.js 16.1.6 + React 19 + TypeScript strict |
+| **Database** | PostgreSQL serverless (Neon) + Prisma 7.5 |
+| **Auth** | HMAC-SHA256 cookies + Google OAuth |
+| **Cache** | Upstash Redis (14 cache keys, invalidacao automatica) |
+| **IA** | Google Gemini + Anthropic Claude (matching, copilot, analise) |
+| **Pagamentos** | Stripe (3 planos: starter, pro, enterprise) |
+| **E-mail** | Resend (transacional) |
+| **Monitoring** | Sentry (client + server + edge), Web Vitals, Vercel Speed Insights |
+| **Analytics** | Umami (RGPD compliant, sem cookies) |
+| **UI** | Tailwind CSS 4, Framer Motion, cmdk, sonner, recharts |
+| **Data Fetching** | TanStack React Query 5.90 |
+| **i18n** | next-intl (PT-PT, PT-BR, EN, ES) |
+| **Testes** | Vitest (308 testes, 30 suites) |
+| **Validacao** | Zod |
+| **Bundle** | @next/bundle-analyzer, dynamic imports |
+| **PWA** | Service worker + manifest + cache offline |
 
 ## Funcionalidades
 
-- **Site publico** com SEO, Open Graph, JSON-LD, sitemap e PWA
-- **Portal de parceiros** com acesso via token e metricas dedicadas
-- **Plataforma multi-sided** para empresas: perfil, oportunidades, matches por IA, mensagens, projetos colaborativos e reviews
+### Plataforma
+- **Site publico** com SEO, Open Graph, JSON-LD, sitemap, ISR e PWA
+- **Plataforma multi-sided** para empresas: perfil, oportunidades, matches por IA, mensagens em tempo real (SSE), projetos colaborativos e reviews
 - **Painel administrativo** completo: CRM, candidaturas, portfolio, financeiro, glossario, artigos, auditoria e notificacoes
+- **Portal de parceiros** com acesso via token e metricas dedicadas
 - **Sistema de reunioes** com hub, kanban, analise por pessoa e roadmaps
+
+### Enterprise
 - **Matching inteligente** com score 0-100 gerado por IA e sugestoes automaticas
 - **Convites de equipe** com links tokenizados e expiracoes
-- **Assinaturas e billing** via Stripe (free, growth, enterprise) com webhooks
+- **Assinaturas e billing** via Stripe com webhooks e portal de gestao
 - **API publica v1** com autenticacao por API key e scopes granulares
-- **Rate limiting** e RBAC por role (superadmin, admin, viewer, empresa, parceiro)
-- **Privacidade:** exportacao e exclusao de dados pelo usuario
+- **Rate limiting** distribuido (Redis) e RBAC por role
+- **Privacidade:** exportacao e exclusao de dados (RGPD)
+
+### UI Components
+- Command palette (Cmd+K) com busca global
+- Toast notifications (sonner)
+- DataTable sortable/filterable com paginacao
+- File upload drag-and-drop com validacao
+- Page transitions (framer-motion)
+- Streaming loading states (8+ loading.tsx)
+
+### Performance
+- ISR em 8 paginas publicas (300s a 86400s)
+- Redis cache em 14 API routes com invalidacao automatica
+- SWR headers para CDN caching
+- Dynamic imports (recharts lazy loaded)
+- Prisma slow query logging (>500ms)
+
+### Observabilidade
+- Sentry em error boundaries (app + dashboard + global)
+- Sentry user context automatico via auth
+- Request ID (UUID) em todas as respostas
+- Structured logger com niveis (info/warn/error)
+- Health check com DB + Redis + memoria (`/api/health`)
+- Web Vitals reporting (`/api/vitals`)
+- Security headers completos (HSTS, CSP, X-Frame, etc.)
 
 ## Getting Started
 
@@ -176,7 +211,7 @@ Acesse [http://localhost:3000](http://localhost:3000).
 pnpm vitest
 ```
 
-O projeto possui 25+ arquivos de teste cobrindo: autenticacao, API v1, billing, cache, CRM, e-mail, i18n, matching, middleware, notificacoes, RBAC, rate limiting, scoring, validacoes e mais.
+308 testes em 30 suites cobrindo: autenticacao, API v1, billing, cache, CRM, e-mail, i18n, matching, middleware, notificacoes, RBAC, rate limiting, scoring, validacoes, logger, security headers e mais.
 
 ## Arquitetura
 
