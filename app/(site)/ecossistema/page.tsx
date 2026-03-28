@@ -4,9 +4,9 @@ import { JsonLd } from "@/components/JsonLd";
 import { ecossistemaSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Ecossistema FIGITAL — GRUPO +351",
+  title: "Ecossistema — GRUPO +351",
   description:
-    "Visualize como as marcas do Grupo +351 se conectam no ecossistema FIGITAL. Infraestrutura, neurônios e distribuição em rede.",
+    "Visualize como as 5 empresas do Grupo +351 se conectam. Operacao fisica, inteligencia digital e comercio global em rede.",
 };
 
 export default function Ecossistema() {

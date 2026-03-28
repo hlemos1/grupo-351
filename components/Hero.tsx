@@ -102,10 +102,10 @@ export function Hero() {
         >
           <TypeWriter
             words={[
+              "Venture Builder luso-brasileiro",
+              "Onde fisico e digital se encontram",
               "Estrutura que aprende. Ativos que duram.",
-              "Holding FIGITAL luso-brasileira",
-              "Onde operação vira inteligência",
-              "Construído para aprender. Desenhado para durar.",
+              "Construido para operar. Desenhado para escalar.",
             ]}
             className="text-xl md:text-2xl text-muted font-light tracking-[-0.01em]"
           />
@@ -117,8 +117,8 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 0.45, ease }}
           className="text-lg md:text-xl text-foreground/90 leading-[1.65] max-w-2xl mx-auto mb-5 tracking-[-0.01em]"
         >
-          Construímos, operamos e escalamos marcas próprias com fundamento
-          económico real, governança sólida e visão de longo prazo.
+          Construimos, operamos e escalamos empresas reais com fundamento
+          economico, governanca solida e visao de longo prazo.
         </motion.p>
 
         <motion.p
@@ -127,9 +127,9 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 0.6, ease }}
           className="text-base text-muted leading-[1.7] max-w-2xl mx-auto mb-14 tracking-[-0.006em]"
         >
-          Somos uma holding FIGITAL sediada em Cascais, Portugal. Integramos
-          operações físicas, plataformas digitais e sistemas de software próprios
-          para criar, operar e escalar ativos reais entre Europa, América Latina e Ásia.
+          Somos um venture builder sediado em Cascais, Portugal. Integramos
+          operacoes fisicas, plataformas digitais e tecnologia proprietaria
+          para criar, operar e escalar negocios reais entre Europa, America Latina e Asia.
         </motion.p>
 
         <motion.div
@@ -152,7 +152,7 @@ export function Hero() {
               href="/ecossistema"
               className="group inline-flex items-center gap-2 text-muted hover:text-primary px-6 py-4 text-[15px] font-medium transition-all duration-300 border border-transparent hover:border-black/[0.06] rounded-2xl hover:bg-white/60 hover:backdrop-blur-xl"
             >
-              Ver ecossistema FIGITAL
+              Ver ecossistema
               <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-300" />
             </a>
           </MagneticButton>

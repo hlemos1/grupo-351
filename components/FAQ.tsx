@@ -2,43 +2,43 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
-import { ChevronDown, Plus, Minus } from "lucide-react";
+import { Plus } from "lucide-react";
 import { useRef } from "react";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
 const faqs = [
   {
-    q: "O que é FIGITAL?",
-    a: "FIGITAL é a arquitetura central do Grupo +351 — a integração estrutural entre operações físicas, plataformas digitais e software proprietário. Não é tendência, é infraestrutura. O físico gera sinais, o digital organiza, a governança transforma em decisão. Saiba mais na nossa Base de Conhecimento (/conhecimento).",
+    q: "O que e o Grupo +351?",
+    a: "Somos um venture builder luso-brasileiro sediado em Cascais, Portugal. Criamos, operamos e escalamos empresas reais que integram operacoes fisicas, tecnologia digital e supply chain global. Hoje temos 5 empresas ativas em areas como consultoria IA, fitness, e-commerce, sourcing China e impressao 3D.",
   },
   {
-    q: "O que é uma Joint Venture no +351?",
-    a: "É uma parceria societária real. A holding entra com marca, método, capital e governança. O operador entra com execução e know-how. Estruturas variam de 50/50 a 70/30 com vesting. Cada marca tem seu modelo — veja detalhes no Portal do Parceiro (/parceiros).",
+    q: "O que e uma Joint Venture no +351?",
+    a: "E uma parceria societaria real. O grupo entra com marca, metodo, capital e governanca. O operador entra com execucao e know-how. Estruturas variam de 50/50 a 75/25 com vesting progressivo. Cada empresa tem seu modelo — veja detalhes no Portal do Parceiro (/parceiros).",
   },
   {
     q: "Preciso ter capital para ser parceiro?",
-    a: "Depende do modelo. Forge and Flow 3D começa com 5.000 EUR. Purple Party pode chegar a 100.000 EUR. Para operadores sem capital, existem modelos com vesting progressivo onde a participação é conquistada com performance. Use o simulador em /parceiros para estimar.",
+    a: "Depende do modelo e da vertical. Existem modelos com vesting progressivo onde a participacao e conquistada com performance, sem necessidade de capital inicial. Para modelos com investimento, os valores variam por empresa.",
   },
   {
     q: "Como me candidato?",
-    a: "Através do formulário estruturado em /aplicar. São 5 etapas: perfil pessoal, experiência, modelo de interesse, proposta e aceite de NDA preliminar. Candidaturas são analisadas pela equipa de governança em até 5 dias úteis.",
+    a: "Atraves do formulario estruturado em /aplicar. Sao 5 etapas: perfil pessoal, experiencia, modelo de interesse, proposta e aceite de NDA preliminar. Candidaturas sao analisadas pela equipa de governanca em ate 5 dias uteis.",
   },
   {
-    q: "Vocês atuam apenas em Portugal?",
-    a: "Estamos sediados em Cascais, Portugal, mas o ecossistema é global. Sourcing da China (Purple Party), marcas validadas no Brasil, distribuição europeia. Veja o mapa completo em /ecossistema.",
+    q: "Voces atuam apenas em Portugal?",
+    a: "Estamos sediados em Cascais, Portugal, mas operamos globalmente. Sourcing direto na China via Nexial Global, marcas com raizes no Brasil, distribuicao europeia e supply chain Asia-Europa. Veja o mapa completo em /ecossistema.",
   },
   {
-    q: "Como as 7 marcas se conectam?",
-    a: "Cada marca é um nó no ecossistema FIGITAL. Sensores (Veeenha, Ruptfy, Forge and Flow) captam dados. Neurônios (Córtex FC, Long View, Purple Party) processam. Distribuição (lojas, app, franquias) retroalimenta. Visualize tudo em /ecossistema.",
+    q: "Como as empresas do ecossistema se conectam?",
+    a: "Cada empresa e um no na rede. A operacao fisica (Strike Studio, FarmLab 3D) gera caixa e dados. A inteligencia digital (Nexial GSO) transforma dados em decisao. O comercio global (Nexial Global, E-Brand) conecta producao a mercado. Tudo se alimenta mutuamente.",
   },
   {
-    q: "Qual a diferença entre operador e investidor?",
-    a: "Operador executa o dia-a-dia do negócio e conquista participação via vesting. Investidor entra com capital e tem retorno passivo. O modelo 'ambos' combina os dois — você opera e investe. Cada perfil tem acesso a modelos diferentes.",
+    q: "Qual a diferenca entre operador e investidor?",
+    a: "Operador executa o dia-a-dia do negocio e conquista participacao via vesting. Investidor entra com capital e tem retorno proporcional. O modelo 'ambos' combina os dois — voce opera e investe. Cada perfil tem acesso a modelos diferentes.",
   },
   {
-    q: "O Grupo +351 participa da operação diária?",
-    a: "Não. A operação é do parceiro. A holding fornece marca, método, governança, conexão com o ecossistema e reunião de conselho mensal. Sem microgestão — com métricas compartilhadas e decisões baseadas em dados FIGITAIS.",
+    q: "O Grupo +351 participa da operacao diaria?",
+    a: "Depende da vertical. Nas empresas 100% do grupo (Nexial GSO, E-Brand), sim. Nas joint ventures (Strike Studio, FarmLab 3D, Nexial Global), a operacao e do parceiro. O grupo fornece estrategia, governanca, conexao com o ecossistema e conselho mensal.",
   },
 ];
 

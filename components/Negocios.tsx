@@ -1,10 +1,11 @@
 "use client";
 
 import {
-  Printer,
+  Brain,
+  Dumbbell,
   ShoppingBag,
-  GraduationCap,
-  Package,
+  Globe,
+  Printer,
   ArrowUpRight,
 } from "lucide-react";
 import { motion, useInView } from "framer-motion";
@@ -14,48 +15,53 @@ import { useRef } from "react";
 const ease = [0.16, 1, 0.3, 1] as const;
 
 const iconMap = {
-  printer: Printer,
+  brain: Brain,
+  dumbbell: Dumbbell,
   "shopping-bag": ShoppingBag,
-  "graduation-cap": GraduationCap,
-  package: Package,
+  globe: Globe,
+  printer: Printer,
 };
 
 const projetos = [
   {
-    name: "Forge and Flow 3D",
-    desc: "Manufatura distribuida via impressão 3D. Produção, franquia leve e infoproduto.",
-    icon: "printer" as const,
-    tag: "Manufatura Digital",
-    status: "Em operação",
+    name: "Nexial GSO",
+    desc: "Consultoria de IA com metodo proprio. Diagnostico, implementacao e operacao continua para empresas.",
+    icon: "brain" as const,
+    tag: "Consultoria IA",
+    status: "Em operacao",
     statusColor: "bg-success",
-    href: "/portfolio/forge-and-flow-3d",
+    metric: "1 cliente enterprise",
+    href: "/portfolio/nexial-gso",
   },
   {
-    name: "Veeenha!!!",
-    desc: "Super app e marketplace regional. Infraestrutura digital de economia local.",
+    name: "Strike Studio",
+    desc: "Franqueadora de boutique de MMA e fitness gamificado com IA. Strike House + Strike Lab.",
+    icon: "dumbbell" as const,
+    tag: "MMA / Fitness",
+    status: "Em operacao",
+    statusColor: "bg-success",
+    metric: "130+ alunos ativos",
+    href: "/portfolio/strike-studio",
+  },
+  {
+    name: "Nexial E-Brand",
+    desc: "E-commerce de marcas proprias com sourcing internacional. Marca Axis em lancamento.",
     icon: "shopping-bag" as const,
-    tag: "Marketplace",
+    tag: "E-commerce",
     status: "Em desenvolvimento",
     statusColor: "bg-warning",
-    href: "/portfolio/veeenha",
+    metric: "1a marca em lancamento",
+    href: "/portfolio/nexial-e-brand",
   },
   {
-    name: "Ruptfy",
-    desc: "Plataforma EdTech propria. A fabrica de cursos do grupo.",
-    icon: "graduation-cap" as const,
-    tag: "EdTech",
-    status: "Em desenvolvimento",
-    statusColor: "bg-warning",
-    href: "/portfolio/ruptfy",
-  },
-  {
-    name: "Purple Party",
-    desc: "Franqueadora + atacado China-Europa. Alibaba Express com franquia fisica.",
-    icon: "package" as const,
-    tag: "Franquia / Atacado",
-    status: "Em desenvolvimento",
-    statusColor: "bg-warning",
-    href: "/portfolio/purple-party",
+    name: "FarmLab 3D",
+    desc: "Laboratorio de criacao de produtos via impressao 3D. Producao, prototipagem e marcas proprias.",
+    icon: "printer" as const,
+    tag: "Impressao 3D",
+    status: "Em operacao",
+    statusColor: "bg-success",
+    metric: "5 impressoras ativas",
+    href: "/portfolio/farmlab-3d",
   },
 ];
 
@@ -84,13 +90,13 @@ export function Negocios() {
             href="/portfolio"
             className="inline-flex items-center gap-1.5 text-accent text-[14px] font-medium hover:underline underline-offset-4 group shrink-0"
           >
-            Ver todas as 7 marcas
+            Ver todas as empresas
             <span className="group-hover:translate-x-0.5 transition-transform duration-300">&rarr;</span>
           </Link>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-5 mb-10">
-          {projetos.map(({ name, desc, icon, tag, status, statusColor, href }, i) => {
+          {projetos.map(({ name, desc, icon, tag, status, statusColor, metric, href }, i) => {
             const Icon = iconMap[icon];
             return (
               <motion.div
@@ -117,9 +123,16 @@ export function Negocios() {
                     </h3>
                     <p className="text-muted text-[14px] leading-[1.7] mb-6">{desc}</p>
 
-                    <div className="flex items-center gap-2 pt-4 border-t border-black/[0.04]">
-                      <div className={`w-2 h-2 rounded-full ${statusColor}`} />
-                      <span className="text-[12px] text-muted font-medium">{status}</span>
+                    <div className="flex items-center justify-between pt-4 border-t border-black/[0.04]">
+                      <div className="flex items-center gap-2">
+                        <div className={`w-2 h-2 rounded-full ${statusColor}`} />
+                        <span className="text-[12px] text-muted font-medium">{status}</span>
+                      </div>
+                      {metric && (
+                        <span className="text-[11px] text-primary/60 font-semibold tracking-wide">
+                          {metric}
+                        </span>
+                      )}
                     </div>
                   </div>
                 </a>
@@ -134,17 +147,14 @@ export function Negocios() {
           transition={{ delay: 0.5, duration: 0.6 }}
           className="flex flex-wrap gap-2.5"
         >
-          {["Córtex FC", "Long View", "Barbearia do Rão"].map((name) => (
-            <Link
-              key={name}
-              href="/portfolio"
-              className="text-[12px] font-medium text-muted bg-white border border-black/[0.04] px-4 py-2 rounded-full hover:border-black/[0.08] hover:text-primary hover:shadow-sm transition-all duration-300"
-            >
-              + {name}
-            </Link>
-          ))}
+          <Link
+            href="/portfolio/nexial-global"
+            className="text-[12px] font-medium text-muted bg-white border border-black/[0.04] px-4 py-2 rounded-full hover:border-black/[0.08] hover:text-primary hover:shadow-sm transition-all duration-300"
+          >
+            + Nexial Global — Sourcing China
+          </Link>
           <span className="text-[12px] text-muted/60 self-center ml-1 font-medium">
-            e mais no portfolio completo
+            ver portfolio completo
           </span>
         </motion.div>
       </div>

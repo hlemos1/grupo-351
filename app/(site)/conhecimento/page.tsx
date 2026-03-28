@@ -7,7 +7,7 @@ import { conhecimentoListSchema, breadcrumbSchema } from "@/lib/schema";
 export const metadata: Metadata = {
   title: "Base de Conhecimento — GRUPO +351",
   description:
-    "Glossário FIGITAL, artigos sobre o modelo de negócio e guias sobre joint ventures do Grupo +351.",
+    "Glossario, artigos sobre o modelo de negocio e guias sobre joint ventures do Grupo +351.",
 };
 
 export const revalidate = 3600; // ISR: 1 hora

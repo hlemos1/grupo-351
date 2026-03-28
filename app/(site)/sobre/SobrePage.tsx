@@ -19,27 +19,27 @@ const ease = [0.16, 1, 0.3, 1] as const;
 const timeline = [
   {
     year: "2013",
-    title: "Início da trajetória",
+    title: "Inicio da trajetoria",
     description:
-      "Os fundadores começam suas jornadas empresariais no Brasil, construindo negócios do zero em diversos setores.",
+      "Os fundadores comecam suas jornadas empresariais no Brasil. Henrique co-funda o Grupo Rao com R$40 mil e uma cozinha em Botafogo.",
   },
   {
     year: "2018",
     title: "Escala nacional",
     description:
-      "Expansão dos negócios para múltiplos estados brasileiros, consolidando experiência em franquias, food service e operações complexas.",
-  },
-  {
-    year: "2023",
-    title: "Olhar para Portugal",
-    description:
-      "Identificação de Portugal como hub estratégico para internacionalização e criação de novos negócios com ponte Brasil-Europa.",
+      "Grupo Rao atinge 200+ unidades em 10 estados. Fernando e Herson consolidam seus negocios no Rio de Janeiro.",
   },
   {
     year: "2024",
-    title: "Fundação do Grupo +351",
+    title: "Mudanca para Portugal",
     description:
-      "Estabelecimento em Cascais. Início das operações com Forge and Flow 3D e Veeenha!!! como primeiros projetos do portfólio.",
+      "Identificacao de Portugal como hub estrategico. Inicio das conversas e planejamento para criacao de um venture builder luso-brasileiro.",
+  },
+  {
+    year: "2025",
+    title: "Fundacao do Grupo +351",
+    description:
+      "Estabelecimento em Cascais com sede na Pampilheira. Lancamento das primeiras empresas: Nexial GSO, Strike Studio, FarmLab 3D, Nexial E-Brand e Nexial Global.",
   },
 ];
 
@@ -47,8 +47,8 @@ const socios = [
   {
     name: "Henrique Lemos",
     initials: "HL",
-    role: "Sócio Fundador",
-    bio: "Co-fundador do Grupo Rão ao lado do irmão Guilherme Lemos em 2013, com R$40 mil emprestados e uma cozinha em Botafogo. Construiu a maior rede de delivery do Brasil: 20+ marcas, 200+ unidades em 10 estados e faturamento de R$220 milhões/ano. Criador do super-app Mundo Rão (800k+ pedidos) e da Rob Food, holding de hambúrgueres com 4 redes. Selo ABF de excelência por 5 anos consecutivos. Autor do livro 'Delivery Milionário'. Lidera o conselho estratégico e a expansão internacional do grupo.",
+    role: "CEO / CVO / CTO",
+    bio: "Co-fundador do Grupo Rao (200+ unidades, R$220M/ano, Selo ABF 5x). Especialista em engenharia cognitiva, IA aplicada e escalabilidade de negocios. Criador do super-app Mundo Rao e da Rob Food (holding de hamburgueres). Autor do livro 'Delivery Milionario'. No +351, lidera estrategia, tecnologia e visao — da consultoria IA (Nexial GSO) ao sourcing internacional.",
     linkedin: "https://www.linkedin.com/in/henrique-lemos-39712b22b/",
     press: [
       { label: "InfoMoney", url: "https://www.infomoney.com.br/negocios/delivery-sushi-rao/" },
@@ -56,27 +56,27 @@ const socios = [
       { label: "Podcast Guelt", url: "https://www.youtube.com/@guaboraempreender" },
     ],
     badges: ["Selo ABF 5x"],
-    expertise: ["Franchising", "Food Tech", "Estratégia", "Internacionalização"],
+    expertise: ["IA & Tecnologia", "Franchising", "Estrategia", "Internacionalizacao"],
     gradient: "from-blue-500 to-indigo-600",
   },
   {
     name: "Fernando Vieira",
     initials: "FV",
-    role: "Sócio Fundador",
-    bio: "Sócio-administrador da Casarão Lustres, empresa de referência no mercado de iluminação decorativa e técnica no Brasil com mais de 4 décadas de atuação. Fundada pelo patriarca Fernando Alexandre Vieira em Benfica, Rio de Janeiro. Especialista em curadoria de produtos nacionais e importados para projetos de alto padrão. Traz ao grupo a experiência de gestão familiar multigeracional e relacionamento com fornecedores internacionais.",
+    role: "COO / Head de Sourcing",
+    bio: "Empreendedor com decadas de experiencia em operacoes, supply chain e gestao de fornecedores internacionais. Background na Casarao Lustres (iluminacao decorativa, 4+ decadas). No +351, lidera compras, sourcing na China, execucao operacional e a construcao da supply chain proprietaria do grupo.",
     press: [],
     badges: [],
-    expertise: ["Iluminação & Design", "Gestão familiar", "Curadoria", "Importação"],
+    expertise: ["Sourcing Internacional", "Supply Chain", "Operacoes", "Importacao"],
     gradient: "from-emerald-500 to-teal-600",
   },
   {
     name: "Herson Rosa",
     initials: "HR",
-    role: "Sócio Fundador",
-    bio: "Principal administrador e sócio da Império dos Freios Peças e Serviços, empresa que lidera há mais de 16 anos o mercado de autopeças para linha pesada (camiões e autocarros) na região Sudeste do Brasil. Sede estratégica na Avenida Brasil (Penha Circular), ponto nevrálgico da logística de transportes. Referência em qualidade técnica, gestão de estoque de alto giro e relacionamento com frotas e transportadoras.",
+    role: "CCO / Head Comercial & RP",
+    bio: "Empresario com mais de 16 anos de experiencia no mercado brasileiro, liderando a Imperio dos Freios no segmento de autopecas para linha pesada. Especialista em desenvolvimento comercial, networking estrategico e relacoes publicas. No +351, lidera a area comercial, captacao de parceiros e relacoes institucionais do grupo.",
     press: [],
     badges: [],
-    expertise: ["Autopeças", "Logística pesada", "Operações", "Atacarejo"],
+    expertise: ["Comercial", "Networking", "Relacoes Publicas", "Desenvolvimento de Negocios"],
     gradient: "from-amber-500 to-orange-600",
   },
 ];
@@ -130,9 +130,9 @@ export function SobrePage() {
               do Grupo +351
             </h1>
             <p className="text-muted text-xl leading-[1.7] max-w-3xl tracking-[-0.006em]">
-              Três empreendedores brasileiros que decidiram unir experiências
-              complementares para construir negócios em Portugal — combinando
-              execução prática, visão estratégica e parcerias de qualidade.
+              Tres empreendedores brasileiros que decidiram unir experiencias
+              complementares para construir empresas reais em Portugal — combinando
+              operacao fisica, tecnologia digital e supply chain global.
             </p>
           </motion.div>
         </div>
@@ -142,10 +142,10 @@ export function SobrePage() {
       <section className="py-20 bg-white border-y border-black/[0.04]">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            <Counter value={60} suffix="+" label="Anos de experiência combinada" className="text-center text-4xl md:text-5xl font-bold text-primary font-display tracking-[-0.03em]" />
-            <Counter value={200} suffix="+" label="Unidades criadas no Brasil" className="text-center text-4xl md:text-5xl font-bold text-primary font-display tracking-[-0.03em]" />
-            <Counter value={3} label="Países de atuação" className="text-center text-4xl md:text-5xl font-bold text-primary font-display tracking-[-0.03em]" />
-            <Counter value={20} suffix="+" label="Marcas desenvolvidas" className="text-center text-4xl md:text-5xl font-bold text-primary font-display tracking-[-0.03em]" />
+            <Counter value={5} label="Empresas ativas" className="text-center text-4xl md:text-5xl font-bold text-primary font-display tracking-[-0.03em]" />
+            <Counter value={3} label="Fundadores operacionais" className="text-center text-4xl md:text-5xl font-bold text-primary font-display tracking-[-0.03em]" />
+            <Counter value={3} label="Continentes de atuacao" className="text-center text-4xl md:text-5xl font-bold text-primary font-display tracking-[-0.03em]" />
+            <Counter value={130} suffix="+" label="Alunos Strike Studio" className="text-center text-4xl md:text-5xl font-bold text-primary font-display tracking-[-0.03em]" />
           </div>
         </div>
       </section>

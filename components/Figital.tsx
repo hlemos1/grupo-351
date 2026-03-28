@@ -8,28 +8,28 @@ const ease = [0.16, 1, 0.3, 1] as const;
 const camadas = [
   {
     num: "01",
-    title: "Infraestrutura",
-    subtitle: "Sensores FIGITAIS",
-    items: ["Veeenha!!! — consumo local", "Ruptfy — aprendizado", "Forge and Flow 3D — produção"],
-    desc: "Onde o mundo físico vira dado.",
+    title: "Operacao Fisica",
+    subtitle: "Onde o valor nasce",
+    items: ["Strike Studio — 130+ alunos, boutique MMA", "FarmLab 3D — producao e prototipagem", "Sede em Cascais — escritorio operacional"],
+    desc: "Negocios reais com clientes reais. O fisico gera caixa e dados.",
     accent: "from-blue-500/10 to-blue-600/5",
     dot: "bg-blue-500",
   },
   {
     num: "02",
-    title: "Marcas",
-    subtitle: "Neurônios FIGITAIS",
-    items: ["Córtex FC — decisão", "Long View — percepção", "Purple Party — supply chain", "Barbearia do Rão — fluxo físico"],
-    desc: "Transformam operação em sinal interpretável.",
+    title: "Inteligencia Digital",
+    subtitle: "Onde o dado vira decisao",
+    items: ["Nexial GSO — consultoria IA com metodo proprio", "Tecnologia proprietaria — automacoes e agentes", "Dados de operacao alimentam estrategia"],
+    desc: "IA e software transformam operacao em inteligencia competitiva.",
     accent: "from-violet-500/10 to-violet-600/5",
     dot: "bg-violet-500",
   },
   {
     num: "03",
-    title: "Distribuição",
-    subtitle: "Retroalimentação",
-    items: ["Lojas físicas", "Super app", "E-commerce", "Franquias", "Conteúdo"],
-    desc: "Fecha o ciclo do aprendizado.",
+    title: "Comercio Global",
+    subtitle: "Onde a escala acontece",
+    items: ["Nexial Global — sourcing China direto", "Nexial E-Brand — e-commerce e marcas proprias", "Supply chain proprietaria Europa-Asia"],
+    desc: "Conectamos producao, distribuicao e mercado global.",
     accent: "from-emerald-500/10 to-emerald-600/5",
     dot: "bg-emerald-500",
   },
@@ -52,17 +52,17 @@ export function Figital() {
             Tese Central
           </p>
           <h2 className="text-3xl md:text-[2.75rem] font-bold text-primary font-display tracking-[-0.025em] leading-[1.1] mb-6">
-            Somos FIGITAL{" "}
+            Fisico + Digital{" "}
             <span className="bg-gradient-to-r from-accent to-accent-light bg-clip-text text-transparent">
               por arquitetura
             </span>
           </h2>
           <p className="text-muted text-lg leading-[1.7] mb-4 tracking-[-0.006em]">
-            FIGITAL não é tendência. É arquitetura. O físico gera sinais.
-            O digital organiza esses sinais. A governança transforma sinais em decisão.
+            Nao separamos fisico de digital. Cada operacao fisica gera dados.
+            Cada sistema digital melhora a operacao. A governanca transforma tudo em decisao.
           </p>
           <p className="text-foreground text-lg leading-[1.7] font-medium tracking-[-0.006em]">
-            Concorrentes copiam produto. Não copiam histórico FIGITAL.
+            Concorrentes copiam produto. Nao copiam o sistema que o criou.
           </p>
         </motion.div>
 

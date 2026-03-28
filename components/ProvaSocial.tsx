@@ -4,24 +4,24 @@ import { AnimatedSection } from "./AnimatedSection";
 import { Award, TrendingUp, Store, Users, Quote } from "lucide-react";
 
 const metricas = [
-  { icon: Store, value: "200+", label: "Unidades no Brasil" },
-  { icon: TrendingUp, value: "R$220M+", label: "Faturamento anual" },
-  { icon: Users, value: "800k+", label: "Pedidos no super-app" },
-  { icon: Award, value: "5x", label: "Selo ABF de excelência" },
+  { icon: Store, value: "5", label: "Empresas ativas" },
+  { icon: TrendingUp, value: "200+", label: "Unidades criadas (fundadores)" },
+  { icon: Users, value: "130+", label: "Alunos Strike Studio" },
+  { icon: Award, value: "3", label: "Continentes de atuacao" },
 ];
 
 const depoimentos = [
   {
     texto:
-      "O modelo de Joint Venture do Grupo +351 nos deu acesso a uma estrutura que levaríamos anos para construir sozinhos. A governança e o método fazem toda a diferença.",
+      "O modelo de Joint Venture do Grupo +351 combina estrutura, metodo e governanca. Nao e investimento passivo — e construcao real de empresa.",
     autor: "Parceiro operador",
-    marca: "Rede de delivery",
+    marca: "Strike Studio",
   },
   {
     texto:
-      "A experiência do Henrique e do time em escalar operações de food service é real e comprovada. Não é teoria — são 200+ unidades funcionando.",
-    autor: "Investidor parceiro",
-    marca: "Ecossistema FIGITAL",
+      "A experiencia dos fundadores em escalar operacoes e real e comprovada. O metodo A&E trouxe clareza e resultado para a nossa operacao.",
+    autor: "Cliente consultoria",
+    marca: "Nexial GSO",
   },
 ];
 
@@ -37,8 +37,8 @@ export function ProvaSocial() {
             Números que falam por si
           </h2>
           <p className="text-muted text-lg leading-relaxed max-w-3xl mb-12">
-            O Grupo +351 é construído sobre uma base sólida de resultados reais
-            no Brasil — agora expandindo para Portugal e Europa.
+            O Grupo +351 e construido sobre uma base solida de experiencia real
+            no Brasil — agora operando em Portugal e expandindo para Europa e Asia.
           </p>
         </AnimatedSection>
 

@@ -21,7 +21,7 @@ export function organizationSchema() {
     name: ORG_NAME,
     legalName: "GRUPO +351, Lda.",
     description:
-      "Hub de negócios e joint ventures sediado em Cascais, Portugal. Construímos empresas FIGITAIS combinando operações físicas, plataformas digitais e software proprietário.",
+      "Hub de negócios e joint ventures sediado em Cascais, Portugal. Construímos empresas reais combinando operações físicas, plataformas digitais e software proprietário.",
     url: SITE_URL,
     logo: ORG_LOGO,
     image: ORG_LOGO,
@@ -82,7 +82,7 @@ export function organizationSchema() {
     ],
     knowsAbout: [
       "Joint Ventures",
-      "FIGITAL Business Model",
+      "Venture Builder",
       "Dark Kitchens",
       "3D Printing",
       "E-commerce",
@@ -107,7 +107,7 @@ export function webSiteSchema() {
     name: ORG_NAME,
     url: SITE_URL,
     description:
-      "Hub de negócios e joint ventures. Construímos empresas FIGITAIS combinando operações físicas, plataformas digitais e software proprietário.",
+      "Hub de negócios e joint ventures. Construímos empresas reais combinando operações físicas, plataformas digitais e software proprietário.",
     publisher: { "@id": `${SITE_URL}/#organization` },
     inLanguage: "pt-PT",
     potentialAction: {
@@ -228,7 +228,7 @@ export function conhecimentoListSchema(
     "@id": `${SITE_URL}/conhecimento`,
     name: "Base de Conhecimento — GRUPO +351",
     description:
-      "Glossário FIGITAL, artigos sobre o modelo de negócio e guias sobre joint ventures do Grupo +351.",
+      "Glossário Fisico + Digital, artigos sobre o modelo de negócio e guias sobre joint ventures do Grupo +351.",
     url: `${SITE_URL}/conhecimento`,
     isPartOf: { "@id": `${SITE_URL}/#website` },
     mainEntity: [
@@ -246,8 +246,8 @@ export function conhecimentoListSchema(
       },
       {
         "@type": "DefinedTermSet",
-        name: "Glossário FIGITAL",
-        description: "Termos-chave do ecossistema FIGITAL do Grupo +351",
+        name: "Glossário Fisico + Digital",
+        description: "Termos-chave do ecossistema Fisico + Digital do Grupo +351",
         hasDefinedTerm: termos.map((t) => ({
           "@type": "DefinedTerm",
           name: t.termo,
@@ -283,7 +283,7 @@ export function artigoSchema(artigo: Artigo) {
       },
       about: [
         { "@type": "Thing", name: "Joint Ventures" },
-        { "@type": "Thing", name: "FIGITAL" },
+        { "@type": "Thing", name: "Fisico + Digital" },
         { "@type": "Thing", name: ORG_NAME },
       ],
     },
@@ -307,7 +307,7 @@ export function sobreSchema() {
       "@id": `${SITE_URL}/sobre`,
       name: "Sobre o GRUPO +351",
       description:
-        "Conheça os fundadores do Grupo +351: Henrique Lemos, Fernando Vieira e Herson Rosa. Empreendedores brasileiros construindo negócios FIGITAIS em Portugal.",
+        "Conheça os fundadores do Grupo +351: Henrique Lemos, Fernando Vieira e Herson Rosa. Empreendedores brasileiros construindo negócios reais em Portugal.",
       url: `${SITE_URL}/sobre`,
       mainEntity: { "@id": `${SITE_URL}/#organization` },
     },
@@ -335,7 +335,7 @@ export function sobreSchema() {
         "Dark Kitchens",
         "Food Delivery",
         "Joint Ventures",
-        "FIGITAL Business Model",
+        "Venture Builder",
         "International Expansion",
         "Super Apps",
         "Web3 Loyalty Programs",
@@ -384,13 +384,13 @@ export function ecossistemaSchema() {
       "@context": "https://schema.org",
       "@type": "WebPage",
       "@id": `${SITE_URL}/ecossistema`,
-      name: "Ecossistema FIGITAL — GRUPO +351",
+      name: "Ecossistema Fisico + Digital — GRUPO +351",
       description:
-        "Arquitetura FIGITAL do Grupo +351: como operações físicas, plataformas digitais e software proprietário se integram num ecossistema de negócios em rede.",
+        "Arquitetura Fisico + Digital do Grupo +351: como operações físicas, plataformas digitais e software proprietário se integram num ecossistema de negócios em rede.",
       url: `${SITE_URL}/ecossistema`,
       isPartOf: { "@id": `${SITE_URL}/#website` },
       about: [
-        { "@type": "Thing", name: "FIGITAL Business Architecture" },
+        { "@type": "Thing", name: "Fisico + Digital Business Architecture" },
         { "@type": "Thing", name: "Business Ecosystem" },
         { "@type": "Thing", name: "Digital Transformation" },
       ],

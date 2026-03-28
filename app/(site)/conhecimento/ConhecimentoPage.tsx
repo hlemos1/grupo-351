@@ -91,7 +91,7 @@ export function ConhecimentoPage({ glossario, artigos }: { glossario: Termo[]; a
             </h1>
             <p className="text-muted text-lg leading-relaxed max-w-3xl">
               Entenda os conceitos, termos e modelos que fundamentam o
-              ecossistema FIGITAL do Grupo +351.
+              ecossistema do Grupo +351.
             </p>
           </motion.div>
         </div>
@@ -186,7 +186,7 @@ export function ConhecimentoPage({ glossario, artigos }: { glossario: Termo[]; a
           <AnimatedSection>
             <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8">
               <h2 className="text-xl font-bold text-foreground font-display">
-                Glossário FIGITAL
+                Glossario
               </h2>
               <div className="flex gap-2">
                 {["todas", "conceito", "marca", "modelo", "metrica"].map((cat) => (

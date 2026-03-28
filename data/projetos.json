@@ -1,132 +1,101 @@
 [
   {
-    "slug": "forge-and-flow-3d",
-    "name": "Forge and Flow 3D",
-    "tagline": "Manufatura distribuída + franquia leve + infoproduto",
-    "description": "Vertical de manufatura distribuída baseada em impressão 3D, venda de produtos próprios e licenciados, infoprodutos educacionais e modelo de franquias leves.",
+    "slug": "nexial-gso",
+    "name": "Nexial GSO",
+    "tagline": "Consultoria de inteligencia artificial com metodo proprio",
+    "description": "Consultoria especializada em transformacao digital e IA para empresas. Diagnostico estrutural, implementacao de automacoes e agentes, e operacao continua com metodo A&E da Foundation Systems.",
     "detalhes": [
-      "Farm própria de impressoras 3D com produção sob demanda",
-      "Catálogo de produtos utilitários, decoração e peças customizadas",
-      "Modelo de franquia leve — CAPEX baixo, sem logística pesada",
-      "Infoproduto obrigatório para franqueados (via Ruptfy)",
-      "Licenciamento de arquivos STL com controle centralizado",
-      "Integração com Veeenha!!! como canal de venda local"
+      "Diagnostico completo de processos e oportunidades de IA",
+      "Implementacao de agentes, automacoes e fluxos inteligentes",
+      "Operacao continua — nao e consultoria pontual, e parceria de longo prazo",
+      "Metodo A&E (Arquitetura & Engenharia) proprietario da Foundation Systems",
+      "Modelo de entrada por projeto com evolucao para recorrencia mensal",
+      "Possibilidade de equity em clientes estrategicos"
     ],
-    "tag": "Manufatura Digital",
-    "status": "Em operação",
+    "tag": "Consultoria IA",
+    "status": "Em operacao",
     "mercado": "Portugal / Europa",
-    "controle": "100% Holding",
-    "icon": "printer"
-  },
-  {
-    "slug": "veeenha",
-    "name": "Veeenha!!!",
-    "tagline": "Super app e marketplace regional de Cascais",
-    "description": "Super App que conecta comércio local, serviços e marcas próprias. Infraestrutura digital de economia local — não é e-commerce genérico.",
-    "detalhes": [
-      "Cadastro de lojistas e catálogo de produtos/serviços locais",
-      "Captura de dados de consumo, recorrência e preferências regionais",
-      "Sensor FIGITAL de consumo local para o ecossistema",
-      "Modelo replicável por cidade para expansão futura",
-      "Canal direto para marcas próprias do grupo"
-    ],
-    "tag": "Marketplace / Super App",
-    "status": "Em desenvolvimento",
-    "mercado": "Cascais, Portugal",
-    "controle": "100% Holding",
-    "icon": "shopping-bag"
-  },
-  {
-    "slug": "ruptfy",
-    "name": "Ruptfy",
-    "tagline": "Plataforma EdTech de cursos e consórcios educacionais",
-    "description": "Plataforma própria de educação digital. Não é um curso — é a fábrica de cursos do grupo. Motor de recorrência digital com margem alta.",
-    "detalhes": [
-      "Hospeda cursos próprios e de marcas do ecossistema",
-      "Modelo de consórcio de cursos e certificações",
-      "Infraestrutura para creators e experts parceiros",
-      "Base de treinamento obrigatório para franqueados",
-      "Sensor FIGITAL de aprendizado — captura progressão e retenção"
-    ],
-    "tag": "EdTech",
-    "status": "Em desenvolvimento",
-    "mercado": "Portugal / Brasil",
-    "parceiro": "Levi Guimarães",
-    "controle": "70% Holding / 30% Operador (vesting)",
-    "icon": "graduation-cap"
-  },
-  {
-    "slug": "purple-party",
-    "name": "Purple Party",
-    "tagline": "Franqueadora + plataforma atacadista China-Europa",
-    "description": "Plataforma que compra produtos na China com margem de atacado e distribui via lojas franqueadas, e-commerce B2C e canais digitais. Um Alibaba Express com franquia física.",
-    "detalhes": [
-      "Sourcing direto da China com controle de supply chain",
-      "Loja física piloto + e-commerce próprio",
-      "Modelo de franquia padronizada para expansão",
-      "Escala por poder de compra e giro de estoque",
-      "Integração com Forge and Flow 3D para know-how de franquia"
-    ],
-    "tag": "Franquia / Atacado",
-    "status": "Em desenvolvimento",
-    "mercado": "Portugal / Europa",
-    "parceiro": "Omari Bacel",
-    "controle": "50% Holding / 50% Operador",
-    "icon": "package"
-  },
-  {
-    "slug": "cortex-fc",
-    "name": "Córtex FC",
-    "tagline": "Infoproduto estratégico de gestão e decisão",
-    "description": "Produto de conhecimento aplicado sobre gestão, visão estratégica e tomada de decisão. Porta de entrada para comunidade, produtos premium e outros ativos do grupo.",
-    "detalhes": [
-      "Conteúdo com intenção econômica, não motivacional",
-      "Alimenta a Ruptfy como plataforma de distribuição",
-      "Gera audiência e autoridade para o ecossistema",
-      "Upsell para consultorias e produtos premium"
-    ],
-    "tag": "Infoproduto",
-    "status": "Em estruturação",
-    "mercado": "Global (PT/BR)",
-    "parceiro": "Tiago Silva",
-    "controle": "60% Holding / 40% Imagem (vesting)",
+    "controle": "100% Grupo +351",
     "icon": "brain"
   },
   {
-    "slug": "long-view",
-    "name": "Long View",
-    "tagline": "Autoridade, narrativa e visão de longo prazo",
-    "description": "Infoproduto de visão estratégica de longo prazo. Ativo de reputação construído sobre autoridade e percepção de valor intangível.",
+    "slug": "strike-studio",
+    "name": "Strike Studio",
+    "tagline": "Franqueadora de boutique de MMA e fitness gamificado",
+    "description": "Rede de studios de artes marciais e fitness com modelo de franquia. Combina Strike House (MMA classico), Strike Lab (boxe sem contato gamificado com IA) e verticais de jiu-jitsu e karate.",
     "detalhes": [
-      "Produto premium de conteúdo intelectual",
-      "Distribuição via base do parceiro + canais próprios",
-      "Diferenciado do Córtex FC pela proposta intelectual",
-      "Formatos: curso, comunidade, mentorias"
+      "Strike House em operacao com mais de 130 alunos ativos",
+      "Strike Lab — boxe estilo Hyrox com estacoes gamificadas por IA, sem contato",
+      "Modelo de franquia em validacao — piloto de 6 meses antes de escalar",
+      "Verticais de jiu-jitsu, karate e outras artes marciais",
+      "Experiencia premium de treino com tecnologia integrada",
+      "Tese de franqueadora com potencial de escala europeia"
     ],
-    "tag": "Infoproduto",
-    "status": "Em estruturação",
-    "mercado": "Global (PT/BR)",
-    "parceiro": "Marcello Antony",
-    "controle": "60% Holding / 40% Imagem (vesting)",
-    "icon": "telescope"
+    "tag": "MMA / Fitness",
+    "status": "Em operacao",
+    "mercado": "Portugal / Europa",
+    "parceiro": "Ricardo e Marcelo (operadores da unidade piloto)",
+    "controle": "50% Grupo +351 / 50% Operadores",
+    "icon": "dumbbell"
   },
   {
-    "slug": "barbearia-do-rao",
-    "name": "Barbearia do Rão",
-    "tagline": "Marca física de barbearia com modelo híbrido",
-    "description": "Marca de barbearia com modelo societário híbrido: marca + operador + investidor. Plano de 3 unidades com padrão operacional definido.",
+    "slug": "nexial-e-brand",
+    "name": "Nexial E-Brand",
+    "tagline": "E-commerce de marcas proprias com sourcing internacional",
+    "description": "Vertical de comercio eletronico focada em criacao e venda de marcas proprias. Importacao direta da China, validacao de produtos via marketplace e construcao de marcas com margens controladas.",
     "detalhes": [
-      "€10.000 por unidade — modelo CAPEX controlado",
-      "Marca fornece nome, padrão, método e expansão",
-      "Operadores entram com trabalho, investidor com capital",
-      "Manual operacional e modelo financeiro por unidade",
-      "Dados FIGITAIS de fluxo, ticket e recorrência"
+      "Marca Axis — mochilas com LED, primeira linha de produto lancada",
+      "Pipeline de mochilas com patente de amortecimento em negociacao",
+      "Venda via Amazon, e-commerce proprio e canais B2B",
+      "Modelo: identificar produto → validar → criar marca → escalar",
+      "Sourcing direto via Nexial Global (sinergia interna)",
+      "Cada marca validada vira empresa propria dentro do ecossistema"
     ],
-    "tag": "Franquia Física",
-    "status": "Em estruturação",
+    "tag": "E-commerce",
+    "status": "Em desenvolvimento",
+    "mercado": "Portugal / Europa",
+    "parceiro": "Gush (25%)",
+    "controle": "75% Grupo +351 / 25% Investidor",
+    "icon": "shopping-bag"
+  },
+  {
+    "slug": "nexial-global",
+    "name": "Nexial Global",
+    "tagline": "Sourcing internacional e supply chain proprietaria",
+    "description": "Braco de sourcing e comercio internacional do grupo. Opera na China com parceiro de 20 anos de experiencia. Viagens empresariais, intermediacao comercial e construcao de cadeia de fornecimento exclusiva.",
+    "detalhes": [
+      "Parceiro estrategico com 20 anos de operacao na China",
+      "Viagens empresariais organizadas para sourcing direto",
+      "Intermediacao comercial China-Europa para terceiros",
+      "Construcao de supply chain proprietaria para o grupo",
+      "Viagem a China em abril de 2026 para fechar fornecedores",
+      "Potencial de se tornar o maior ativo estrategico do grupo"
+    ],
+    "tag": "Sourcing / Supply Chain",
+    "status": "Em estruturacao",
+    "mercado": "China / Portugal / Europa",
+    "parceiro": "Marcos (40%)",
+    "controle": "40% Grupo +351 / 40% Operador / 20% Conselheiro",
+    "icon": "globe"
+  },
+  {
+    "slug": "farmlab-3d",
+    "name": "FarmLab 3D",
+    "tagline": "Laboratorio de criacao de produtos via impressao 3D",
+    "description": "Vertical de manufatura aditiva com foco em criacao de produtos proprios e marcas. Producao sob demanda, prototipagem rapida e desenvolvimento de linhas de produto para e-commerce e B2B.",
+    "detalhes": [
+      "Farm com 5 impressoras 3D operacionais",
+      "Producao de acessorios de celular, decoracao, brindes e itens personalizados",
+      "Linha propria de produtos para venda em e-commerce",
+      "Prototipagem rapida para validacao de novos produtos",
+      "Sinergia com Nexial E-Brand como canal de distribuicao",
+      "Tese: produtos validados evoluem para marcas proprias"
+    ],
+    "tag": "Impressao 3D / Manufatura",
+    "status": "Em operacao",
     "mercado": "Portugal",
-    "parceiro": "Daniel Bittencourt, Everson Perninha, Dom Patrício",
-    "controle": "30% Marca + 30% Investidor + 40% Operadores",
-    "icon": "scissors"
+    "parceiro": "Marcel Shiba (25%)",
+    "controle": "75% Grupo +351 / 25% Operador tecnico",
+    "icon": "printer"
   }
 ]

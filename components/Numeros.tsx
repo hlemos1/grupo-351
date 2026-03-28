@@ -4,10 +4,10 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 
 const stats = [
-  { value: 10, suffix: "+", label: "Anos de experiência combinada" },
-  { value: 200, suffix: "+", label: "Unidades criadas no Brasil" },
-  { value: 3, suffix: "", label: "Países de atuação" },
-  { value: 20, suffix: "+", label: "Marcas desenvolvidas" },
+  { value: 5, suffix: "", label: "Empresas ativas" },
+  { value: 3, suffix: "", label: "Fundadores operacionais" },
+  { value: 130, suffix: "+", label: "Alunos Strike Studio" },
+  { value: 3, suffix: "", label: "Continentes de atuacao" },
 ];
 
 function AnimatedNumber({ value, suffix }: { value: number; suffix: string }) {

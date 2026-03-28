@@ -8,12 +8,9 @@ import {
   CheckCircle,
   Printer,
   ShoppingBag,
-  GraduationCap,
-  Package,
-  Brain,
-  Telescope,
-  Scissors,
   Globe,
+  Dumbbell,
+  Brain,
   Users,
 } from "lucide-react";
 import { AnimatedSection } from "@/components/AnimatedSection";
@@ -22,11 +19,9 @@ import type { Projeto } from "@/lib/projetos";
 const iconMap: Record<string, typeof Printer> = {
   printer: Printer,
   "shopping-bag": ShoppingBag,
-  "graduation-cap": GraduationCap,
-  package: Package,
+  globe: Globe,
+  dumbbell: Dumbbell,
   brain: Brain,
-  telescope: Telescope,
-  scissors: Scissors,
 };
 
 export function ProjetoPage({ projeto }: { projeto: Projeto }) {

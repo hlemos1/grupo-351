@@ -16,14 +16,14 @@ import { JsonLd } from "@/components/JsonLd";
 import { faqSchema } from "@/lib/schema";
 
 const faqs = [
-  { q: "O que é FIGITAL?", a: "FIGITAL é a arquitetura central do Grupo +351 — a integração estrutural entre operações físicas, plataformas digitais e software proprietário. Não é tendência, é infraestrutura." },
-  { q: "O que é uma Joint Venture no +351?", a: "É uma parceria societária real. A holding entra com marca, método, capital e governança. O operador entra com execução e know-how. Estruturas variam de 50/50 a 70/30 com vesting." },
-  { q: "Preciso ter capital para ser parceiro?", a: "Depende do modelo. Forge and Flow 3D começa com 5.000 EUR. Purple Party pode chegar a 100.000 EUR. Para operadores sem capital, existem modelos com vesting progressivo." },
-  { q: "Como me candidato?", a: "Através do formulário estruturado em /aplicar. São 5 etapas: perfil pessoal, experiência, modelo de interesse, proposta e aceite de NDA preliminar. Candidaturas são analisadas em até 5 dias úteis." },
-  { q: "Vocês atuam apenas em Portugal?", a: "Estamos sediados em Cascais, Portugal, mas o ecossistema é global. Sourcing da China, marcas validadas no Brasil, distribuição europeia." },
-  { q: "Como as 7 marcas se conectam?", a: "Cada marca é um nó no ecossistema FIGITAL. Sensores captam dados, neurónios processam, distribuição retroalimenta. Tudo conectado numa arquitetura de rede." },
-  { q: "Qual a diferença entre operador e investidor?", a: "Operador executa o dia-a-dia do negócio e conquista participação via vesting. Investidor entra com capital e tem retorno passivo. O modelo ambos combina os dois." },
-  { q: "O Grupo +351 participa da operação diária?", a: "Não. A operação é do parceiro. A holding fornece marca, método, governança, conexão com o ecossistema e reunião de conselho mensal." },
+  { q: "O que e o Grupo +351?", a: "Somos um venture builder luso-brasileiro sediado em Cascais, Portugal. Criamos, operamos e escalamos empresas reais que integram operacoes fisicas, tecnologia digital e supply chain global." },
+  { q: "O que e uma Joint Venture no +351?", a: "E uma parceria societaria real. O grupo entra com marca, metodo, capital e governanca. O operador entra com execucao e know-how. Estruturas variam de 50/50 a 75/25 com vesting." },
+  { q: "Preciso ter capital para ser parceiro?", a: "Depende do modelo e da vertical. Existem modelos com vesting progressivo onde a participacao e conquistada com performance, sem capital inicial." },
+  { q: "Como me candidato?", a: "Atraves do formulario estruturado em /aplicar. Sao 5 etapas: perfil pessoal, experiencia, modelo de interesse, proposta e aceite de NDA. Candidaturas sao analisadas em ate 5 dias uteis." },
+  { q: "Voces atuam apenas em Portugal?", a: "Estamos sediados em Cascais, Portugal, mas operamos globalmente. Sourcing direto na China, marcas com raizes no Brasil, distribuicao europeia e supply chain Asia-Europa." },
+  { q: "Como as empresas do ecossistema se conectam?", a: "Cada empresa e um no na rede. Operacao fisica gera caixa e dados, inteligencia digital transforma em decisao, comercio global conecta producao a mercado." },
+  { q: "Qual a diferenca entre operador e investidor?", a: "Operador executa o dia-a-dia e conquista participacao via vesting. Investidor entra com capital e tem retorno proporcional. O modelo ambos combina os dois." },
+  { q: "O Grupo +351 participa da operacao diaria?", a: "Depende da vertical. Nas empresas 100% do grupo, sim. Nas joint ventures, a operacao e do parceiro. O grupo fornece estrategia, governanca e conselho mensal." },
 ];
 
 export default function Home() {

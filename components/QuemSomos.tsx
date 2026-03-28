@@ -10,23 +10,23 @@ const socios = [
   {
     name: "Henrique Lemos",
     initials: "HL",
-    role: "Sócio Fundador",
-    bio: "CEO do Grupo Rão — maior rede de delivery do Brasil com 200+ unidades, 20+ marcas e super-app próprio. Food tech, Web3, IA e expansão internacional.",
+    role: "CEO / CVO / CTO",
+    bio: "Co-fundador do Grupo Rao (200+ unidades, R$220M/ano). Especialista em engenharia cognitiva, IA aplicada e escalabilidade de negocios. Lidera a estrategia, tecnologia e visao do grupo.",
     linkedin: "https://www.linkedin.com/in/henrique-lemos-39712b22b/",
     gradient: "from-blue-500 to-indigo-600",
   },
   {
     name: "Fernando Vieira",
     initials: "FV",
-    role: "Sócio Fundador",
-    bio: "Sócio-administrador da Casarão Lustres — referência em iluminação decorativa e técnica no Brasil com mais de 4 décadas de atuação no Rio de Janeiro.",
+    role: "COO / Head de Sourcing",
+    bio: "Empreendedor com decadas de experiencia em operacoes e supply chain. Responsavel por compras, fornecedores internacionais e execucao operacional do grupo.",
     gradient: "from-emerald-500 to-teal-600",
   },
   {
     name: "Herson Rosa",
     initials: "HR",
-    role: "Sócio Fundador",
-    bio: "Administrador da Império dos Freios — líder no mercado de autopeças para linha pesada há mais de 16 anos, referência na região Sudeste do Brasil.",
+    role: "CCO / Head Comercial & RP",
+    bio: "Empresario com mais de 16 anos no mercado brasileiro. Lidera a area comercial, desenvolvimento de negocios e relacoes estrategicas do grupo.",
     gradient: "from-amber-500 to-orange-600",
   },
 ];
@@ -54,17 +54,16 @@ export function QuemSomos() {
               </span>
             </h2>
             <p className="text-muted text-lg leading-[1.7] mb-4 tracking-[-0.006em]">
-              O Grupo +351 é uma holding empresarial fundada por três empresários
-              com histórico comprovado de criação, operação e escala de negócios
+              O Grupo +351 e um venture builder fundado por tres empresarios
+              com historico comprovado de criacao, operacao e escala de negocios
               no Brasil e em Portugal.
             </p>
             <p className="text-muted text-lg leading-[1.7] mb-4 tracking-[-0.006em]">
-              Não existimos para testar ideias. Existimos para criar ativos.
-              Cada marca precisa gerar caixa, reputação e recorrência.
+              Nao existimos para testar ideias. Existimos para construir empresas.
+              Cada negocio precisa gerar caixa, reputacao e recorrencia.
             </p>
             <p className="text-foreground text-lg leading-[1.7] font-medium tracking-[-0.006em]">
-              Capital controla a arquitetura. Execução gera dados.
-              Permanência consolida aprendizado.
+              Cash flow primeiro. Equity depois. Sem atalhos.
             </p>
           </div>
         </motion.div>

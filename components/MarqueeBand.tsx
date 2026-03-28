@@ -3,18 +3,17 @@
 import { Marquee } from "./Marquee";
 
 const words = [
-  "FIGITAL",
-  "Holding",
-  "Forge and Flow 3D",
-  "Veeenha!!!",
-  "Ruptfy",
-  "Purple Party",
-  "Córtex FC",
-  "Long View",
-  "Barbearia do Rão",
+  "Venture Builder",
+  "Nexial GSO",
+  "Strike Studio",
+  "Nexial E-Brand",
+  "Nexial Global",
+  "FarmLab 3D",
   "Cascais",
-  "Governança",
+  "Fisico + Digital",
   "Ativos que duram",
+  "Governanca",
+  "Supply Chain Global",
 ];
 
 export function MarqueeBand() {

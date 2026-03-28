@@ -4,11 +4,9 @@ import { motion } from "framer-motion";
 import {
   Printer,
   ShoppingBag,
-  GraduationCap,
-  Package,
+  Globe,
+  Dumbbell,
   Brain,
-  Telescope,
-  Scissors,
   ArrowRight,
 } from "lucide-react";
 import { AnimatedSection } from "@/components/AnimatedSection";
@@ -17,11 +15,9 @@ import type { Projeto } from "@/lib/projetos";
 const iconMap: Record<string, typeof Printer> = {
   printer: Printer,
   "shopping-bag": ShoppingBag,
-  "graduation-cap": GraduationCap,
-  package: Package,
+  globe: Globe,
+  dumbbell: Dumbbell,
   brain: Brain,
-  telescope: Telescope,
-  scissors: Scissors,
 };
 
 export function PortfolioPage({ projetos }: { projetos: Projeto[] }) {
