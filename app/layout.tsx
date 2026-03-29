@@ -24,12 +24,12 @@ const geistSans = Geist({
 });
 
 export const metadata: Metadata = {
-  title: "GRUPO +351 — Hub de Negócios e Joint Ventures",
+  title: "GRUPO +351 — Venture Builder Luso-Brasileiro",
   description:
     "Construímos empresas combinando experiência, parceiros estratégicos e oportunidades reais de mercado. Sediados em Cascais, Portugal.",
   metadataBase: new URL("https://grupo351.com"),
   openGraph: {
-    title: "GRUPO +351 — Hub de Negócios e Joint Ventures",
+    title: "GRUPO +351 — Venture Builder Luso-Brasileiro",
     description:
       "Construímos empresas combinando experiência, parceiros estratégicos e oportunidades reais de mercado.",
     url: "https://grupo351.com",
@@ -41,13 +41,13 @@ export const metadata: Metadata = {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "GRUPO +351 — Hub de Negócios e Joint Ventures",
+        alt: "GRUPO +351 — Venture Builder Luso-Brasileiro",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "GRUPO +351 — Hub de Negócios e Joint Ventures",
+    title: "GRUPO +351 — Venture Builder Luso-Brasileiro",
     description:
       "Construímos empresas combinando experiência, parceiros estratégicos e oportunidades reais de mercado.",
     images: ["/opengraph-image"],

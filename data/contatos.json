@@ -4,12 +4,12 @@
     "criadoEm": "2025-03-04T11:00:00.000Z",
     "lido": true,
     "arquivado": false,
-    "nome": "Pedro Gonçalves",
+    "nome": "Pedro Goncalves",
     "email": "pedro.g@example.com",
     "empresa": "DigitalFlow Agency",
     "tipo": "fornecedor",
-    "mensagem": "Somos uma agência de marketing digital em Lisboa e gostaríamos de apresentar nossos serviços ao Grupo +351. Temos experiência com marcas B2C e e-commerce.",
-    "notas": "Contactar quando precisarmos de agência para Veeenha"
+    "mensagem": "Somos uma agencia de marketing digital em Lisboa e gostariamos de apresentar nossos servicos ao Grupo +351. Temos experiencia com marcas B2C e e-commerce.",
+    "notas": "Contactar quando precisarmos de agencia para Nexial E-Brand"
   },
   {
     "id": "ct2-b3c4-d5e6-f7a8-b9c0d1e2f3a4",
@@ -21,7 +21,7 @@
     "empresa": "",
     "tipo": "parceria",
     "orcamento": "a-definir",
-    "mensagem": "Sou proprietária de 2 barbearias no Porto e vi o projeto Barbearia do Rão. Tenho interesse em entender melhor o modelo. Posso disponibilizar os meus espaços como pilotos."
+    "mensagem": "Sou instrutora de artes marciais no Porto e vi o projeto Strike Studio. Tenho interesse em entender melhor o modelo de franquia. Posso disponibilizar o meu espaco como piloto."
   },
   {
     "id": "ct3-c4d5-e6f7-a8b9-c0d1e2f3a4b5",
@@ -30,9 +30,9 @@
     "arquivado": false,
     "nome": "Carlos Henrique Souza",
     "email": "carlos.hs@example.com",
-    "empresa": "CH Importações",
+    "empresa": "CH Importacoes",
     "tipo": "joint-venture",
     "orcamento": "50k-200k",
-    "mensagem": "Trabalho com importação de equipamentos industriais do China. Tenho interesse na Purple Party. Posso trazer know-how de supply chain e contactos com fornecedores em Yiwu e Guangzhou."
+    "mensagem": "Trabalho com importacao de equipamentos industriais da China. Tenho interesse na Nexial Global. Posso trazer know-how de supply chain e contactos com fornecedores em Yiwu e Guangzhou."
   }
 ]

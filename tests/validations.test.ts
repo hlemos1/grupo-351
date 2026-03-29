@@ -200,9 +200,9 @@ describe("projetoSchema", () => {
 describe("termoSchema", () => {
   it("accepts valid termo", () => {
     const result = termoSchema.safeParse({
-      slug: "figital",
-      termo: "FIGITAL",
-      definicao: "Combinação de físico, digital e software num modelo de negócio integrado",
+      slug: "fisico-digital",
+      termo: "Fisico + Digital",
+      definicao: "Integracao de operacoes fisicas, plataformas digitais e tecnologia proprietaria",
       categoria: "conceito",
     });
     expect(result.success).toBe(true);

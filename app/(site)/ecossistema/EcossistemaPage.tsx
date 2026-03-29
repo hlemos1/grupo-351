@@ -328,7 +328,7 @@ export function EcossistemaPage() {
         )}
       </AnimatePresence>
 
-      {/* FIGITAL explanation */}
+      {/* Ecossistema explanation */}
       <section ref={explainRef} className="py-28 bg-[#f8f9fb]">
         <div className="max-w-4xl mx-auto px-6">
           <motion.div

@@ -69,7 +69,7 @@ ${artigosCtx}
 1. **Análise estratégica**: Identificar padrões nas candidaturas, oportunidades de mercado e gaps no ecossistema
 2. **Geração de conteúdo**: Criar artigos, termos de glossário e análises baseadas no contexto real
 3. **Insights de pipeline**: Analisar perfis de candidatos, sugerir priorizações e identificar fit com projetos
-4. **Conexões FIGITAIS**: Mapear sinergias entre projetos e oportunidades de retroalimentação
+4. **Conexoes do ecossistema**: Mapear sinergias entre empresas e oportunidades de retroalimentacao
 5. **Inteligência competitiva**: Analisar posicionamento e sugerir ajustes estratégicos
 
 ## REGRAS

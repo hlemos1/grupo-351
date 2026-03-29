@@ -107,7 +107,7 @@ export default function ParceirosAdminPage() {
                 className={inputClass}
                 value={form.projetoSlug}
                 onChange={(e) => setForm({ ...form, projetoSlug: e.target.value })}
-                placeholder="forge-and-flow-3d"
+                placeholder="strike-studio"
               />
             </div>
             <div>

@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "GRUPO +351 — Hub de Negócios e Joint Ventures";
+export const alt = "GRUPO +351 — Venture Builder Luso-Brasileiro";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 

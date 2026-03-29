@@ -39,7 +39,7 @@ interface ConversaResumo {
 
 const PROMPTS = [
   { label: "Análise do pipeline", prompt: "Analise o pipeline de candidaturas atual. Identifique padrões, perfis mais comuns, e sugira ações prioritárias." },
-  { label: "Sinergias FIGITAIS", prompt: "Mapeie as sinergias FIGITAIS entre os projetos do portfólio. Onde há conexões fortes e onde há gaps?" },
+  { label: "Sinergias do ecossistema", prompt: "Mapeie as sinergias entre as empresas do portfolio (Nexial GSO, Strike Studio, E-Brand, Global, FarmLab 3D). Onde ha conexoes fortes e onde ha gaps?" },
   { label: "Gerar artigo", prompt: "Sugira um novo artigo para a base de conhecimento baseado no estado atual do ecossistema. Retorne no formato JSON com titulo, resumo, categoria e conteudo." },
   { label: "Novos termos", prompt: "Sugira 3 termos que faltam no glossário. Retorne cada um no formato JSON com termo, definicao e categoria." },
   { label: "Relatório executivo", prompt: "Gere um relatório executivo sobre o estado atual do Grupo +351: projetos, pipeline, contatos e recomendações." },

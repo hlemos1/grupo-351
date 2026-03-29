@@ -1,110 +1,92 @@
 [
   {
-    "slug": "figital",
-    "termo": "FIGITAL",
-    "definicao": "Arquitetura que integra operações físicas, plataformas digitais e software proprietário. Não é tendência — é infraestrutura. O físico gera sinais, o digital organiza, a governança transforma sinais em decisão.",
+    "slug": "fisico-digital",
+    "termo": "Fisico + Digital",
+    "definicao": "Arquitetura que integra operacoes fisicas, plataformas digitais e tecnologia proprietaria. Nao e tendencia — e infraestrutura. O fisico gera caixa e dados, o digital transforma em decisao, o comercio global conecta a mercado.",
     "categoria": "conceito"
   },
   {
-    "slug": "sensor-figital",
-    "termo": "Sensor FIGITAL",
-    "definicao": "Marca ou operação que atua na camada de infraestrutura do ecossistema. Captura dados reais de consumo, aprendizado ou produção. Exemplos: Veeenha!!! (consumo local), Ruptfy (aprendizado), Forge and Flow 3D (produção).",
+    "slug": "operacao-fisica",
+    "termo": "Operacao Fisica",
+    "definicao": "Camada do ecossistema onde o valor nasce. Negocios reais com clientes reais que geram caixa e dados. Exemplos: Strike Studio (130+ alunos, MMA/fitness), FarmLab 3D (impressao 3D, producao).",
     "categoria": "conceito"
   },
   {
-    "slug": "neuronio-figital",
-    "termo": "Neurônio FIGITAL",
-    "definicao": "Marca que transforma dados brutos em sinais interpretáveis: decisão, percepção ou supply chain. Exemplos: Córtex FC (decisão), Long View (percepção), Purple Party (supply chain).",
+    "slug": "inteligencia-digital",
+    "termo": "Inteligencia Digital",
+    "definicao": "Camada onde dados viram decisao. IA e software transformam operacao em inteligencia competitiva. A Nexial GSO opera nessa camada com o Metodo A&E.",
     "categoria": "conceito"
   },
   {
-    "slug": "retroalimentacao",
-    "termo": "Retroalimentação",
-    "definicao": "Camada de distribuição que fecha o ciclo do aprendizado. Lojas físicas, super app, e-commerce, franquias e conteúdo geram novos dados que alimentam os sensores.",
+    "slug": "comercio-global",
+    "termo": "Comercio Global",
+    "definicao": "Camada de escala do ecossistema. Conecta producao a mercado internacional. Nexial Global (sourcing China) e Nexial E-Brand (e-commerce de marcas proprias) operam nessa camada.",
     "categoria": "conceito"
   },
   {
-    "slug": "historico-figital",
-    "termo": "Histórico FIGITAL",
-    "definicao": "Ativo intangível gerado pelo acúmulo de ciclos sensor-neurônio-distribuição. Concorrentes copiam produto. Não copiam histórico FIGITAL — é o moat do ecossistema.",
+    "slug": "venture-builder",
+    "termo": "Venture Builder",
+    "definicao": "Modelo operacional do Grupo +351. Cria, opera e escala empresas reais com foco em geracao de caixa primeiro, dividendos depois, equity por ultimo. Diferente de incubadora ou aceleradora — o grupo opera junto.",
     "categoria": "conceito"
   },
   {
     "slug": "joint-venture",
     "termo": "Joint Venture (JV)",
-    "definicao": "Modelo de parceria societária do Grupo +351. A holding entra com marca, método, capital e governança. O operador entra com execução, know-how técnico e dedicação. Estruturas variam de 50/50 a 70/30 com vesting.",
+    "definicao": "Modelo de parceria societaria do Grupo +351. O grupo entra com marca, metodo, capital e governanca. O operador entra com execucao e know-how. Estruturas variam de 50/50 a 75/25 com vesting.",
     "categoria": "modelo"
   },
   {
     "slug": "vesting",
     "termo": "Vesting",
-    "definicao": "Mecanismo pelo qual o parceiro operador adquire participação societária progressivamente ao longo do tempo, condicionada a metas e performance. Protege ambas as partes.",
-    "categoria": "modelo"
-  },
-  {
-    "slug": "franquia-leve",
-    "termo": "Franquia Leve",
-    "definicao": "Modelo de expansão com CAPEX reduzido, sem necessidade de ponto físico tradicional. Operador recebe marca, método e formação. Usado pela Forge and Flow 3D.",
+    "definicao": "Mecanismo pelo qual o parceiro operador adquire participacao societaria progressivamente ao longo do tempo, condicionada a metas e performance. Pool de 10-15% por empresa. Protege ambas as partes.",
     "categoria": "modelo"
   },
   {
     "slug": "modelo-tripartido",
     "termo": "Modelo Tripartido",
-    "definicao": "Estrutura societária com 3 partes: Marca (30%), Investidor (30%) e Operador (40%). Usado pela Barbearia do Rão para alinhar incentivos entre quem cria, quem financia e quem opera.",
+    "definicao": "Estrutura societaria com 3 partes: Grupo (40%), Operador (40%) e Conselheiro (20%). Usado pela Nexial Global para alinhar incentivos entre quem estrutura, quem opera na China e quem conecta.",
     "categoria": "modelo"
   },
   {
     "slug": "capex",
     "termo": "CAPEX",
-    "definicao": "Capital expenditure — investimento inicial necessário para colocar uma unidade ou operação em funcionamento. No ecossistema +351, varia de 5.000 EUR (Forge and Flow 3D) a 100.000 EUR (Purple Party).",
+    "definicao": "Capital expenditure — investimento inicial necessario para colocar uma operacao em funcionamento. No ecossistema +351, varia de 5.000 EUR (FarmLab 3D) a 60.000 EUR (Nexial Global).",
     "categoria": "metrica"
   },
   {
-    "slug": "gmv",
-    "termo": "GMV",
-    "definicao": "Gross Merchandise Volume — volume total de transações processadas pela plataforma. Métrica principal do Veeenha!!! como indicador de adoção e escala.",
-    "categoria": "metrica"
+    "slug": "metodo-ae",
+    "termo": "Metodo A&E",
+    "definicao": "Arquitetura & Engenharia — metodo proprietario da Foundation Systems usado pela Nexial GSO. Diagnostico estrutural, implementacao de IA e automacoes, e operacao continua. Nao e consultoria pontual.",
+    "categoria": "conceito"
   },
   {
-    "slug": "forge-and-flow-3d",
-    "termo": "Forge and Flow 3D",
-    "definicao": "Vertical de manufatura distribuída baseada em impressão 3D. Produção sob demanda, franquia leve e infoproduto educacional. Sensor FIGITAL de produção.",
-    "categoria": "marca"
+    "slug": "nexial-gso",
+    "termo": "Nexial GSO",
+    "definicao": "Consultoria de inteligencia artificial com metodo proprio (A&E). Diagnostico, implementacao e operacao continua. 100% Grupo +351. Ja com cliente enterprise (Grupo Pateo).",
+    "categoria": "empresa"
   },
   {
-    "slug": "veeenha",
-    "termo": "Veeenha!!!",
-    "definicao": "Super App que conecta comércio local, serviços e marcas próprias em Cascais. Sensor FIGITAL de consumo local. Modelo replicável por cidade.",
-    "categoria": "marca"
+    "slug": "strike-studio",
+    "termo": "Strike Studio",
+    "definicao": "Franqueadora de boutique de MMA e fitness gamificado. Strike House (MMA classico, 130+ alunos) + Strike Lab (boxe sem contato, gamificado com IA). Tese de franquia em validacao.",
+    "categoria": "empresa"
   },
   {
-    "slug": "ruptfy",
-    "termo": "Ruptfy",
-    "definicao": "Plataforma EdTech do ecossistema. Fábrica de cursos, consórcio educacional e base de treinamento obrigatória para franqueados. Sensor FIGITAL de aprendizado.",
-    "categoria": "marca"
+    "slug": "nexial-e-brand",
+    "termo": "Nexial E-Brand",
+    "definicao": "E-commerce de marcas proprias com sourcing internacional. Marca Axis (mochilas LED) em lancamento. Cada marca validada vira empresa propria. 75% Grupo +351, 25% investidor.",
+    "categoria": "empresa"
   },
   {
-    "slug": "purple-party",
-    "termo": "Purple Party",
-    "definicao": "Franqueadora e plataforma atacadista China-Europa. Sourcing direto, loja física e e-commerce B2C. Neurônio FIGITAL de supply chain.",
-    "categoria": "marca"
+    "slug": "nexial-global",
+    "termo": "Nexial Global",
+    "definicao": "Braco de sourcing e comercio internacional. Parceiro com 20 anos na China. Viagens empresariais, intermediacao e construcao de supply chain proprietaria Asia-Europa.",
+    "categoria": "empresa"
   },
   {
-    "slug": "cortex-fc",
-    "termo": "Córtex FC",
-    "definicao": "Infoproduto estratégico sobre gestão e tomada de decisão. Neurônio FIGITAL de decisão. Alimenta Ruptfy e gera audiência para o ecossistema.",
-    "categoria": "marca"
-  },
-  {
-    "slug": "long-view",
-    "termo": "Long View",
-    "definicao": "Infoproduto de autoridade e visão de longo prazo. Neurônio FIGITAL de percepção. Produto premium de conteúdo intelectual.",
-    "categoria": "marca"
-  },
-  {
-    "slug": "barbearia-do-rao",
-    "termo": "Barbearia do Rão",
-    "definicao": "Marca física de barbearia com modelo tripartido. Gera dados FIGITAIS de fluxo, ticket e recorrência. 10.000 EUR por unidade.",
-    "categoria": "marca"
+    "slug": "farmlab-3d",
+    "termo": "FarmLab 3D",
+    "definicao": "Laboratorio de criacao de produtos via impressao 3D. 5 impressoras operacionais. Producao sob demanda, prototipagem rapida e desenvolvimento de marcas proprias. 75% Grupo +351, 25% operador.",
+    "categoria": "empresa"
   }
 ]

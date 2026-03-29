@@ -31,7 +31,7 @@ function generateNdaHtml(nome?: string, data?: string): string {
 <body>
   <div class="header">
     <div class="logo"><span>+</span>351</div>
-    <p class="subtitle">GRUPO +351 — Hub de Negócios e Joint Ventures</p>
+    <p class="subtitle">GRUPO +351 — Venture Builder Luso-Brasileiro</p>
   </div>
 
   <h1>Acordo de Confidencialidade Preliminar (NDA)</h1>

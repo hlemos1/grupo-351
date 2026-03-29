@@ -17,7 +17,7 @@ function makeCandidatura(overrides: Record<string, unknown> = {}) {
     capitalDisponivel: "50k-200k",
     prazo: "imediato",
     dedicacao: "integral",
-    motivacao: "Quero expandir o modelo de delivery brasileiro para Portugal. Tenho experiência com operações de alta escala e acredito que o modelo FIGITAL pode transformar o mercado português. Meu background de 10 anos no setor me dá confiança para executar.",
+    motivacao: "Quero expandir o modelo de delivery brasileiro para Portugal. Tenho experiencia com operacoes de alta escala e acredito que o venture builder +351 pode transformar o mercado portugues. Meu background de 10 anos no setor me da confianca para executar.",
     diferenciais: "Rede de contatos em Portugal, experiência com dark kitchens, já operei franquias de alimentação com sucesso em 3 cidades diferentes no Brasil, incluindo gestão de equipas de 50+ pessoas",
     disponibilidade: "imediata",
     aceitaNDA: true,
