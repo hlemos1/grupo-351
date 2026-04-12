@@ -1,130 +1,18 @@
 "use client";
 
-import { useState } from "react";
-import { useForm } from "react-hook-form";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  ArrowRight,
-  ArrowLeft,
-  CheckCircle,
-  AlertCircle,
-  Send,
-  User,
-  Briefcase,
-  Wallet,
-  FileText,
-  Shield,
-  Download,
-} from "lucide-react";
+import { ArrowRight, ArrowLeft, CheckCircle, AlertCircle, Send, Download } from "lucide-react";
 import { AnimatedSection } from "@/components/AnimatedSection";
-
-/* ─── Types ─── */
-interface AplicarForm {
-  /* Step 1 — Perfil */
-  nome: string;
-  email: string;
-  telefone: string;
-  pais: string;
-  cidade: string;
-  perfil: "operador" | "investidor" | "ambos";
-  /* Step 2 — Experiência */
-  experiencia: string;
-  setor: string;
-  empresaAtual: string;
-  linkedin: string;
-  /* Step 3 — Modelo de interesse */
-  modelo: string[];
-  capitalDisponivel: string;
-  prazo: string;
-  dedicacao: string;
-  /* Step 4 — Proposta */
-  motivacao: string;
-  diferenciais: string;
-  disponibilidade: string;
-  /* Step 5 — NDA */
-  aceitaNDA: boolean;
-}
-
-const STEPS = [
-  { id: 1, label: "Perfil", icon: User },
-  { id: 2, label: "Experiência", icon: Briefcase },
-  { id: 3, label: "Modelo", icon: Wallet },
-  { id: 4, label: "Proposta", icon: FileText },
-  { id: 5, label: "Acordo", icon: Shield },
-];
-
-interface ModeloOption {
-  value: string;
-  label: string;
-  tag: string;
-}
+import { useAplicar, STEPS, type ModeloOption } from "./useAplicar";
 
 export function AplicarPage({ modelos: modelosProp }: { modelos?: ModeloOption[] }) {
-  const MODELOS: ModeloOption[] = [
-    ...(modelosProp || []),
-    { value: "novo-projeto", label: "Propor novo projeto", tag: "Proposta" },
-  ];
-  const [step, setStep] = useState(1);
-  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
-  const [selectedModelos, setSelectedModelos] = useState<string[]>([]);
-
+  const ap = useAplicar(modelosProp);
+  const { form, step, status, progress, inputClass, MODELOS, selectedModelos } = ap;
   const {
     register,
     handleSubmit,
-    trigger,
     formState: { errors },
-  } = useForm<AplicarForm>({ mode: "onTouched" });
-
-  const inputClass =
-    "w-full px-4 py-3 rounded-lg border border-border bg-surface text-foreground placeholder:text-muted/50 focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent transition-all";
-
-  /* ─── Navigation ─── */
-  const fieldsPerStep: Record<number, (keyof AplicarForm)[]> = {
-    1: ["nome", "email", "telefone", "pais", "cidade", "perfil"],
-    2: ["experiencia", "setor"],
-    3: ["capitalDisponivel", "prazo", "dedicacao"],
-    4: ["motivacao", "diferenciais"],
-    5: ["aceitaNDA"],
-  };
-
-  async function nextStep() {
-    const valid = await trigger(fieldsPerStep[step]);
-    if (valid) setStep((s) => Math.min(s + 1, 5));
-  }
-
-  function prevStep() {
-    setStep((s) => Math.max(s - 1, 1));
-  }
-
-  function toggleModelo(value: string) {
-    setSelectedModelos((prev) =>
-      prev.includes(value) ? prev.filter((v) => v !== value) : [...prev, value]
-    );
-  }
-
-  /* ─── Submit ─── */
-  const onSubmit = async (data: AplicarForm) => {
-    setStatus("sending");
-    try {
-      const res = await fetch("/api/contato", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...data,
-          modelo: selectedModelos,
-          tipo: "aplicacao-jv",
-        }),
-      });
-      if (!res.ok) throw new Error();
-      setStatus("sent");
-    } catch {
-      setStatus("error");
-      setTimeout(() => setStatus("idle"), 5000);
-    }
-  };
-
-  /* ─── Progress ─── */
-  const progress = ((step - 1) / (STEPS.length - 1)) * 100;
+  } = form;
 
   return (
     <main className="pt-16">
@@ -143,8 +31,8 @@ export function AplicarPage({ modelos: modelosProp }: { modelos?: ModeloOption[]
               Construa conosco
             </h1>
             <p className="text-muted text-lg leading-relaxed max-w-2xl">
-              Preencha o formulário abaixo para se candidatar como operador,
-              investidor ou parceiro estratégico de uma das nossas marcas.
+              Preencha o formulário abaixo para se candidatar como operador, investidor ou parceiro
+              estratégico de uma das nossas marcas.
             </p>
           </motion.div>
         </div>
@@ -159,17 +47,14 @@ export function AplicarPage({ modelos: modelosProp }: { modelos?: ModeloOption[]
                 <div className="w-20 h-20 rounded-full bg-success/10 flex items-center justify-center mx-auto mb-6">
                   <CheckCircle className="w-10 h-10 text-success" />
                 </div>
-                <h2 className="text-2xl font-bold text-foreground mb-3">
-                  Candidatura enviada
-                </h2>
+                <h2 className="text-2xl font-bold text-foreground mb-3">Candidatura enviada</h2>
                 <p className="text-muted mb-4 leading-relaxed">
-                  Recebemos sua candidatura e ela será analisada pela equipa de
-                  governança do Grupo +351. Entraremos em contato em até 5 dias
-                  úteis com os próximos passos.
+                  Recebemos sua candidatura e ela será analisada pela equipa de governança do Grupo
+                  +351. Entraremos em contato em até 5 dias úteis com os próximos passos.
                 </p>
                 <p className="text-xs text-muted/60">
-                  Caso necessário, enviaremos um NDA formal antes de compartilhar
-                  informações confidenciais do modelo.
+                  Caso necessário, enviaremos um NDA formal antes de compartilhar informações
+                  confidenciais do modelo.
                 </p>
               </div>
             </AnimatedSection>
@@ -186,13 +71,13 @@ export function AplicarPage({ modelos: modelosProp }: { modelos?: ModeloOption[]
                       <button
                         key={s.id}
                         type="button"
-                        onClick={() => s.id < step && setStep(s.id)}
+                        onClick={() => s.id < ap.step && ap.setStep(s.id)}
                         className={`flex flex-col items-center gap-1.5 transition-all ${
                           isActive
                             ? "text-accent"
                             : isDone
-                            ? "text-success cursor-pointer"
-                            : "text-muted/30"
+                              ? "text-success cursor-pointer"
+                              : "text-muted/30"
                         }`}
                       >
                         <div
@@ -200,8 +85,8 @@ export function AplicarPage({ modelos: modelosProp }: { modelos?: ModeloOption[]
                             isActive
                               ? "border-accent bg-accent/5"
                               : isDone
-                              ? "border-success bg-success/5"
-                              : "border-border"
+                                ? "border-success bg-success/5"
+                                : "border-border"
                           }`}
                         >
                           {isDone ? (
@@ -227,7 +112,7 @@ export function AplicarPage({ modelos: modelosProp }: { modelos?: ModeloOption[]
               </div>
 
               {/* Form steps */}
-              <form onSubmit={handleSubmit(onSubmit)}>
+              <form onSubmit={handleSubmit(ap.onSubmit)}>
                 <div className="bg-surface rounded-2xl border border-border p-8 md:p-10 min-h-[400px]">
                   <AnimatePresence mode="wait">
                     {/* ─── Step 1: Perfil ─── */}
@@ -239,12 +124,8 @@ export function AplicarPage({ modelos: modelosProp }: { modelos?: ModeloOption[]
                         exit={{ opacity: 0, x: -20 }}
                         transition={{ duration: 0.3 }}
                       >
-                        <h2 className="text-xl font-bold text-foreground mb-1">
-                          Dados pessoais
-                        </h2>
-                        <p className="text-muted text-sm mb-8">
-                          Informações básicas sobre você.
-                        </p>
+                        <h2 className="text-xl font-bold text-foreground mb-1">Dados pessoais</h2>
+                        <p className="text-muted text-sm mb-8">Informações básicas sobre você.</p>
 
                         <div className="grid md:grid-cols-2 gap-6 mb-6">
                           <div>
@@ -330,8 +211,16 @@ export function AplicarPage({ modelos: modelosProp }: { modelos?: ModeloOption[]
                           </label>
                           <div className="grid grid-cols-3 gap-3">
                             {[
-                              { value: "operador", label: "Operador", desc: "Vou operar o negócio" },
-                              { value: "investidor", label: "Investidor", desc: "Vou investir capital" },
+                              {
+                                value: "operador",
+                                label: "Operador",
+                                desc: "Vou operar o negócio",
+                              },
+                              {
+                                value: "investidor",
+                                label: "Investidor",
+                                desc: "Vou investir capital",
+                              },
                               { value: "ambos", label: "Ambos", desc: "Operar e investir" },
                             ].map((opt) => (
                               <label key={opt.value} className="cursor-pointer">
@@ -342,7 +231,9 @@ export function AplicarPage({ modelos: modelosProp }: { modelos?: ModeloOption[]
                                   className="sr-only peer"
                                 />
                                 <div className="p-4 rounded-xl border-2 border-border peer-checked:border-accent peer-checked:bg-accent/5 hover:border-accent/30 transition-all text-center">
-                                  <p className="font-semibold text-foreground text-sm">{opt.label}</p>
+                                  <p className="font-semibold text-foreground text-sm">
+                                    {opt.label}
+                                  </p>
                                   <p className="text-muted text-xs mt-1">{opt.desc}</p>
                                 </div>
                               </label>
@@ -367,9 +258,7 @@ export function AplicarPage({ modelos: modelosProp }: { modelos?: ModeloOption[]
                         <h2 className="text-xl font-bold text-foreground mb-1">
                           Experiência profissional
                         </h2>
-                        <p className="text-muted text-sm mb-8">
-                          Conte-nos sobre sua trajetória.
-                        </p>
+                        <p className="text-muted text-sm mb-8">Conte-nos sobre sua trajetória.</p>
 
                         <div className="space-y-6">
                           <div>
@@ -386,7 +275,9 @@ export function AplicarPage({ modelos: modelosProp }: { modelos?: ModeloOption[]
                               placeholder="Descreva sua experiência profissional relevante, negócios que já operou ou investiu, e resultados alcançados..."
                             />
                             {errors.experiencia && (
-                              <p className="text-error text-xs mt-1">{errors.experiencia.message}</p>
+                              <p className="text-error text-xs mt-1">
+                                {errors.experiencia.message}
+                              </p>
                             )}
                           </div>
 
@@ -400,7 +291,9 @@ export function AplicarPage({ modelos: modelosProp }: { modelos?: ModeloOption[]
                                 className={inputClass}
                                 defaultValue=""
                               >
-                                <option value="" disabled>Selecione...</option>
+                                <option value="" disabled>
+                                  Selecione...
+                                </option>
                                 <option value="food-service">Food Service / Restauração</option>
                                 <option value="varejo">Varejo / Retalho</option>
                                 <option value="tecnologia">Tecnologia</option>
@@ -467,7 +360,7 @@ export function AplicarPage({ modelos: modelosProp }: { modelos?: ModeloOption[]
                               <button
                                 key={m.value}
                                 type="button"
-                                onClick={() => toggleModelo(m.value)}
+                                onClick={() => ap.toggleModelo(m.value)}
                                 className={`p-3 rounded-xl border-2 text-left transition-all ${
                                   selectedModelos.includes(m.value)
                                     ? "border-accent bg-accent/5"
@@ -493,7 +386,9 @@ export function AplicarPage({ modelos: modelosProp }: { modelos?: ModeloOption[]
                               className={inputClass}
                               defaultValue=""
                             >
-                              <option value="" disabled>Selecione...</option>
+                              <option value="" disabled>
+                                Selecione...
+                              </option>
                               <option value="ate-10k">Até 10.000 EUR</option>
                               <option value="10k-30k">10.000 - 30.000 EUR</option>
                               <option value="30k-50k">30.000 - 50.000 EUR</option>
@@ -503,7 +398,9 @@ export function AplicarPage({ modelos: modelosProp }: { modelos?: ModeloOption[]
                               <option value="a-definir">A definir</option>
                             </select>
                             {errors.capitalDisponivel && (
-                              <p className="text-error text-xs mt-1">{errors.capitalDisponivel.message}</p>
+                              <p className="text-error text-xs mt-1">
+                                {errors.capitalDisponivel.message}
+                              </p>
                             )}
                           </div>
                           <div>
@@ -515,7 +412,9 @@ export function AplicarPage({ modelos: modelosProp }: { modelos?: ModeloOption[]
                               className={inputClass}
                               defaultValue=""
                             >
-                              <option value="" disabled>Selecione...</option>
+                              <option value="" disabled>
+                                Selecione...
+                              </option>
                               <option value="imediato">Imediato</option>
                               <option value="1-3-meses">1 a 3 meses</option>
                               <option value="3-6-meses">3 a 6 meses</option>
@@ -535,7 +434,9 @@ export function AplicarPage({ modelos: modelosProp }: { modelos?: ModeloOption[]
                               className={inputClass}
                               defaultValue=""
                             >
-                              <option value="" disabled>Selecione...</option>
+                              <option value="" disabled>
+                                Selecione...
+                              </option>
                               <option value="integral">Tempo integral</option>
                               <option value="parcial">Tempo parcial</option>
                               <option value="passivo">Investimento passivo</option>
@@ -557,9 +458,7 @@ export function AplicarPage({ modelos: modelosProp }: { modelos?: ModeloOption[]
                         exit={{ opacity: 0, x: -20 }}
                         transition={{ duration: 0.3 }}
                       >
-                        <h2 className="text-xl font-bold text-foreground mb-1">
-                          Sua proposta
-                        </h2>
+                        <h2 className="text-xl font-bold text-foreground mb-1">Sua proposta</h2>
                         <p className="text-muted text-sm mb-8">
                           Conte-nos por que quer fazer parte do ecossistema +351.
                         </p>
@@ -597,7 +496,9 @@ export function AplicarPage({ modelos: modelosProp }: { modelos?: ModeloOption[]
                               placeholder="Que habilidades, rede de contactos ou recursos únicos você traz para a mesa?"
                             />
                             {errors.diferenciais && (
-                              <p className="text-error text-xs mt-1">{errors.diferenciais.message}</p>
+                              <p className="text-error text-xs mt-1">
+                                {errors.diferenciais.message}
+                              </p>
                             )}
                           </div>
 
@@ -627,9 +528,7 @@ export function AplicarPage({ modelos: modelosProp }: { modelos?: ModeloOption[]
                         <h2 className="text-xl font-bold text-foreground mb-1">
                           Acordo de Confidencialidade
                         </h2>
-                        <p className="text-muted text-sm mb-8">
-                          Último passo antes de enviar.
-                        </p>
+                        <p className="text-muted text-sm mb-8">Último passo antes de enviar.</p>
 
                         <div className="bg-white rounded-xl border border-border p-6 mb-6">
                           <div className="flex items-start justify-between mb-3">
@@ -647,9 +546,7 @@ export function AplicarPage({ modelos: modelosProp }: { modelos?: ModeloOption[]
                             </a>
                           </div>
                           <div className="text-muted text-sm leading-relaxed space-y-3 max-h-56 overflow-y-auto pr-2">
-                            <p>
-                              Ao submeter esta candidatura, o candidato declara e concorda que:
-                            </p>
+                            <p>Ao submeter esta candidatura, o candidato declara e concorda que:</p>
                             <p>
                               <strong>1. Veracidade.</strong> Todas as informações fornecidas neste
                               formulário são verdadeiras, completas e podem ser verificadas pelo
@@ -662,23 +559,23 @@ export function AplicarPage({ modelos: modelosProp }: { modelos?: ModeloOption[]
                             <p>
                               <strong>3. Confidencialidade.</strong> O candidato compromete-se a
                               manter sigilo absoluto sobre quaisquer informações comerciais,
-                              financeiras, operacionais ou estratégicas recebidas durante o
-                              processo de avaliação, por um período de 2 (dois) anos.
+                              financeiras, operacionais ou estratégicas recebidas durante o processo
+                              de avaliação, por um período de 2 (dois) anos.
                             </p>
                             <p>
-                              <strong>4. Uso restrito.</strong> As informações confidenciais
-                              serão utilizadas exclusivamente para avaliação da parceria, não
-                              podendo ser divulgadas, reproduzidas ou transmitidas a terceiros.
+                              <strong>4. Uso restrito.</strong> As informações confidenciais serão
+                              utilizadas exclusivamente para avaliação da parceria, não podendo ser
+                              divulgadas, reproduzidas ou transmitidas a terceiros.
                             </p>
                             <p>
-                              <strong>5. Devolução.</strong> Caso o processo não avance, o
-                              candidato compromete-se a devolver ou destruir quaisquer materiais
-                              confidenciais recebidos.
+                              <strong>5. Devolução.</strong> Caso o processo não avance, o candidato
+                              compromete-se a devolver ou destruir quaisquer materiais confidenciais
+                              recebidos.
                             </p>
                             <p>
-                              <strong>6. RGPD.</strong> Os dados pessoais serão tratados nos
-                              termos do Regulamento Geral de Proteção de Dados (UE 2016/679) e
-                              da legislação portuguesa aplicável.
+                              <strong>6. RGPD.</strong> Os dados pessoais serão tratados nos termos
+                              do Regulamento Geral de Proteção de Dados (UE 2016/679) e da
+                              legislação portuguesa aplicável.
                             </p>
                             <p>
                               <strong>7. Lei aplicável.</strong> Este acordo é regido pela
@@ -689,8 +586,8 @@ export function AplicarPage({ modelos: modelosProp }: { modelos?: ModeloOption[]
 
                         <div className="bg-amber-50 border border-amber-200/60 rounded-lg p-4 mb-6 text-sm text-amber-800">
                           <p>
-                            Ao aceitar, o seu endereço IP, data/hora e identificação do
-                            navegador serão registados como prova digital de aceite deste NDA.
+                            Ao aceitar, o seu endereço IP, data/hora e identificação do navegador
+                            serão registados como prova digital de aceite deste NDA.
                           </p>
                         </div>
 
@@ -744,7 +641,7 @@ export function AplicarPage({ modelos: modelosProp }: { modelos?: ModeloOption[]
                     {step > 1 && (
                       <button
                         type="button"
-                        onClick={prevStep}
+                        onClick={ap.prevStep}
                         className="inline-flex items-center gap-2 text-muted hover:text-foreground transition-colors text-sm font-medium"
                       >
                         <ArrowLeft className="w-4 h-4" />
@@ -764,7 +661,7 @@ export function AplicarPage({ modelos: modelosProp }: { modelos?: ModeloOption[]
                     {step < 5 ? (
                       <button
                         type="button"
-                        onClick={nextStep}
+                        onClick={ap.nextStep}
                         className="inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-lg font-medium hover:bg-primary-light transition-all hover:shadow-lg hover:shadow-primary/20"
                       >
                         Continuar
