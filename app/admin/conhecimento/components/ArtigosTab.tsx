@@ -1,7 +1,17 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
-import { Plus, X, Save, CheckCircle, Trash2, Star, AlertTriangle } from "lucide-react";
+import {
+  Plus,
+  X,
+  Save,
+  CheckCircle,
+  Trash2,
+  Star,
+  AlertTriangle,
+  ChevronDown,
+  ChevronUp,
+} from "lucide-react";
 import { type Artigo, categoriasArtigos, slugify, inputClass } from "./shared";
 
 export function ArtigosTab() {
