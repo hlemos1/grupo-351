@@ -29,10 +29,7 @@ function getProvider(): AiProvider {
   return "gemini";
 }
 
-async function* streamGemini(
-  messages: AiMessage[],
-  systemPrompt: string
-): AsyncGenerator<string> {
+async function* streamGemini(messages: AiMessage[], systemPrompt: string): AsyncGenerator<string> {
   const apiKey = process.env.GOOGLE_API_KEY;
   if (!apiKey) throw new Error("GOOGLE_API_KEY não configurada");
 
@@ -67,7 +64,7 @@ async function* streamAnthropic(
   const client = new Anthropic({ apiKey });
 
   const stream = client.messages.stream({
-    model: "claude-sonnet-4-20250514",
+    model: "claude-sonnet-4-6-20250715",
     max_tokens: 4096,
     system: systemPrompt,
     messages: messages.map((m) => ({
@@ -77,10 +74,7 @@ async function* streamAnthropic(
   });
 
   for await (const event of stream) {
-    if (
-      event.type === "content_block_delta" &&
-      event.delta.type === "text_delta"
-    ) {
+    if (event.type === "content_block_delta" && event.delta.type === "text_delta") {
       yield event.delta.text;
     }
   }
@@ -90,9 +84,7 @@ async function* streamAnthropic(
  * Retorna um AsyncGenerator que emite chunks de texto.
  * Escolhe o provider baseado em AI_PROVIDER ou no parâmetro.
  */
-export async function* streamChat(
-  options: AiStreamOptions
-): AsyncGenerator<string> {
+export async function* streamChat(options: AiStreamOptions): AsyncGenerator<string> {
   const provider = options.provider || getProvider();
 
   if (provider === "anthropic") {
@@ -113,17 +105,13 @@ export function createSSEStream(options: AiStreamOptions): ReadableStream {
     async start(controller) {
       try {
         for await (const text of streamChat(options)) {
-          controller.enqueue(
-            encoder.encode(`data: ${JSON.stringify({ text })}\n\n`)
-          );
+          controller.enqueue(encoder.encode(`data: ${JSON.stringify({ text })}\n\n`));
         }
         controller.enqueue(encoder.encode("data: [DONE]\n\n"));
         controller.close();
       } catch (err) {
         const msg = err instanceof Error ? err.message : "Erro desconhecido";
-        controller.enqueue(
-          encoder.encode(`data: ${JSON.stringify({ error: msg })}\n\n`)
-        );
+        controller.enqueue(encoder.encode(`data: ${JSON.stringify({ error: msg })}\n\n`));
         controller.close();
       }
     },
