@@ -29,3 +29,22 @@ jobs:
         run: pnpm lint
       - name: Test
         run: pnpm test --run
+
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: latest
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+      - run: pnpm install --frozen-lockfile
+      - name: Audit dependencies
+        run: pnpm audit --audit-level=high
+        continue-on-error: true
+      - name: Check for secrets in code
+        run: |
+          ! grep -rn "sk-ant\|sk_live\|AKIA\|-----BEGIN" . --include="*.ts" --include="*.tsx" --exclude-dir=node_modules --exclude-dir=.next --exclude-dir=__tests__ | grep -v "placeholder\|regex\|pattern"
