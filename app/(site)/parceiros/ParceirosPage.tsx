@@ -103,20 +103,21 @@ const modelos: ModeloJV[] = [
     ],
   },
   {
-    slug: "farmlab-3d",
-    name: "FarmLab 3D",
+    slug: "fixxe3d",
+    name: "FIXXE3D",
     icon: "printer",
     tag: "Impressao 3D",
     status: "Em operacao",
-    perfilIdeal: "Maker, designer 3D ou empreendedor com interesse em manufatura aditiva",
+    perfilIdeal:
+      "Maker, designer 3D ou empreendedor com interesse em manufatura aditiva, retail B2C e Academy",
     estrutura: { holding: "75%", operador: "25%" },
     investimento: { min: 5000, max: 15000 },
     retornoEstimado: "25-40% margem bruta",
     prazoRetorno: "6-12 meses",
     destaques: [
-      "CAPEX mais baixo do portfolio",
-      "5 impressoras operacionais",
-      "Produtos validados viram marcas proprias",
+      "6 impressoras operacionais",
+      "Tres frentes: retail B2C, B2B e Academy",
+      "Lancamento oficial no Cascais Kids",
     ],
     oQueHoldingFornece: [
       "Farm de impressoras e infraestrutura",
@@ -136,7 +137,8 @@ const modelos: ModeloJV[] = [
     icon: "globe",
     tag: "Sourcing / Supply Chain",
     status: "Em estruturacao",
-    perfilIdeal: "Profissional com experiencia em comercio exterior, importacao ou logistica internacional",
+    perfilIdeal:
+      "Profissional com experiencia em comercio exterior, importacao ou logistica internacional",
     estrutura: { holding: "40%", operador: "40%", nota: "+ 20% Conselheiro" },
     investimento: { min: 20000, max: 60000 },
     retornoEstimado: "Comissao + margem de intermediacao",
@@ -198,12 +200,17 @@ function Simulador({ modelo }: { modelo: ModeloJV }) {
     <div className="bg-white rounded-2xl border border-black/[0.04] p-6">
       <div className="flex items-center gap-2 mb-5">
         <Calculator className="w-4 h-4 text-accent" />
-        <p className="font-semibold text-foreground text-[14px] tracking-[-0.01em]">Simulador rapido</p>
+        <p className="font-semibold text-foreground text-[14px] tracking-[-0.01em]">
+          Simulador rapido
+        </p>
       </div>
 
       <div className="mb-5">
         <label className="text-[13px] text-muted mb-2.5 block">
-          Investimento: <span className="font-semibold text-foreground">{investimento.toLocaleString("pt-PT")} EUR</span>
+          Investimento:{" "}
+          <span className="font-semibold text-foreground">
+            {investimento.toLocaleString("pt-PT")} EUR
+          </span>
         </label>
         <input
           type="range"
@@ -222,15 +229,21 @@ function Simulador({ modelo }: { modelo: ModeloJV }) {
 
       <div className="grid grid-cols-2 gap-3">
         <div className="bg-[#f8f9fb] rounded-xl p-4">
-          <p className="text-[10px] text-muted uppercase tracking-[0.15em] font-semibold mb-1">Retorno estimado/ano</p>
+          <p className="text-[10px] text-muted uppercase tracking-[0.15em] font-semibold mb-1">
+            Retorno estimado/ano
+          </p>
           <p className="font-bold text-foreground text-[15px] tracking-[-0.01em]">
             {margemBaixa.toLocaleString("pt-PT", { maximumFractionDigits: 0 })} -{" "}
             {margemAlta.toLocaleString("pt-PT", { maximumFractionDigits: 0 })} EUR
           </p>
         </div>
         <div className="bg-[#f8f9fb] rounded-xl p-4">
-          <p className="text-[10px] text-muted uppercase tracking-[0.15em] font-semibold mb-1">Prazo retorno</p>
-          <p className="font-bold text-foreground text-[15px] tracking-[-0.01em]">{modelo.prazoRetorno}</p>
+          <p className="text-[10px] text-muted uppercase tracking-[0.15em] font-semibold mb-1">
+            Prazo retorno
+          </p>
+          <p className="font-bold text-foreground text-[15px] tracking-[-0.01em]">
+            {modelo.prazoRetorno}
+          </p>
         </div>
       </div>
 
@@ -244,7 +257,16 @@ function Simulador({ modelo }: { modelo: ModeloJV }) {
 /* --- Wallet icon --- */
 function Wallet({ className }: { className?: string }) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+    >
       <path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1" />
       <path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4" />
     </svg>
@@ -258,11 +280,7 @@ function ModeloCard({ modelo }: { modelo: ModeloJV }) {
 
   return (
     <div className="bg-[#f8f9fb] rounded-2xl border border-black/[0.04] overflow-hidden hover:border-black/[0.06] hover:shadow-lg hover:shadow-black/[0.03] transition-all duration-500">
-      <button
-        type="button"
-        onClick={() => setOpen(!open)}
-        className="w-full p-6 md:p-8 text-left"
-      >
+      <button type="button" onClick={() => setOpen(!open)} className="w-full p-6 md:p-8 text-left">
         <div className="flex items-start justify-between">
           <div className="flex items-start gap-4">
             <div className="w-12 h-12 rounded-xl bg-primary/[0.05] flex items-center justify-center shrink-0">
@@ -270,7 +288,9 @@ function ModeloCard({ modelo }: { modelo: ModeloJV }) {
             </div>
             <div>
               <div className="flex items-center gap-3 flex-wrap mb-1">
-                <h3 className="text-xl font-bold text-foreground tracking-[-0.015em]">{modelo.name}</h3>
+                <h3 className="text-xl font-bold text-foreground tracking-[-0.015em]">
+                  {modelo.name}
+                </h3>
                 <span className="text-[11px] font-semibold text-accent bg-accent/[0.06] px-2.5 py-1 rounded-full tracking-wide">
                   {modelo.tag}
                 </span>
@@ -284,10 +304,13 @@ function ModeloCard({ modelo }: { modelo: ModeloJV }) {
                 </div>
                 <div className="flex items-center gap-1.5 text-[12px] text-muted">
                   <Wallet className="w-3.5 h-3.5 text-accent" />
-                  {modelo.investimento.min.toLocaleString("pt-PT")} - {modelo.investimento.max.toLocaleString("pt-PT")} EUR
+                  {modelo.investimento.min.toLocaleString("pt-PT")} -{" "}
+                  {modelo.investimento.max.toLocaleString("pt-PT")} EUR
                 </div>
                 <div className="flex items-center gap-1.5 text-[12px] text-muted">
-                  <div className={`w-2 h-2 rounded-full ${modelo.status === "Em operação" ? "bg-emerald-500" : modelo.status === "Em desenvolvimento" ? "bg-amber-500" : "bg-muted"}`} />
+                  <div
+                    className={`w-2 h-2 rounded-full ${modelo.status === "Em operação" ? "bg-emerald-500" : modelo.status === "Em desenvolvimento" ? "bg-amber-500" : "bg-muted"}`}
+                  />
                   {modelo.status}
                 </div>
               </div>
@@ -323,11 +346,15 @@ function ModeloCard({ modelo }: { modelo: ModeloJV }) {
                     </h4>
                     <div className="flex gap-3">
                       <div className="flex-1 bg-primary/[0.04] rounded-xl p-4 text-center">
-                        <p className="text-2xl font-bold text-primary tracking-[-0.02em]">{modelo.estrutura.holding}</p>
+                        <p className="text-2xl font-bold text-primary tracking-[-0.02em]">
+                          {modelo.estrutura.holding}
+                        </p>
                         <p className="text-[11px] text-muted font-medium">Holding</p>
                       </div>
                       <div className="flex-1 bg-accent/[0.04] rounded-xl p-4 text-center">
-                        <p className="text-2xl font-bold text-accent tracking-[-0.02em]">{modelo.estrutura.operador}</p>
+                        <p className="text-2xl font-bold text-accent tracking-[-0.02em]">
+                          {modelo.estrutura.operador}
+                        </p>
                         <p className="text-[11px] text-muted font-medium">Operador</p>
                       </div>
                     </div>
@@ -426,9 +453,8 @@ export function ParceirosPage() {
               Modelos de Joint Venture
             </h1>
             <p className="text-muted text-lg leading-[1.7] max-w-3xl tracking-[-0.006em]">
-              Cada marca do ecossistema +351 tem uma estrutura societaria e um
-              perfil de parceiro ideal. Explore os modelos, simule o investimento
-              e candidate-se.
+              Cada marca do ecossistema +351 tem uma estrutura societaria e um perfil de parceiro
+              ideal. Explore os modelos, simule o investimento e candidate-se.
             </p>
           </motion.div>
         </div>
@@ -439,9 +465,21 @@ export function ParceirosPage() {
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid md:grid-cols-4 gap-8">
             {[
-              { num: "01", title: "Explore", desc: "Conheca os modelos e estruturas de cada marca" },
-              { num: "02", title: "Simule", desc: "Use o simulador para entender investimento e retorno" },
-              { num: "03", title: "Candidate-se", desc: "Preencha o formulario estruturado de aplicacao" },
+              {
+                num: "01",
+                title: "Explore",
+                desc: "Conheca os modelos e estruturas de cada marca",
+              },
+              {
+                num: "02",
+                title: "Simule",
+                desc: "Use o simulador para entender investimento e retorno",
+              },
+              {
+                num: "03",
+                title: "Candidate-se",
+                desc: "Preencha o formulario estruturado de aplicacao",
+              },
               { num: "04", title: "Negocie", desc: "Avancamos para NDA e termos detalhados" },
             ].map((item, i) => (
               <motion.div
@@ -451,8 +489,12 @@ export function ParceirosPage() {
                 transition={{ delay: 0.3 + i * 0.08, duration: 0.6, ease }}
                 className="text-center md:text-left"
               >
-                <span className="text-3xl font-bold text-black/[0.04] font-display tracking-[-0.03em]">{item.num}</span>
-                <h3 className="font-semibold text-foreground mt-1 tracking-[-0.01em]">{item.title}</h3>
+                <span className="text-3xl font-bold text-black/[0.04] font-display tracking-[-0.03em]">
+                  {item.num}
+                </span>
+                <h3 className="font-semibold text-foreground mt-1 tracking-[-0.01em]">
+                  {item.title}
+                </h3>
                 <p className="text-muted text-[13px] mt-1 leading-[1.6]">{item.desc}</p>
               </motion.div>
             ))}
@@ -530,7 +572,9 @@ export function ParceirosPage() {
               >
                 <div className="bg-white rounded-2xl border border-black/[0.04] p-8 h-full hover:shadow-xl hover:shadow-black/[0.03] transition-all duration-500">
                   <VIcon className="w-8 h-8 text-primary mb-5" />
-                  <h3 className="font-bold text-foreground text-lg mb-2 tracking-[-0.015em]">{title}</h3>
+                  <h3 className="font-bold text-foreground text-lg mb-2 tracking-[-0.015em]">
+                    {title}
+                  </h3>
                   <p className="text-muted text-[14px] leading-[1.7]">{desc}</p>
                 </div>
               </motion.div>

@@ -39,7 +39,7 @@ const timeline = [
     year: "2025",
     title: "Fundacao do Grupo +351",
     description:
-      "Estabelecimento em Cascais com sede na Pampilheira. Lancamento das primeiras empresas: Nexial GSO, Strike Studio, FarmLab 3D, Nexial E-Brand e Nexial Global.",
+      "Estabelecimento em Cascais com sede na Pampilheira. Lancamento das primeiras empresas: Nexial GSO, Strike Studio, FIXXE3D, Nexial E-Brand e Nexial Global.",
   },
 ];
 
@@ -85,22 +85,26 @@ const valores = [
   {
     icon: Building2,
     title: "Construção real",
-    description: "Não fazemos consultoria. Construímos empresas e operamos junto com nossos parceiros.",
+    description:
+      "Não fazemos consultoria. Construímos empresas e operamos junto com nossos parceiros.",
   },
   {
     icon: Users,
     title: "Parceria genuína",
-    description: "Buscamos relações de longo prazo baseadas em confiança, transparência e resultados compartilhados.",
+    description:
+      "Buscamos relações de longo prazo baseadas em confiança, transparência e resultados compartilhados.",
   },
   {
     icon: Globe,
     title: "Visão internacional",
-    description: "Conectamos o melhor do empreendedorismo brasileiro com as oportunidades do mercado europeu.",
+    description:
+      "Conectamos o melhor do empreendedorismo brasileiro com as oportunidades do mercado europeu.",
   },
   {
     icon: Rocket,
     title: "Execução focada",
-    description: "Priorizamos ação sobre planeamento. Cada projeto é tratado com urgência e pragmatismo.",
+    description:
+      "Priorizamos ação sobre planeamento. Cada projeto é tratado com urgência e pragmatismo.",
   },
 ];
 
@@ -130,9 +134,9 @@ export function SobrePage() {
               do Grupo +351
             </h1>
             <p className="text-muted text-xl leading-[1.7] max-w-3xl tracking-[-0.006em]">
-              Tres empreendedores brasileiros que decidiram unir experiencias
-              complementares para construir empresas reais em Portugal — combinando
-              operacao fisica, tecnologia digital e supply chain global.
+              Tres empreendedores brasileiros que decidiram unir experiencias complementares para
+              construir empresas reais em Portugal — combinando operacao fisica, tecnologia digital
+              e supply chain global.
             </p>
           </motion.div>
         </div>
@@ -142,10 +146,27 @@ export function SobrePage() {
       <section className="py-20 bg-white border-y border-black/[0.04]">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            <Counter value={5} label="Empresas ativas" className="text-center text-4xl md:text-5xl font-bold text-primary font-display tracking-[-0.03em]" />
-            <Counter value={3} label="Fundadores operacionais" className="text-center text-4xl md:text-5xl font-bold text-primary font-display tracking-[-0.03em]" />
-            <Counter value={3} label="Continentes de atuacao" className="text-center text-4xl md:text-5xl font-bold text-primary font-display tracking-[-0.03em]" />
-            <Counter value={130} suffix="+" label="Alunos Strike Studio" className="text-center text-4xl md:text-5xl font-bold text-primary font-display tracking-[-0.03em]" />
+            <Counter
+              value={5}
+              label="Empresas ativas"
+              className="text-center text-4xl md:text-5xl font-bold text-primary font-display tracking-[-0.03em]"
+            />
+            <Counter
+              value={3}
+              label="Fundadores operacionais"
+              className="text-center text-4xl md:text-5xl font-bold text-primary font-display tracking-[-0.03em]"
+            />
+            <Counter
+              value={3}
+              label="Continentes de atuacao"
+              className="text-center text-4xl md:text-5xl font-bold text-primary font-display tracking-[-0.03em]"
+            />
+            <Counter
+              value={130}
+              suffix="+"
+              label="Alunos Strike Studio"
+              className="text-center text-4xl md:text-5xl font-bold text-primary font-display tracking-[-0.03em]"
+            />
           </div>
         </div>
       </section>
@@ -177,7 +198,9 @@ export function SobrePage() {
                 <div className="group bg-[#f8f9fb] rounded-2xl border border-black/[0.04] p-8 md:p-10 hover:shadow-xl hover:shadow-black/[0.03] hover:border-black/[0.06] transition-all duration-500">
                   <div className="flex flex-col md:flex-row gap-8">
                     <div className="shrink-0">
-                      <div className={`w-24 h-24 rounded-2xl bg-gradient-to-br ${socio.gradient} flex items-center justify-center text-white font-bold text-2xl shadow-lg shadow-black/[0.08] group-hover:scale-[1.03] transition-transform duration-500`}>
+                      <div
+                        className={`w-24 h-24 rounded-2xl bg-gradient-to-br ${socio.gradient} flex items-center justify-center text-white font-bold text-2xl shadow-lg shadow-black/[0.08] group-hover:scale-[1.03] transition-transform duration-500`}
+                      >
                         {socio.initials}
                       </div>
                     </div>
@@ -187,7 +210,9 @@ export function SobrePage() {
                           <h3 className="text-2xl font-bold text-foreground tracking-[-0.02em]">
                             {socio.name}
                           </h3>
-                          <p className="text-accent text-[12px] font-semibold tracking-wide uppercase">{socio.role}</p>
+                          <p className="text-accent text-[12px] font-semibold tracking-wide uppercase">
+                            {socio.role}
+                          </p>
                         </div>
                         {socio.linkedin && (
                           <a
@@ -295,7 +320,9 @@ export function SobrePage() {
                       i % 2 === 0 ? "md:text-right" : ""
                     }`}
                   >
-                    <span className="text-accent font-bold text-lg tracking-[-0.01em]">{item.year}</span>
+                    <span className="text-accent font-bold text-lg tracking-[-0.01em]">
+                      {item.year}
+                    </span>
                     <h3 className="text-xl font-semibold text-foreground mt-1 mb-2 tracking-[-0.015em]">
                       {item.title}
                     </h3>
@@ -344,7 +371,9 @@ export function SobrePage() {
                     <Icon className="w-6 h-6 text-primary" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-foreground text-lg mb-2 tracking-[-0.015em]">{title}</h3>
+                    <h3 className="font-semibold text-foreground text-lg mb-2 tracking-[-0.015em]">
+                      {title}
+                    </h3>
                     <p className="text-muted text-[14px] leading-[1.7]">{description}</p>
                   </div>
                 </div>

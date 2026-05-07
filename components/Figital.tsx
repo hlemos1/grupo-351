@@ -10,7 +10,12 @@ const camadas = [
     num: "01",
     title: "Operacao Fisica",
     subtitle: "Onde o valor nasce",
-    items: ["Strike Studio — 130+ alunos, boutique MMA", "FarmLab 3D — producao e prototipagem", "Sede em Cascais — escritorio operacional"],
+    items: [
+      "Strike Studio — 130+ alunos, boutique MMA + Strike Lab",
+      "FIXXE3D — 6 maquinas, retail B2C, B2B e Academy",
+      "Brownie do Luiz — exclusividade PT/ES, distribuicao iberica",
+      "Unitri Robotics — robo Unitree G1 em operacao",
+    ],
     desc: "Negocios reais com clientes reais. O fisico gera caixa e dados.",
     accent: "from-blue-500/10 to-blue-600/5",
     dot: "bg-blue-500",
@@ -19,7 +24,11 @@ const camadas = [
     num: "02",
     title: "Inteligencia Digital",
     subtitle: "Onde o dado vira decisao",
-    items: ["Nexial GSO — consultoria IA com metodo proprio", "Tecnologia proprietaria — automacoes e agentes", "Dados de operacao alimentam estrategia"],
+    items: [
+      "Nexial GSO — consultoria IA com clientes pagantes",
+      "Metodo A&E proprietario — agentes, automacoes, dashboards",
+      "Dados de operacao alimentam estrategia central",
+    ],
     desc: "IA e software transformam operacao em inteligencia competitiva.",
     accent: "from-violet-500/10 to-violet-600/5",
     dot: "bg-violet-500",
@@ -28,7 +37,11 @@ const camadas = [
     num: "03",
     title: "Comercio Global",
     subtitle: "Onde a escala acontece",
-    items: ["Nexial Global — sourcing China direto", "Nexial E-Brand — e-commerce e marcas proprias", "Supply chain proprietaria Europa-Asia"],
+    items: [
+      "Nexial Global — sourcing China com filial em estruturacao",
+      "Nexial E-Brand — marcas proprias e e-commerce DTC",
+      "Supply chain proprietaria Brasil-China-Europa",
+    ],
     desc: "Conectamos producao, distribuicao e mercado global.",
     accent: "from-emerald-500/10 to-emerald-600/5",
     dot: "bg-emerald-500",
@@ -58,8 +71,8 @@ export function Figital() {
             </span>
           </h2>
           <p className="text-muted text-lg leading-[1.7] mb-4 tracking-[-0.006em]">
-            Nao separamos fisico de digital. Cada operacao fisica gera dados.
-            Cada sistema digital melhora a operacao. A governanca transforma tudo em decisao.
+            Nao separamos fisico de digital. Cada operacao fisica gera dados. Cada sistema digital
+            melhora a operacao. A governanca transforma tudo em decisao.
           </p>
           <p className="text-foreground text-lg leading-[1.7] font-medium tracking-[-0.006em]">
             Concorrentes copiam produto. Nao copiam o sistema que o criou.
@@ -75,11 +88,19 @@ export function Figital() {
               transition={{ delay: 0.15 + i * 0.1, duration: 0.7, ease }}
             >
               <div className="group bg-[#f8f9fb] rounded-2xl border border-black/[0.04] p-8 h-full hover:shadow-xl hover:shadow-black/[0.03] hover:border-black/[0.06] transition-all duration-500">
-                <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${accent} flex items-center justify-center mb-5`}>
-                  <span className="text-[15px] font-bold text-foreground/60 font-display">{num}</span>
+                <div
+                  className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${accent} flex items-center justify-center mb-5`}
+                >
+                  <span className="text-[15px] font-bold text-foreground/60 font-display">
+                    {num}
+                  </span>
                 </div>
-                <h3 className="text-xl font-bold text-foreground tracking-[-0.015em] mb-1">{title}</h3>
-                <p className="text-accent text-[12px] font-semibold tracking-wide uppercase mb-4">{subtitle}</p>
+                <h3 className="text-xl font-bold text-foreground tracking-[-0.015em] mb-1">
+                  {title}
+                </h3>
+                <p className="text-accent text-[12px] font-semibold tracking-wide uppercase mb-4">
+                  {subtitle}
+                </p>
                 <p className="text-muted text-[14px] leading-[1.65] mb-5">{desc}</p>
                 <ul className="space-y-2.5">
                   {items.map((item) => (

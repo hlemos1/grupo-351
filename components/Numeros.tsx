@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 
 const stats = [
-  { value: 5, suffix: "", label: "Empresas ativas" },
+  { value: 8, suffix: "", label: "Verticais ativas" },
   { value: 3, suffix: "", label: "Fundadores operacionais" },
   { value: 130, suffix: "+", label: "Alunos Strike Studio" },
   { value: 3, suffix: "", label: "Continentes de atuacao" },
@@ -58,8 +58,7 @@ export function Numeros() {
       <div
         className="absolute inset-0 opacity-[0.03]"
         style={{
-          backgroundImage:
-            "radial-gradient(circle at 1px 1px, white 1px, transparent 0)",
+          backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)",
           backgroundSize: "40px 40px",
         }}
       />

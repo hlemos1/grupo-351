@@ -6,6 +6,9 @@ import {
   ShoppingBag,
   Globe,
   Printer,
+  Cookie,
+  Bot,
+  Trophy,
   ArrowUpRight,
 } from "lucide-react";
 import { motion, useInView } from "framer-motion";
@@ -20,6 +23,9 @@ const iconMap = {
   "shopping-bag": ShoppingBag,
   globe: Globe,
   printer: Printer,
+  cookie: Cookie,
+  bot: Bot,
+  trophy: Trophy,
 };
 
 const projetos = [
@@ -30,12 +36,32 @@ const projetos = [
     tag: "Consultoria IA",
     status: "Em operacao",
     statusColor: "bg-success",
-    metric: "1 cliente enterprise",
+    metric: "2 clientes pagantes",
     href: "/portfolio/nexial-gso",
   },
   {
+    name: "FIXXE3D",
+    desc: "Impressao 3D em tres frentes: retail B2C, B2B corporativo e Academy. Lancamento no Cascais Kids.",
+    icon: "printer" as const,
+    tag: "Impressao 3D",
+    status: "Em operacao",
+    statusColor: "bg-success",
+    metric: "6 maquinas + lancamento",
+    href: "/portfolio/fixxe3d",
+  },
+  {
+    name: "Brownie do Luiz",
+    desc: "Marca brasileira premium de brownies com exclusividade contratada Portugal e Espanha. Canal fisico + DTC.",
+    icon: "cookie" as const,
+    tag: "Food / Distribuicao",
+    status: "Em estruturacao",
+    statusColor: "bg-warning",
+    metric: "Exclusividade PT/ES",
+    href: "/portfolio/brownie-do-luiz",
+  },
+  {
     name: "Strike Studio",
-    desc: "Franqueadora de boutique de MMA e fitness gamificado com IA. Strike House + Strike Lab.",
+    desc: "Wellness, striking e fitness boutique. Strike House em operacao, Strike Lab em lancamento.",
     icon: "dumbbell" as const,
     tag: "MMA / Fitness",
     status: "Em operacao",
@@ -43,26 +69,13 @@ const projetos = [
     metric: "130+ alunos ativos",
     href: "/portfolio/strike-studio",
   },
-  {
-    name: "Nexial E-Brand",
-    desc: "E-commerce de marcas proprias com sourcing internacional. Marca Axis em lancamento.",
-    icon: "shopping-bag" as const,
-    tag: "E-commerce",
-    status: "Em desenvolvimento",
-    statusColor: "bg-warning",
-    metric: "1a marca em lancamento",
-    href: "/portfolio/nexial-e-brand",
-  },
-  {
-    name: "FarmLab 3D",
-    desc: "Laboratorio de criacao de produtos via impressao 3D. Producao, prototipagem e marcas proprias.",
-    icon: "printer" as const,
-    tag: "Impressao 3D",
-    status: "Em operacao",
-    statusColor: "bg-success",
-    metric: "5 impressoras ativas",
-    href: "/portfolio/farmlab-3d",
-  },
+];
+
+const adicionais = [
+  { name: "Unitri Robotics — robotica e IA aplicada", href: "/portfolio/unitri-robotics" },
+  { name: "Renzo Gracie BJJ — wellness e comunidade", href: "/portfolio/renzo-gracie-bjj" },
+  { name: "Nexial Global — sourcing China", href: "/portfolio/nexial-global" },
+  { name: "Nexial E-Brand — e-commerce DTC", href: "/portfolio/nexial-e-brand" },
 ];
 
 export function Negocios() {
@@ -91,7 +104,9 @@ export function Negocios() {
             className="inline-flex items-center gap-1.5 text-accent text-[14px] font-medium hover:underline underline-offset-4 group shrink-0"
           >
             Ver todas as empresas
-            <span className="group-hover:translate-x-0.5 transition-transform duration-300">&rarr;</span>
+            <span className="group-hover:translate-x-0.5 transition-transform duration-300">
+              &rarr;
+            </span>
           </Link>
         </motion.div>
 
@@ -147,12 +162,15 @@ export function Negocios() {
           transition={{ delay: 0.5, duration: 0.6 }}
           className="flex flex-wrap gap-2.5"
         >
-          <Link
-            href="/portfolio/nexial-global"
-            className="text-[12px] font-medium text-muted bg-white border border-black/[0.04] px-4 py-2 rounded-full hover:border-black/[0.08] hover:text-primary hover:shadow-sm transition-all duration-300"
-          >
-            + Nexial Global — Sourcing China
-          </Link>
+          {adicionais.map(({ name, href }) => (
+            <Link
+              key={href}
+              href={href}
+              className="text-[12px] font-medium text-muted bg-white border border-black/[0.04] px-4 py-2 rounded-full hover:border-black/[0.08] hover:text-primary hover:shadow-sm transition-all duration-300"
+            >
+              + {name}
+            </Link>
+          ))}
           <span className="text-[12px] text-muted/60 self-center ml-1 font-medium">
             ver portfolio completo
           </span>

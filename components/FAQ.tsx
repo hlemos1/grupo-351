@@ -30,7 +30,7 @@ const faqs = [
   },
   {
     q: "Como as empresas do ecossistema se conectam?",
-    a: "Cada empresa e um no na rede. A operacao fisica (Strike Studio, FarmLab 3D) gera caixa e dados. A inteligencia digital (Nexial GSO) transforma dados em decisao. O comercio global (Nexial Global, E-Brand) conecta producao a mercado. Tudo se alimenta mutuamente.",
+    a: "Cada empresa e um no na rede. A operacao fisica (Strike Studio, FIXXE3D, Brownie do Luiz, Unitri Robotics) gera caixa e dados. A inteligencia digital (Nexial GSO) transforma dados em decisao. O comercio global (Nexial Global, E-Brand) conecta producao a mercado. Tudo se alimenta mutuamente.",
   },
   {
     q: "Qual a diferenca entre operador e investidor?",
@@ -38,7 +38,7 @@ const faqs = [
   },
   {
     q: "O Grupo +351 participa da operacao diaria?",
-    a: "Depende da vertical. Nas empresas 100% do grupo (Nexial GSO, E-Brand), sim. Nas joint ventures (Strike Studio, FarmLab 3D, Nexial Global), a operacao e do parceiro. O grupo fornece estrategia, governanca, conexao com o ecossistema e conselho mensal.",
+    a: "Depende da vertical. Nas empresas 100% do grupo (Nexial GSO, Brownie do Luiz, Unitri Robotics, Renzo Gracie, E-Brand), sim. Nas joint ventures (Strike Studio, FIXXE3D, Nexial Global), a operacao e do parceiro. O grupo fornece estrategia, governanca, conexao com o ecossistema e conselho mensal.",
   },
 ];
 

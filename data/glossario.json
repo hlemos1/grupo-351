@@ -8,7 +8,7 @@
   {
     "slug": "operacao-fisica",
     "termo": "Operacao Fisica",
-    "definicao": "Camada do ecossistema onde o valor nasce. Negocios reais com clientes reais que geram caixa e dados. Exemplos: Strike Studio (130+ alunos, MMA/fitness), FarmLab 3D (impressao 3D, producao).",
+    "definicao": "Camada do ecossistema onde o valor nasce. Negocios reais com clientes reais que geram caixa e dados. Exemplos: Strike Studio (130+ alunos, MMA/fitness), FIXXE3D (impressao 3D, producao + Academy), Brownie do Luiz (distribuicao iberica), Unitri Robotics (eventos e demos).",
     "categoria": "conceito"
   },
   {
@@ -50,7 +50,7 @@
   {
     "slug": "capex",
     "termo": "CAPEX",
-    "definicao": "Capital expenditure — investimento inicial necessario para colocar uma operacao em funcionamento. No ecossistema +351, varia de 5.000 EUR (FarmLab 3D) a 60.000 EUR (Nexial Global).",
+    "definicao": "Capital expenditure — investimento inicial necessario para colocar uma operacao em funcionamento. No ecossistema +351, varia de 5.000 EUR (FIXXE3D) a 60.000 EUR (Nexial Global).",
     "categoria": "metrica"
   },
   {
@@ -84,9 +84,9 @@
     "categoria": "empresa"
   },
   {
-    "slug": "farmlab-3d",
-    "termo": "FarmLab 3D",
-    "definicao": "Laboratorio de criacao de produtos via impressao 3D. 5 impressoras operacionais. Producao sob demanda, prototipagem rapida e desenvolvimento de marcas proprias. 75% Grupo +351, 25% operador.",
+    "slug": "fixxe3d",
+    "termo": "FIXXE3D",
+    "definicao": "Vertical de impressao 3D em tres frentes integradas: retail B2C de produtos personalizados, B2B de brindes corporativos e Academy de formacao. 6 maquinas em operacao, lancamento oficial no Cascais Kids (16-17 maio 2026). 75% Grupo +351, 25% Marcelo Cheba.",
     "categoria": "empresa"
   }
 ]

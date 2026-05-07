@@ -45,6 +45,16 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "*.vercel-storage.com" },
     ],
   },
+  async redirects() {
+    return [
+      // Legacy slug rename: FarmLab 3D -> FIXXE3D (2026-05)
+      {
+        source: "/portfolio/farmlab-3d",
+        destination: "/portfolio/fixxe3d",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {
@@ -53,15 +63,11 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/_next/static/:path*",
-        headers: [
-          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
-        ],
+        headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
       },
       {
         source: "/fonts/:path*",
-        headers: [
-          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
-        ],
+        headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
       },
       {
         source: "/_next/image/:path*",
