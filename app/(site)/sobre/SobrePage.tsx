@@ -147,8 +147,8 @@ export function SobrePage() {
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             <Counter
-              value={5}
-              label="Empresas ativas"
+              value={8}
+              label="Verticais ativas"
               className="text-center text-4xl md:text-5xl font-bold text-primary font-display tracking-[-0.03em]"
             />
             <Counter
