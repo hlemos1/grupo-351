@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { getUserSession } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { generateApiKey } from "@/lib/api-auth";
+import { generateApiKey, hashApiKey, apiKeyDisplayParts } from "@/lib/api-auth";
 import { getCompanyPlan } from "@/lib/stripe";
 import { logPlatformAudit } from "@/lib/audit";
 import { cached, invalidate, CACHE_KEYS } from "@/lib/cache";
@@ -15,26 +15,31 @@ export async function GET() {
 
   const cacheKey = CACHE_KEYS.apiKeys(session.id);
 
-  const masked = await cached(cacheKey, async () => {
-    const keys = await prisma.apiKey.findMany({
-      where: { userId: session.id },
-      select: {
-        id: true,
-        key: true,
-        nome: true,
-        scopes: true,
-        ativa: true,
-        ultimoUso: true,
-        criadoEm: true,
-      },
-      orderBy: { criadoEm: "desc" },
-    });
+  const masked = await cached(
+    cacheKey,
+    async () => {
+      const keys = await prisma.apiKey.findMany({
+        where: { userId: session.id },
+        select: {
+          id: true,
+          keyPrefix: true,
+          keyLast4: true,
+          nome: true,
+          scopes: true,
+          ativa: true,
+          ultimoUso: true,
+          criadoEm: true,
+        },
+        orderBy: { criadoEm: "desc" },
+      });
 
-    return keys.map((k) => ({
-      ...k,
-      key: k.key.slice(0, 12) + "..." + k.key.slice(-4),
-    }));
-  }, 300);
+      return keys.map(({ keyPrefix, keyLast4, ...k }) => ({
+        ...k,
+        key: `${keyPrefix}...${keyLast4}`,
+      }));
+    },
+    300
+  );
 
   return NextResponse.json(masked);
 }
@@ -49,7 +54,10 @@ export async function POST(request: Request) {
   // Verificar se tem empresa e plano enterprise
   const company = await prisma.company.findUnique({ where: { ownerId: session.id } });
   if (!company) {
-    return NextResponse.json({ error: "Necessário ter uma empresa cadastrada para criar API keys" }, { status: 403 });
+    return NextResponse.json(
+      { error: "Necessário ter uma empresa cadastrada para criar API keys" },
+      { status: 403 }
+    );
   }
   const plan = await getCompanyPlan(company.id);
   if (!plan.limites.apiAccess) {
@@ -57,7 +65,9 @@ export async function POST(request: Request) {
   }
 
   let body;
-  try { body = await request.json(); } catch {
+  try {
+    body = await request.json();
+  } catch {
     return NextResponse.json({ error: "JSON inválido" }, { status: 400 });
   }
   const { nome, scopes } = body;
@@ -66,16 +76,24 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "nome obrigatório" }, { status: 400 });
   }
 
-  const validScopes = ["companies:read", "opportunities:read", "opportunities:write", "matches:read"];
-  const filteredScopes = (scopes || ["companies:read", "opportunities:read"]).filter(
-    (s: string) => validScopes.includes(s)
+  const validScopes = [
+    "companies:read",
+    "opportunities:read",
+    "opportunities:write",
+    "matches:read",
+  ];
+  const filteredScopes = (scopes || ["companies:read", "opportunities:read"]).filter((s: string) =>
+    validScopes.includes(s)
   );
 
   const key = generateApiKey();
+  const { keyPrefix, keyLast4 } = apiKeyDisplayParts(key);
 
   const apiKey = await prisma.apiKey.create({
     data: {
-      key,
+      keyHash: hashApiKey(key),
+      keyPrefix,
+      keyLast4,
       nome,
       scopes: filteredScopes,
       userId: session.id,
@@ -94,12 +112,15 @@ export async function POST(request: Request) {
   await invalidate(CACHE_KEYS.apiKeys(session.id));
 
   // Retornar key completa apenas na criação
-  return NextResponse.json({
-    id: apiKey.id,
-    key: apiKey.key, // IMPORTANTE: visível apenas aqui
-    nome: apiKey.nome,
-    scopes: apiKey.scopes,
-  }, { status: 201 });
+  return NextResponse.json(
+    {
+      id: apiKey.id,
+      key, // IMPORTANTE: key completa visível apenas aqui — não é armazenada (só o hash)
+      nome: apiKey.nome,
+      scopes: apiKey.scopes,
+    },
+    { status: 201 }
+  );
 }
 
 // DELETE — revogar API key

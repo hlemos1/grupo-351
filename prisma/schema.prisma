@@ -376,7 +376,9 @@ model Payment {
 
 model ApiKey {
   id          String    @id @default(cuid())
-  key         String    @unique
+  keyHash     String    @unique @map("key_hash") // sha256(key) — nunca armazenar a key em texto claro
+  keyPrefix   String    @map("key_prefix")       // ex: pk351_xxxxxx (display)
+  keyLast4    String    @map("key_last4")        // ultimos 4 chars (display)
   nome        String    // nome descritivo
   scopes      String[]  // companies:read | opportunities:read | opportunities:write | matches:read
   ativa       Boolean   @default(true)
