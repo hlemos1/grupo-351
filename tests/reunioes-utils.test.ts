@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi, afterEach } from "vitest";
 import {
   formatDate,
   formatDateShort,
@@ -37,14 +37,44 @@ describe("formatMonth", () => {
 describe("daysSince", () => {
   it("returns 0 for today", () => {
     const today = new Date().toISOString().split("T")[0];
-    const days = daysSince(today);
-    expect(days).toBeLessThanOrEqual(1);
-    expect(days).toBeGreaterThanOrEqual(0);
+    expect(daysSince(today)).toBe(0);
+  });
+
+  it("returns 1 for yesterday", () => {
+    const yesterday = new Date(Date.now() - 86400000).toISOString().split("T")[0];
+    expect(daysSince(yesterday)).toBe(1);
   });
 
   it("returns positive number for past dates", () => {
     const pastDate = "2024-01-01";
     expect(daysSince(pastDate)).toBeGreaterThan(0);
+  });
+
+  // Regressao: a versao antiga ancorava a data ao meio-dia LOCAL e comparava
+  // com Date.now(), retornando -1 para "hoje" quando rodada antes do meio-dia.
+  // Estes casos provam que o resultado nao depende da hora do dia nem do fuso.
+  describe("independente da hora do dia", () => {
+    afterEach(() => {
+      vi.useRealTimers();
+    });
+
+    it("retorna 0 para hoje as 00:01 UTC", () => {
+      vi.useFakeTimers();
+      vi.setSystemTime(new Date("2026-03-10T00:01:00Z"));
+      expect(daysSince("2026-03-10")).toBe(0);
+    });
+
+    it("retorna 0 para hoje as 23:59 UTC", () => {
+      vi.useFakeTimers();
+      vi.setSystemTime(new Date("2026-03-10T23:59:00Z"));
+      expect(daysSince("2026-03-10")).toBe(0);
+    });
+
+    it("retorna 1 para ontem independente da hora", () => {
+      vi.useFakeTimers();
+      vi.setSystemTime(new Date("2026-03-10T00:01:00Z"));
+      expect(daysSince("2026-03-09")).toBe(1);
+    });
   });
 });
 
