@@ -31,6 +31,7 @@ export function usePortfolio() {
   }, []);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- setState runs after await inside fetchProjetos, not synchronously
     fetchProjetos();
   }, [fetchProjetos]);
 
