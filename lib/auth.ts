@@ -110,7 +110,11 @@ export function getSessionName(token: string): string | null {
   const parts = token.split(":");
   if (parts.length === 4) return parts[1]; // legado
   if (parts.length === 5) {
-    try { return decodeNome(parts[2]); } catch { return parts[2]; }
+    try {
+      return decodeNome(parts[2]);
+    } catch {
+      return parts[2];
+    }
   }
   return null;
 }
@@ -143,10 +147,12 @@ export async function verifyUserCredentials(
   if (!match) return { valid: false };
 
   // Atualizar último login
-  await prisma.user.update({
-    where: { id: user.id },
-    data: { ultimoLogin: new Date() },
-  }).catch((err) => logger.warn("Failed to update ultimoLogin", "auth", { error: String(err) }));
+  await prisma.user
+    .update({
+      where: { id: user.id },
+      data: { ultimoLogin: new Date() },
+    })
+    .catch((err) => logger.warn("Failed to update ultimoLogin", "auth", { error: String(err) }));
 
   return {
     valid: true,
@@ -154,8 +160,25 @@ export async function verifyUserCredentials(
   };
 }
 
-export function createUserSessionToken(user: { id: string; nome: string; role: string }): { token: string; expires: Date } {
+export function createUserSessionToken(user: { id: string; nome: string; role: string }): {
+  token: string;
+  expires: Date;
+} {
   return createToken(user.role, user.id, user.nome);
+}
+
+/**
+ * Guard contra account takeover por pre-hijacking (USENIX Security 22).
+ * Retorna true quando um login externo (ex: Google) NAO deve ser vinculado
+ * automaticamente a uma conta encontrada por email: a conta ja tem senha
+ * propria e ainda nao tem o provedor vinculado. Nesse caso o dono da senha
+ * precisa logar e vincular o provedor de forma explicita.
+ */
+export function shouldBlockGoogleAutoLink(
+  account: { senhaHash: string | null; googleId: string | null } | null
+): boolean {
+  if (!account) return false;
+  return Boolean(account.senhaHash) && !account.googleId;
 }
 
 export async function getUserSession(): Promise<{ id: string; nome: string; role: string } | null> {

@@ -86,3 +86,31 @@ describe("auth module", () => {
     expect(diff).toBeLessThanOrEqual(86400000);
   });
 });
+
+describe("shouldBlockGoogleAutoLink (pre-hijacking guard)", () => {
+  beforeEach(() => {
+    vi.resetModules();
+  });
+
+  it("BLOQUEIA conta com senha propria e sem googleId (cenario de takeover)", async () => {
+    const { shouldBlockGoogleAutoLink } = await import("@/lib/auth");
+    expect(shouldBlockGoogleAutoLink({ senhaHash: "$2b$12$hash", googleId: null })).toBe(true);
+  });
+
+  it("permite vincular conta sem senha (Google-only, sem credencial a proteger)", async () => {
+    const { shouldBlockGoogleAutoLink } = await import("@/lib/auth");
+    expect(shouldBlockGoogleAutoLink({ senhaHash: null, googleId: null })).toBe(false);
+  });
+
+  it("nao bloqueia conta que ja tem googleId vinculado (usuario recorrente)", async () => {
+    const { shouldBlockGoogleAutoLink } = await import("@/lib/auth");
+    expect(
+      shouldBlockGoogleAutoLink({ senhaHash: "$2b$12$hash", googleId: "google-sub-123" })
+    ).toBe(false);
+  });
+
+  it("nao bloqueia quando nao ha conta existente (novo usuario)", async () => {
+    const { shouldBlockGoogleAutoLink } = await import("@/lib/auth");
+    expect(shouldBlockGoogleAutoLink(null)).toBe(false);
+  });
+});

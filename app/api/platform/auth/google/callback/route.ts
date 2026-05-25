@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { prisma } from "@/lib/prisma";
-import { createUserSessionToken, USER_COOKIE } from "@/lib/auth";
+import { createUserSessionToken, USER_COOKIE, shouldBlockGoogleAutoLink } from "@/lib/auth";
 
 interface GoogleTokenResponse {
   access_token: string;
@@ -84,37 +84,56 @@ export async function GET(request: Request) {
       return NextResponse.redirect(`${baseUrl}/login?error=google_email`);
     }
 
-    // Encontrar ou criar usuário
+    // Encontrar ou criar usuário.
+    // Match primeiro pelo googleId (provedor exato), nunca por email cego —
+    // vincular Google a uma conta com senha propria sem prova de posse permite
+    // account takeover por pre-hijacking (USENIX Security 22).
     let user = await prisma.user.findFirst({
-      where: {
-        OR: [
-          { googleId: googleUser.sub },
-          { email: googleUser.email.toLowerCase() },
-        ],
-      },
+      where: { googleId: googleUser.sub },
     });
 
     if (user) {
-      // Atualizar googleId e avatar se necessário
-      await prisma.user.update({
+      // Usuário Google recorrente: apenas atualizar avatar/ultimoLogin.
+      user = await prisma.user.update({
         where: { id: user.id },
         data: {
-          googleId: googleUser.sub,
           avatar: user.avatar || googleUser.picture || null,
           ultimoLogin: new Date(),
         },
       });
     } else {
-      // Criar novo usuário
-      user = await prisma.user.create({
-        data: {
-          email: googleUser.email.toLowerCase(),
-          nome: googleUser.name || googleUser.email.split("@")[0],
-          googleId: googleUser.sub,
-          avatar: googleUser.picture || null,
-          role: "empresa",
-        },
+      const byEmail = await prisma.user.findFirst({
+        where: { email: googleUser.email.toLowerCase() },
       });
+
+      if (byEmail) {
+        // Conta existente com senha propria e sem Google vinculado:
+        // NAO vincular automaticamente. Exigir login por senha primeiro para
+        // depois vincular o provedor de forma explicita.
+        if (shouldBlockGoogleAutoLink(byEmail)) {
+          return NextResponse.redirect(`${baseUrl}/login?error=account_exists`);
+        }
+        // Conta sem credencial de senha: seguro vincular o Google.
+        user = await prisma.user.update({
+          where: { id: byEmail.id },
+          data: {
+            googleId: googleUser.sub,
+            avatar: byEmail.avatar || googleUser.picture || null,
+            ultimoLogin: new Date(),
+          },
+        });
+      } else {
+        // Criar novo usuário
+        user = await prisma.user.create({
+          data: {
+            email: googleUser.email.toLowerCase(),
+            nome: googleUser.name || googleUser.email.split("@")[0],
+            googleId: googleUser.sub,
+            avatar: googleUser.picture || null,
+            role: "empresa",
+          },
+        });
+      }
     }
 
     // Criar sessão
