@@ -66,8 +66,10 @@ describe("Prisma Schema Validation", () => {
     expect(schema).toMatch(/stripeSubscriptionId.*@unique/);
   });
 
-  it("ApiKey has key unique constraint", () => {
-    expect(schema).toMatch(/model ApiKey \{[\s\S]*?key\s+String\s+@unique/);
+  it("ApiKey stores keyHash (unique), never plaintext key", () => {
+    expect(schema).toMatch(/model ApiKey \{[\s\S]*?keyHash\s+String\s+@unique/);
+    // Anti-regressao C-1: nao pode existir coluna `key` em texto claro.
+    expect(schema).not.toMatch(/model ApiKey \{[\s\S]*?\bkey\s+String/);
   });
 
   it("Parceiro has email and token unique", () => {

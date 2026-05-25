@@ -23,14 +23,19 @@ export async function validateApiKey(request: Request): Promise<ApiKeyContext | 
   const key = auth.slice(7);
   if (!key.startsWith("pk351_")) return null;
 
-  const apiKey = await prisma.apiKey.findUnique({ where: { key } });
+  // Nunca buscar pela key crua: armazenamos apenas o hash sha256.
+  const apiKey = await prisma.apiKey.findUnique({ where: { keyHash: hashApiKey(key) } });
   if (!apiKey || !apiKey.ativa) return null;
 
   // Atualizar último uso (fire-and-forget)
-  prisma.apiKey.update({
-    where: { id: apiKey.id },
-    data: { ultimoUso: new Date() },
-  }).catch((err) => logger.warn("Failed to update API key ultimoUso", "api-auth", { error: String(err) }));
+  prisma.apiKey
+    .update({
+      where: { id: apiKey.id },
+      data: { ultimoUso: new Date() },
+    })
+    .catch((err) =>
+      logger.warn("Failed to update API key ultimoUso", "api-auth", { error: String(err) })
+    );
 
   return {
     userId: apiKey.userId,
@@ -44,5 +49,16 @@ export function hasScope(ctx: ApiKeyContext, scope: string): boolean {
 }
 
 export function generateApiKey(): string {
+  // 24 bytes aleatorios = 192 bits de entropia -> sha256 e' adequado (lookup indexado).
   return `pk351_${crypto.randomBytes(24).toString("hex")}`;
+}
+
+/** Hash determinístico (sha256) usado como chave de busca da API key. */
+export function hashApiKey(key: string): string {
+  return crypto.createHash("sha256").update(key).digest("hex");
+}
+
+/** Partes exibíveis da key (a key completa nunca é recuperável após criação). */
+export function apiKeyDisplayParts(key: string): { keyPrefix: string; keyLast4: string } {
+  return { keyPrefix: key.slice(0, 12), keyLast4: key.slice(-4) };
 }
