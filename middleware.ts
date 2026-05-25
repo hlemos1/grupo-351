@@ -67,7 +67,11 @@ export async function middleware(request: NextRequest) {
   // ─── Admin routes ───
   if (pathname.startsWith("/admin") || pathname.startsWith("/api/admin")) {
     // Allow login/logout without auth
-    if (pathname === "/admin/login" || pathname === "/api/admin/login" || pathname === "/api/admin/logout") {
+    if (
+      pathname === "/admin/login" ||
+      pathname === "/api/admin/login" ||
+      pathname === "/api/admin/logout"
+    ) {
       return NextResponse.next();
     }
 
@@ -79,6 +83,13 @@ export async function middleware(request: NextRequest) {
     const result = await verifyToken(session.value);
     if (!result.valid) {
       return redirectOrDeny(request, pathname, "/admin/login");
+    }
+
+    // RBAC: area admin exige role admin ou superadmin. Qualquer outro role
+    // (ex: viewer) ou token sem role e bloqueado — defesa central, cobre
+    // todas as rotas /api/admin e /admin de uma vez.
+    if (result.role !== "admin" && result.role !== "superadmin") {
+      return denyInsufficientRole(request, pathname);
     }
 
     const response = NextResponse.next();
@@ -126,11 +137,14 @@ function redirectOrDeny(request: NextRequest, pathname: string, loginPath: strin
   return NextResponse.redirect(new URL(loginPath, request.url));
 }
 
+// Autenticado mas sem role suficiente: 403 para API, redirect para paginas.
+function denyInsufficientRole(request: NextRequest, pathname: string) {
+  if (pathname.startsWith("/api/")) {
+    return NextResponse.json({ error: "Acesso negado" }, { status: 403 });
+  }
+  return NextResponse.redirect(new URL("/admin/login?error=forbidden", request.url));
+}
+
 export const config = {
-  matcher: [
-    "/admin/:path*",
-    "/api/admin/:path*",
-    "/dashboard/:path*",
-    "/api/platform/:path*",
-  ],
+  matcher: ["/admin/:path*", "/api/admin/:path*", "/dashboard/:path*", "/api/platform/:path*"],
 };

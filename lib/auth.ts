@@ -65,18 +65,27 @@ function verifyToken(token: string): { valid: boolean; role?: string; id?: strin
 export async function verifyCredentials(
   email: string,
   senha: string
-): Promise<{ valid: boolean; nome?: string }> {
+): Promise<{ valid: boolean; nome?: string; role?: string; id?: string }> {
   const user = await prisma.adminUser.findUnique({
     where: { email: email.toLowerCase() },
   });
   if (!user) return { valid: false };
   const match = await bcrypt.compare(senha, user.senhaHash);
   if (!match) return { valid: false };
-  return { valid: true, nome: user.nome };
+  return { valid: true, nome: user.nome, role: user.role, id: user.id };
 }
 
-export function createSessionToken(nome: string): { token: string; expires: Date } {
-  return createToken("admin", "legacy", nome);
+/**
+ * Emite o token de sessao admin com o role REAL do AdminUser
+ * (superadmin | admin | viewer). Antes hardcodava "admin", o que promovia
+ * qualquer viewer a admin efetivo — raiz da escalacao de privilegio.
+ */
+export function createSessionToken(
+  nome: string,
+  role: string,
+  id: string = "legacy"
+): { token: string; expires: Date } {
+  return createToken(role, id, nome);
 }
 
 /**
