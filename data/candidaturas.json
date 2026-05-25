@@ -13,10 +13,7 @@
     "setor": "food-service",
     "empresaAtual": "Sabores Lda.",
     "linkedin": "https://linkedin.com/in/ricardoalmeida",
-    "modelo": [
-      "strike-studio",
-      "nexial-e-brand"
-    ],
+    "modelo": ["strike-studio", "nexial-e-brand"],
     "capitalDisponivel": "30k-50k",
     "prazo": "1-3-meses",
     "dedicacao": "integral",
@@ -39,10 +36,7 @@
     "setor": "financeiro",
     "empresaAtual": "ABS Capital",
     "linkedin": "https://linkedin.com/in/anabsantos",
-    "modelo": [
-      "nexial-gso",
-      "nexial-e-brand"
-    ],
+    "modelo": ["nexial-gso", "nexial-e-brand"],
     "capitalDisponivel": "100k-250k",
     "prazo": "3-6-meses",
     "dedicacao": "passivo",
@@ -66,13 +60,11 @@
     "experiencia": "Designer industrial com 8 anos de experiencia. Trabalho com impressao 3D ha 4 anos, tenho farm propria com 6 Bambu P1S. Ja vendi 2000+ pecas no Etsy.",
     "setor": "manufatura",
     "empresaAtual": "Freelancer",
-    "modelo": [
-      "farmlab-3d"
-    ],
+    "modelo": ["fixxe3d"],
     "capitalDisponivel": "10k-30k",
     "prazo": "imediato",
     "dedicacao": "integral",
-    "motivacao": "Vivo em Cascais e trabalho com 3D printing. O FarmLab 3D e literalmente o meu negocio ideal. Quero profissionalizar e escalar o que ja faco.",
+    "motivacao": "Vivo em Cascais e trabalho com 3D printing. A FIXXE3D e literalmente o meu negocio ideal. Quero profissionalizar e escalar o que ja faco.",
     "diferenciais": "Farm operacional, experiencia em design para FDM/SLA, carteira de clientes existente, dominio do Bambu Studio e slicing avancado.",
     "disponibilidade": "Qualquer dia, moro em Cascais",
     "aceitaNDA": true
@@ -91,10 +83,7 @@
     "setor": "importacao",
     "empresaAtual": "",
     "linkedin": "https://linkedin.com/in/mariaclarav",
-    "modelo": [
-      "nexial-global",
-      "nexial-e-brand"
-    ],
+    "modelo": ["nexial-global", "nexial-e-brand"],
     "capitalDisponivel": "50k-100k",
     "prazo": "1-3-meses",
     "dedicacao": "integral",

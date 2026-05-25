@@ -38,12 +38,36 @@ interface ConversaResumo {
 }
 
 const PROMPTS = [
-  { label: "Análise do pipeline", prompt: "Analise o pipeline de candidaturas atual. Identifique padrões, perfis mais comuns, e sugira ações prioritárias." },
-  { label: "Sinergias do ecossistema", prompt: "Mapeie as sinergias entre as empresas do portfolio (Nexial GSO, Strike Studio, E-Brand, Global, FarmLab 3D). Onde ha conexoes fortes e onde ha gaps?" },
-  { label: "Gerar artigo", prompt: "Sugira um novo artigo para a base de conhecimento baseado no estado atual do ecossistema. Retorne no formato JSON com titulo, resumo, categoria e conteudo." },
-  { label: "Novos termos", prompt: "Sugira 3 termos que faltam no glossário. Retorne cada um no formato JSON com termo, definicao e categoria." },
-  { label: "Relatório executivo", prompt: "Gere um relatório executivo sobre o estado atual do Grupo +351: projetos, pipeline, contatos e recomendações." },
-  { label: "Oportunidades", prompt: "Com base no portfólio e posicionamento em Portugal/Europa, que oportunidades adjacentes devemos considerar?" },
+  {
+    label: "Análise do pipeline",
+    prompt:
+      "Analise o pipeline de candidaturas atual. Identifique padrões, perfis mais comuns, e sugira ações prioritárias.",
+  },
+  {
+    label: "Sinergias do ecossistema",
+    prompt:
+      "Mapeie as sinergias entre as empresas do portfolio (Nexial GSO, FIXXE3D, Brownie do Luiz, Strike Studio, Unitri Robotics, Renzo Gracie BJJ, Nexial Global, Nexial E-Brand). Onde ha conexoes fortes e onde ha gaps?",
+  },
+  {
+    label: "Gerar artigo",
+    prompt:
+      "Sugira um novo artigo para a base de conhecimento baseado no estado atual do ecossistema. Retorne no formato JSON com titulo, resumo, categoria e conteudo.",
+  },
+  {
+    label: "Novos termos",
+    prompt:
+      "Sugira 3 termos que faltam no glossário. Retorne cada um no formato JSON com termo, definicao e categoria.",
+  },
+  {
+    label: "Relatório executivo",
+    prompt:
+      "Gere um relatório executivo sobre o estado atual do Grupo +351: projetos, pipeline, contatos e recomendações.",
+  },
+  {
+    label: "Oportunidades",
+    prompt:
+      "Com base no portfólio e posicionamento em Portugal/Europa, que oportunidades adjacentes devemos considerar?",
+  },
 ];
 
 export default function InteligenciaPage() {
@@ -82,7 +106,9 @@ export default function InteligenciaPage() {
     try {
       const res = await fetch("/api/admin/ai/historico");
       if (res.ok) setHistorico(await res.json());
-    } catch { /* ignore */ }
+    } catch {
+      /* ignore */
+    }
     setLoadingHistorico(false);
   }
 
@@ -91,14 +117,18 @@ export default function InteligenciaPage() {
       const res = await fetch(`/api/admin/ai/historico/${id}`);
       if (res.ok) {
         const data = await res.json();
-        const msgs = (data.mensagens as Array<{ role: string; content: string }>).map(
-          (m, i) => ({ id: `hist-${i}`, role: m.role as "user" | "assistant", content: m.content })
-        );
+        const msgs = (data.mensagens as Array<{ role: string; content: string }>).map((m, i) => ({
+          id: `hist-${i}`,
+          role: m.role as "user" | "assistant",
+          content: m.content,
+        }));
         setMessages(msgs);
         setConversaAtiva(id);
         setView("chat");
       }
-    } catch { setError("Erro ao carregar conversa"); }
+    } catch {
+      setError("Erro ao carregar conversa");
+    }
   }
 
   async function salvarConversa() {
@@ -109,7 +139,8 @@ export default function InteligenciaPage() {
     const firstUser = messages.find((m) => m.role === "user")?.content || "";
     const titulo = firstUser.length > 80 ? firstUser.slice(0, 77) + "..." : firstUser;
     const firstAssistant = messages.find((m) => m.role === "assistant")?.content || "";
-    const resumo = firstAssistant.length > 200 ? firstAssistant.slice(0, 197) + "..." : firstAssistant;
+    const resumo =
+      firstAssistant.length > 200 ? firstAssistant.slice(0, 197) + "..." : firstAssistant;
 
     try {
       const res = await fetch("/api/admin/ai/historico", {
@@ -129,7 +160,9 @@ export default function InteligenciaPage() {
       } else {
         setError("Erro ao salvar conversa");
       }
-    } catch { setError("Erro ao salvar conversa"); }
+    } catch {
+      setError("Erro ao salvar conversa");
+    }
     setSavingConversa(false);
   }
 
@@ -142,7 +175,9 @@ export default function InteligenciaPage() {
       });
       setHistorico((prev) => prev.filter((c) => c.id !== id));
       if (conversaAtiva === id) setConversaAtiva(null);
-    } catch { /* ignore */ }
+    } catch {
+      /* ignore */
+    }
   }
 
   function novaConversa() {
@@ -167,7 +202,9 @@ export default function InteligenciaPage() {
       const res = await fetch("/api/admin/ai", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: updated.map((m) => ({ role: m.role, content: m.content })) }),
+        body: JSON.stringify({
+          messages: updated.map((m) => ({ role: m.role, content: m.content })),
+        }),
       });
 
       if (!res.ok) {
@@ -195,13 +232,18 @@ export default function InteligenciaPage() {
           if (data === "[DONE]") break;
           try {
             const p = JSON.parse(data);
-            if (p.error) { setError(p.error); break; }
+            if (p.error) {
+              setError(p.error);
+              break;
+            }
             if (p.text) {
               setMessages((prev) =>
-                prev.map((m) => m.id === asstId ? { ...m, content: m.content + p.text } : m)
+                prev.map((m) => (m.id === asstId ? { ...m, content: m.content + p.text } : m))
               );
             }
-          } catch { /* skip */ }
+          } catch {
+            /* skip */
+          }
         }
       }
     } catch (err) {
@@ -227,13 +269,21 @@ export default function InteligenciaPage() {
   async function saveContent(content: string, type: "artigo" | "termo") {
     const pattern = type === "artigo" ? /"titulo"/ : /"termo"/;
     const match = content.match(new RegExp(`\\{[\\s\\S]*?${pattern.source}[\\s\\S]*?\\}`, ""));
-    if (!match) { setError(`Não encontrei JSON de ${type} na resposta.`); return; }
+    if (!match) {
+      setError(`Não encontrei JSON de ${type} na resposta.`);
+      return;
+    }
     try {
       const parsed = JSON.parse(match[0]);
       setSaving(true);
       const name = type === "artigo" ? parsed.titulo : parsed.termo;
       if (!name) throw new Error("Campo obrigatório ausente");
-      const slug = name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+      const slug = name
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/(^-|-$)/g, "");
       const endpoint = type === "artigo" ? "/api/admin/artigos" : "/api/admin/glossario";
       const res = await fetch(endpoint, {
         method: "POST",
@@ -247,13 +297,21 @@ export default function InteligenciaPage() {
         setSaveMsg(type === "artigo" ? "Artigo salvo!" : "Termo salvo!");
         setTimeout(() => setSaveMsg(""), 3000);
       }
-    } catch { setError(`JSON de ${type} inválido.`); }
+    } catch {
+      setError(`JSON de ${type} inválido.`);
+    }
     setSaving(false);
   }
 
   function formatDate(iso: string) {
     const d = new Date(iso);
-    return d.toLocaleDateString("pt-PT", { day: "2-digit", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" });
+    return d.toLocaleDateString("pt-PT", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
   }
 
   return (
@@ -281,8 +339,8 @@ export default function InteligenciaPage() {
               {view === "historico"
                 ? `${historico.length} conversas salvas`
                 : conversaAtiva
-                ? "Conversa do histórico"
-                : "Contexto completo do ecossistema"}
+                  ? "Conversa do histórico"
+                  : "Contexto completo do ecossistema"}
             </p>
           </div>
         </div>
@@ -293,7 +351,11 @@ export default function InteligenciaPage() {
               disabled={savingConversa}
               className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-[12px] font-medium text-muted hover:text-accent hover:bg-accent/5 transition-all disabled:opacity-40"
             >
-              {savingConversa ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Save className="w-3.5 h-3.5" />}
+              {savingConversa ? (
+                <Loader2 className="w-3.5 h-3.5 animate-spin" />
+              ) : (
+                <Save className="w-3.5 h-3.5" />
+              )}
               Salvar
             </button>
           )}
@@ -325,7 +387,10 @@ export default function InteligenciaPage() {
                 <Plus className="w-4 h-4" />
               </button>
               <button
-                onClick={() => { setMessages([]); setConversaAtiva(null); }}
+                onClick={() => {
+                  setMessages([]);
+                  setConversaAtiva(null);
+                }}
                 className="p-2 rounded-xl text-muted hover:text-foreground hover:bg-black/5 transition-all"
               >
                 <Trash2 className="w-4 h-4" />
@@ -346,7 +411,9 @@ export default function InteligenciaPage() {
           >
             <AlertTriangle className="w-4 h-4 shrink-0" />
             <span className="flex-1 text-[13px]">{error}</span>
-            <button onClick={() => setError("")}><X className="w-4 h-4 text-red-400" /></button>
+            <button onClick={() => setError("")}>
+              <X className="w-4 h-4 text-red-400" />
+            </button>
           </motion.div>
         )}
         {saveMsg && (
@@ -377,7 +444,8 @@ export default function InteligenciaPage() {
                 Nenhuma conversa salva
               </h2>
               <p className="text-muted text-sm max-w-sm">
-                Quando salvar uma conversa com a IA, ela aparece aqui como base de aprendizado do ecossistema.
+                Quando salvar uma conversa com a IA, ela aparece aqui como base de aprendizado do
+                ecossistema.
               </p>
             </div>
           ) : (
@@ -390,10 +458,7 @@ export default function InteligenciaPage() {
                   <div className="w-9 h-9 rounded-xl bg-accent/[0.06] flex items-center justify-center shrink-0 mt-0.5">
                     <MessageSquare className="w-4 h-4 text-accent" />
                   </div>
-                  <button
-                    onClick={() => loadConversa(c.id)}
-                    className="flex-1 text-left min-w-0"
-                  >
+                  <button onClick={() => loadConversa(c.id)} className="flex-1 text-left min-w-0">
                     <p className="text-[14px] font-medium text-foreground truncate group-hover:text-accent transition-colors">
                       {c.titulo}
                     </p>
@@ -446,7 +511,8 @@ export default function InteligenciaPage() {
                     Assistente Estratégico
                   </h2>
                   <p className="text-muted text-sm max-w-sm mb-8">
-                    Tenho acesso total ao ecossistema. Projetos, candidaturas, contatos e base de conhecimento.
+                    Tenho acesso total ao ecossistema. Projetos, candidaturas, contatos e base de
+                    conhecimento.
                   </p>
                 </motion.div>
                 <motion.div
@@ -510,7 +576,11 @@ export default function InteligenciaPage() {
                                   onClick={() => copyMsg(msg.content, msg.id)}
                                   className="flex items-center gap-1 text-[11px] text-muted hover:text-foreground px-2 py-1 rounded-lg hover:bg-black/[0.04] transition-all"
                                 >
-                                  {copied === msg.id ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
+                                  {copied === msg.id ? (
+                                    <Check className="w-3 h-3" />
+                                  ) : (
+                                    <Copy className="w-3 h-3" />
+                                  )}
                                   {copied === msg.id ? "Copiado" : "Copiar"}
                                 </button>
                                 <button

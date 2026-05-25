@@ -47,8 +47,8 @@ export function ArtigosTab() {
     setLoading(false);
   }, []);
 
-  // eslint-disable-next-line react-hooks/set-state-in-effect -- setState calls are after await (async)
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- setState runs after await inside fetchArtigos, not synchronously
     fetchArtigos();
   }, [fetchArtigos]);
 

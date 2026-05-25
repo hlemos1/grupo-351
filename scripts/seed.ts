@@ -19,7 +19,8 @@ const candidaturas = [
     pais: "Portugal",
     cidade: "Lisboa",
     perfil: "operador",
-    experiencia: "15 anos em gestao de restaurantes e food service. Operei 3 restaurantes proprios em Lisboa e 2 franquias de marcas internacionais. Experiencia com delivery via Glovo e UberEats.",
+    experiencia:
+      "15 anos em gestao de restaurantes e food service. Operei 3 restaurantes proprios em Lisboa e 2 franquias de marcas internacionais. Experiencia com delivery via Glovo e UberEats.",
     setor: "food-service",
     empresaAtual: "Sabores Lda.",
     linkedin: "https://linkedin.com/in/ricardoalmeida",
@@ -27,8 +28,10 @@ const candidaturas = [
     capitalDisponivel: "30k-50k",
     prazo: "1-3-meses",
     dedicacao: "integral",
-    motivacao: "Quero expandir minha atuacao para o fitness e e-commerce. O modelo do +351 que integra fisico e digital e exatamente o que procuro.",
-    diferenciais: "Rede de contactos com 50+ empresarios em Lisboa. Experiencia comprovada em gestao de equipes de 20+ pessoas. Conheco profundamente o mercado local.",
+    motivacao:
+      "Quero expandir minha atuacao para o fitness e e-commerce. O modelo do +351 que integra fisico e digital e exatamente o que procuro.",
+    diferenciais:
+      "Rede de contactos com 50+ empresarios em Lisboa. Experiencia comprovada em gestao de equipes de 20+ pessoas. Conheco profundamente o mercado local.",
     disponibilidade: "Segunda a sexta, 9h-18h",
     aceitaNDA: true,
   },
@@ -42,7 +45,8 @@ const candidaturas = [
     pais: "Brasil",
     cidade: "Rio de Janeiro",
     perfil: "investidor",
-    experiencia: "Investidora anjo com portfolio de 8 startups. Saida bem-sucedida em 2 (fintech e edtech). Background em consultoria McKinsey. MBA em Wharton.",
+    experiencia:
+      "Investidora anjo com portfolio de 8 startups. Saida bem-sucedida em 2 (fintech e edtech). Background em consultoria McKinsey. MBA em Wharton.",
     setor: "financeiro",
     empresaAtual: "ABS Capital",
     linkedin: "https://linkedin.com/in/anabsantos",
@@ -50,8 +54,10 @@ const candidaturas = [
     capitalDisponivel: "100k-250k",
     prazo: "3-6-meses",
     dedicacao: "passivo",
-    motivacao: "Interesse em exposicao ao mercado europeu com tese clara. O modelo de consultoria IA + e-commerce e escalavel. Quero um veiculo de investimento com governanca real.",
-    diferenciais: "Capital paciente + rede de mentores e investidores no Brasil e EUA. Posso trazer co-investidores para rodadas futuras.",
+    motivacao:
+      "Interesse em exposicao ao mercado europeu com tese clara. O modelo de consultoria IA + e-commerce e escalavel. Quero um veiculo de investimento com governanca real.",
+    diferenciais:
+      "Capital paciente + rede de mentores e investidores no Brasil e EUA. Posso trazer co-investidores para rodadas futuras.",
     disponibilidade: "Flexivel, prefiro video-chamadas",
     aceitaNDA: true,
     notas: "Perfil muito forte. Agendar call com Henrique esta semana.",
@@ -67,15 +73,18 @@ const candidaturas = [
     pais: "Portugal",
     cidade: "Cascais",
     perfil: "ambos",
-    experiencia: "Designer industrial com 8 anos de experiencia. Trabalho com impressao 3D ha 4 anos, tenho farm propria com 6 Bambu P1S. Ja vendi 2000+ pecas no Etsy.",
+    experiencia:
+      "Designer industrial com 8 anos de experiencia. Trabalho com impressao 3D ha 4 anos, tenho farm propria com 6 Bambu P1S. Ja vendi 2000+ pecas no Etsy.",
     setor: "manufatura",
     empresaAtual: "Freelancer",
-    modelo: ["farmlab-3d"],
+    modelo: ["fixxe3d"],
     capitalDisponivel: "10k-30k",
     prazo: "imediato",
     dedicacao: "integral",
-    motivacao: "Vivo em Cascais e trabalho com 3D printing. O FarmLab 3D e literalmente o meu negocio ideal. Quero profissionalizar e escalar o que ja faco.",
-    diferenciais: "Farm operacional, experiencia em design para FDM/SLA, carteira de clientes existente, dominio do Bambu Studio e slicing avancado.",
+    motivacao:
+      "Vivo em Cascais e trabalho com 3D printing. A FIXXE3D e literalmente o meu negocio ideal. Quero profissionalizar e escalar o que ja faco.",
+    diferenciais:
+      "Farm operacional, experiencia em design para FDM/SLA, carteira de clientes existente, dominio do Bambu Studio e slicing avancado.",
     disponibilidade: "Qualquer dia, moro em Cascais",
     aceitaNDA: true,
   },
@@ -89,7 +98,8 @@ const candidaturas = [
     pais: "Portugal",
     cidade: "Porto",
     perfil: "operador",
-    experiencia: "10 anos em e-commerce. Montei e vendi 2 lojas online (moda feminina e acessorios). Experiencia com sourcing da China via Alibaba e 1688.",
+    experiencia:
+      "10 anos em e-commerce. Montei e vendi 2 lojas online (moda feminina e acessorios). Experiencia com sourcing da China via Alibaba e 1688.",
     setor: "importacao",
     empresaAtual: "",
     linkedin: "https://linkedin.com/in/mariaclarav",
@@ -97,8 +107,10 @@ const candidaturas = [
     capitalDisponivel: "50k-100k",
     prazo: "1-3-meses",
     dedicacao: "integral",
-    motivacao: "Tenho experiencia direta com importacao China-Europa e quero um modelo com estrutura. Nexial Global e o tipo de negocio que sei operar. O E-Brand me interessa como canal de distribuicao.",
-    diferenciais: "Contactos com 15+ fornecedores verificados na China. Experiencia com despacho aduaneiro PT. Sei montar e otimizar lojas Shopify.",
+    motivacao:
+      "Tenho experiencia direta com importacao China-Europa e quero um modelo com estrutura. Nexial Global e o tipo de negocio que sei operar. O E-Brand me interessa como canal de distribuicao.",
+    diferenciais:
+      "Contactos com 15+ fornecedores verificados na China. Experiencia com despacho aduaneiro PT. Sei montar e otimizar lojas Shopify.",
     disponibilidade: "Terca e quinta, manha",
     aceitaNDA: true,
     notas: "Excelente perfil para Nexial Global. Entrevista presencial marcada para 15/03.",
@@ -116,7 +128,8 @@ const contatos = [
     email: "pedro.g@example.com",
     empresa: "DigitalFlow Agency",
     tipo: "fornecedor",
-    mensagem: "Somos uma agencia de marketing digital em Lisboa e gostariamos de apresentar nossos servicos ao Grupo +351. Temos experiencia com marcas B2C e e-commerce.",
+    mensagem:
+      "Somos uma agencia de marketing digital em Lisboa e gostariamos de apresentar nossos servicos ao Grupo +351. Temos experiencia com marcas B2C e e-commerce.",
     notas: "Contactar quando precisarmos de agencia para Nexial E-Brand",
   },
   {
@@ -129,7 +142,8 @@ const contatos = [
     empresa: "",
     tipo: "parceria",
     orcamento: "a-definir",
-    mensagem: "Sou instrutora de artes marciais no Porto e vi o projeto Strike Studio. Tenho interesse em entender melhor o modelo de franquia. Posso disponibilizar o meu espaco como piloto.",
+    mensagem:
+      "Sou instrutora de artes marciais no Porto e vi o projeto Strike Studio. Tenho interesse em entender melhor o modelo de franquia. Posso disponibilizar o meu espaco como piloto.",
   },
   {
     id: "ct3-c4d5-e6f7-a8b9-c0d1e2f3a4b5",
@@ -141,7 +155,8 @@ const contatos = [
     empresa: "CH Importacoes",
     tipo: "joint-venture",
     orcamento: "50k-200k",
-    mensagem: "Trabalho com importacao de equipamentos industriais da China. Tenho interesse na Nexial Global. Posso trazer know-how de supply chain e contactos com fornecedores em Yiwu e Guangzhou.",
+    mensagem:
+      "Trabalho com importacao de equipamentos industriais da China. Tenho interesse na Nexial Global. Posso trazer know-how de supply chain e contactos com fornecedores em Yiwu e Guangzhou.",
   },
 ];
 
