@@ -29,10 +29,12 @@ export async function POST(request: Request) {
     // Atualizar ultimo login
     const admin = await prisma.adminUser.findUnique({ where: { email: email.toLowerCase() } });
     if (admin) {
-      await prisma.adminUser.update({
-        where: { id: admin.id },
-        data: { ultimoLogin: new Date() },
-      }).catch(() => {});
+      await prisma.adminUser
+        .update({
+          where: { id: admin.id },
+          data: { ultimoLogin: new Date() },
+        })
+        .catch(() => {});
 
       await logAudit({
         acao: "login",
@@ -43,7 +45,7 @@ export async function POST(request: Request) {
       }).catch(() => {});
     }
 
-    const { token, expires } = createSessionToken(result.nome!);
+    const { token, expires } = createSessionToken(result.nome!, result.role!, result.id);
     const res = NextResponse.json({ success: true, nome: result.nome });
     res.cookies.set(COOKIE_NAME, token, {
       httpOnly: true,

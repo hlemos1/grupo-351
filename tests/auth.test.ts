@@ -16,7 +16,7 @@ describe("auth module", () => {
 
   it("createSessionToken returns token and expires", async () => {
     const { createSessionToken } = await import("@/lib/auth");
-    const result = createSessionToken("Admin Test");
+    const result = createSessionToken("Admin Test", "admin");
     expect(result.token).toBeTruthy();
     expect(result.expires).toBeInstanceOf(Date);
     expect(result.expires.getTime()).toBeGreaterThan(Date.now());
@@ -24,13 +24,13 @@ describe("auth module", () => {
 
   it("verifySessionToken validates a valid token", async () => {
     const { createSessionToken, verifySessionToken } = await import("@/lib/auth");
-    const { token } = createSessionToken("Admin Test");
+    const { token } = createSessionToken("Admin Test", "admin");
     expect(verifySessionToken(token)).toBe(true);
   });
 
   it("verifySessionToken rejects tampered token", async () => {
     const { createSessionToken, verifySessionToken } = await import("@/lib/auth");
-    const { token } = createSessionToken("Admin Test");
+    const { token } = createSessionToken("Admin Test", "admin");
     const tampered = token.slice(0, -10) + "0000000000";
     expect(verifySessionToken(tampered)).toBe(false);
   });
@@ -43,16 +43,29 @@ describe("auth module", () => {
 
   it("getSessionName extracts name from token", async () => {
     const { createSessionToken, getSessionName } = await import("@/lib/auth");
-    const { token } = createSessionToken("Maria Admin");
+    const { token } = createSessionToken("Maria Admin", "admin");
     const name = getSessionName(token);
     expect(name).toBe("Maria Admin");
   });
 
   it("getSessionRole extracts role from token", async () => {
     const { createSessionToken, getSessionRole } = await import("@/lib/auth");
-    const { token } = createSessionToken("Test");
+    const { token } = createSessionToken("Test", "admin");
     const role = getSessionRole(token);
     expect(role).toBe("admin");
+  });
+
+  it("createSessionToken preserva o role real — viewer NAO vira admin", async () => {
+    const { createSessionToken, getSessionRole } = await import("@/lib/auth");
+    const { token } = createSessionToken("Viewer User", "viewer");
+    // Raiz da escalacao de privilegio: antes o role era hardcoded "admin".
+    expect(getSessionRole(token)).toBe("viewer");
+  });
+
+  it("createSessionToken preserva role superadmin", async () => {
+    const { createSessionToken, getSessionRole } = await import("@/lib/auth");
+    const { token } = createSessionToken("Super", "superadmin");
+    expect(getSessionRole(token)).toBe("superadmin");
   });
 
   it("createUserSessionToken creates token with correct role", async () => {
@@ -79,10 +92,38 @@ describe("auth module", () => {
 
   it("token expires in 24 hours", async () => {
     const { createSessionToken } = await import("@/lib/auth");
-    const { expires } = createSessionToken("Test");
+    const { expires } = createSessionToken("Test", "admin");
     const diff = expires.getTime() - Date.now();
     // Should be approximately 24 hours (86400000 ms)
     expect(diff).toBeGreaterThan(86000000);
     expect(diff).toBeLessThanOrEqual(86400000);
+  });
+});
+
+describe("shouldBlockGoogleAutoLink (pre-hijacking guard)", () => {
+  beforeEach(() => {
+    vi.resetModules();
+  });
+
+  it("BLOQUEIA conta com senha propria e sem googleId (cenario de takeover)", async () => {
+    const { shouldBlockGoogleAutoLink } = await import("@/lib/auth");
+    expect(shouldBlockGoogleAutoLink({ senhaHash: "$2b$12$hash", googleId: null })).toBe(true);
+  });
+
+  it("permite vincular conta sem senha (Google-only, sem credencial a proteger)", async () => {
+    const { shouldBlockGoogleAutoLink } = await import("@/lib/auth");
+    expect(shouldBlockGoogleAutoLink({ senhaHash: null, googleId: null })).toBe(false);
+  });
+
+  it("nao bloqueia conta que ja tem googleId vinculado (usuario recorrente)", async () => {
+    const { shouldBlockGoogleAutoLink } = await import("@/lib/auth");
+    expect(
+      shouldBlockGoogleAutoLink({ senhaHash: "$2b$12$hash", googleId: "google-sub-123" })
+    ).toBe(false);
+  });
+
+  it("nao bloqueia quando nao ha conta existente (novo usuario)", async () => {
+    const { shouldBlockGoogleAutoLink } = await import("@/lib/auth");
+    expect(shouldBlockGoogleAutoLink(null)).toBe(false);
   });
 });

@@ -56,9 +56,39 @@ describe("middleware token format", () => {
 
     for (const token of invalidTokens) {
       const parts = token.split(":");
-      expect(parts.length === 4 || parts.length === 5).toBe(
-        [4, 5].includes(parts.length)
-      );
+      expect(parts.length === 4 || parts.length === 5).toBe([4, 5].includes(parts.length));
     }
+  });
+});
+
+describe("admin RBAC gate", () => {
+  // Replica a regra do choke point do middleware: a area admin so aceita
+  // role admin ou superadmin. Qualquer outro role (viewer) ou ausencia de
+  // role e bloqueado. A raiz (token carregar o role real) e testada em
+  // auth.test.ts sobre o codigo de producao.
+  function isAdminRoleAllowed(role?: string): boolean {
+    return role === "admin" || role === "superadmin";
+  }
+
+  it("permite admin", () => {
+    expect(isAdminRoleAllowed("admin")).toBe(true);
+  });
+
+  it("permite superadmin", () => {
+    expect(isAdminRoleAllowed("superadmin")).toBe(true);
+  });
+
+  it("bloqueia viewer", () => {
+    expect(isAdminRoleAllowed("viewer")).toBe(false);
+  });
+
+  it("bloqueia token sem role", () => {
+    expect(isAdminRoleAllowed(undefined)).toBe(false);
+    expect(isAdminRoleAllowed("")).toBe(false);
+  });
+
+  it("bloqueia roles da plataforma (empresa, parceiro) na area admin", () => {
+    expect(isAdminRoleAllowed("empresa")).toBe(false);
+    expect(isAdminRoleAllowed("parceiro")).toBe(false);
   });
 });
