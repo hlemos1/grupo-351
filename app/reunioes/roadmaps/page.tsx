@@ -4,6 +4,7 @@ import { useEffect, useState, useMemo } from "react";
 import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { SharedHeader } from "@/components/reunioes/SharedHeader";
+import { daysSince } from "@/lib/reunioes/utils";
 import {
   Map,
   ChevronDown,
@@ -74,11 +75,34 @@ interface Data {
   roadmaps: Roadmap[];
 }
 
-const statusConfig: Record<string, { label: string; color: string; bg: string; icon: typeof CheckCircle2 }> = {
-  em_andamento: { label: "Em andamento", color: "text-blue-600", bg: "bg-blue-500/10", icon: TrendingUp },
-  em_desenvolvimento: { label: "Em desenvolvimento", color: "text-amber-600", bg: "bg-amber-500/10", icon: Clock },
-  planejamento: { label: "Planejamento", color: "text-violet-600", bg: "bg-violet-500/10", icon: Circle },
-  concluido: { label: "Concluido", color: "text-emerald-600", bg: "bg-emerald-500/10", icon: CheckCircle2 },
+const statusConfig: Record<
+  string,
+  { label: string; color: string; bg: string; icon: typeof CheckCircle2 }
+> = {
+  em_andamento: {
+    label: "Em andamento",
+    color: "text-blue-600",
+    bg: "bg-blue-500/10",
+    icon: TrendingUp,
+  },
+  em_desenvolvimento: {
+    label: "Em desenvolvimento",
+    color: "text-amber-600",
+    bg: "bg-amber-500/10",
+    icon: Clock,
+  },
+  planejamento: {
+    label: "Planejamento",
+    color: "text-violet-600",
+    bg: "bg-violet-500/10",
+    icon: Circle,
+  },
+  concluido: {
+    label: "Concluido",
+    color: "text-emerald-600",
+    bg: "bg-emerald-500/10",
+    icon: CheckCircle2,
+  },
   pausado: { label: "Pausado", color: "text-red-500", bg: "bg-red-500/10", icon: AlertTriangle },
 };
 
@@ -124,12 +148,6 @@ function formatDate(dateStr: string) {
   return d.toLocaleDateString("pt-BR", { day: "2-digit", month: "short", year: "numeric" });
 }
 
-function daysSince(dateStr: string) {
-  const d = new Date(dateStr + "T12:00:00");
-  const now = new Date();
-  return Math.floor((now.getTime() - d.getTime()) / (1000 * 60 * 60 * 24));
-}
-
 export default function RoadmapsPage() {
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
@@ -143,11 +161,26 @@ export default function RoadmapsPage() {
   const [activePhase, setActivePhase] = useState<Record<string, number>>({});
 
   useEffect(() => {
-    if (!token) { queueMicrotask(() => { setLoading(false); setError(true); }); return; }
+    if (!token) {
+      queueMicrotask(() => {
+        setLoading(false);
+        setError(true);
+      });
+      return;
+    }
     fetch(`/api/reunioes/roadmaps?token=${encodeURIComponent(token)}`)
-      .then((r) => { if (!r.ok) throw new Error(); return r.json(); })
-      .then((d) => { setData(d); setLoading(false); })
-      .catch(() => { setLoading(false); setError(true); });
+      .then((r) => {
+        if (!r.ok) throw new Error();
+        return r.json();
+      })
+      .then((d) => {
+        setData(d);
+        setLoading(false);
+      })
+      .catch(() => {
+        setLoading(false);
+        setError(true);
+      });
   }, [token]);
 
   const filtered = useMemo(() => {
@@ -168,9 +201,17 @@ export default function RoadmapsPage() {
   if (error || (!loading && !token)) {
     return (
       <div className="min-h-screen bg-[#f5f5f7] flex items-center justify-center p-6">
-        <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="bg-white rounded-3xl border border-black/[0.04] shadow-xl p-10 max-w-sm w-full text-center">
-          <div className="w-14 h-14 rounded-2xl bg-red-500/10 flex items-center justify-center mx-auto mb-5"><Shield className="w-7 h-7 text-red-500" /></div>
-          <h1 className="text-xl font-bold text-foreground font-display tracking-tight mb-2">Acesso restrito</h1>
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="bg-white rounded-3xl border border-black/[0.04] shadow-xl p-10 max-w-sm w-full text-center"
+        >
+          <div className="w-14 h-14 rounded-2xl bg-red-500/10 flex items-center justify-center mx-auto mb-5">
+            <Shield className="w-7 h-7 text-red-500" />
+          </div>
+          <h1 className="text-xl font-bold text-foreground font-display tracking-tight mb-2">
+            Acesso restrito
+          </h1>
           <p className="text-sm text-muted">Token invalido.</p>
         </motion.div>
       </div>
@@ -196,30 +237,69 @@ export default function RoadmapsPage() {
 
       <main className="max-w-6xl mx-auto p-5 lg:p-8">
         <motion.div variants={stagger} initial="hidden" animate="show" className="space-y-6">
-
           {/* KPIs */}
           <motion.div variants={fadeUp} className="grid grid-cols-2 lg:grid-cols-4 gap-3">
             {[
-              { icon: Map, label: "Projetos ativos", value: data.roadmaps.filter(r => r.status === "em_andamento").length, sub: `de ${data.totalRoadmaps} mapeados`, color: "from-amber-500/10 to-amber-600/5", iconColor: "text-amber-500" },
-              { icon: ListChecks, label: "Acoes totais", value: totalAcoes, sub: `${(totalAcoes / data.totalRoadmaps).toFixed(0)} media por projeto`, color: "from-emerald-500/10 to-emerald-600/5", iconColor: "text-emerald-500" },
-              { icon: Flag, label: "Prioridade critica", value: data.roadmaps.filter(r => r.prioridade === "critica").length + data.roadmaps.filter(r => r.prioridade === "alta").length, sub: "critica + alta", color: "from-red-500/10 to-red-600/5", iconColor: "text-red-500" },
-              { icon: Layers, label: "Categorias", value: categorias.length, sub: "verticais distintas", color: "from-violet-500/10 to-violet-600/5", iconColor: "text-violet-500" },
+              {
+                icon: Map,
+                label: "Projetos ativos",
+                value: data.roadmaps.filter((r) => r.status === "em_andamento").length,
+                sub: `de ${data.totalRoadmaps} mapeados`,
+                color: "from-amber-500/10 to-amber-600/5",
+                iconColor: "text-amber-500",
+              },
+              {
+                icon: ListChecks,
+                label: "Acoes totais",
+                value: totalAcoes,
+                sub: `${(totalAcoes / data.totalRoadmaps).toFixed(0)} media por projeto`,
+                color: "from-emerald-500/10 to-emerald-600/5",
+                iconColor: "text-emerald-500",
+              },
+              {
+                icon: Flag,
+                label: "Prioridade critica",
+                value:
+                  data.roadmaps.filter((r) => r.prioridade === "critica").length +
+                  data.roadmaps.filter((r) => r.prioridade === "alta").length,
+                sub: "critica + alta",
+                color: "from-red-500/10 to-red-600/5",
+                iconColor: "text-red-500",
+              },
+              {
+                icon: Layers,
+                label: "Categorias",
+                value: categorias.length,
+                sub: "verticais distintas",
+                color: "from-violet-500/10 to-violet-600/5",
+                iconColor: "text-violet-500",
+              },
             ].map((kpi) => {
               const Icon = kpi.icon;
               return (
-                <div key={kpi.label} className="bg-white rounded-2xl border border-black/[0.04] p-5 hover:shadow-md transition-all duration-300">
-                  <div className={`w-9 h-9 rounded-xl bg-gradient-to-br ${kpi.color} flex items-center justify-center mb-3`}>
+                <div
+                  key={kpi.label}
+                  className="bg-white rounded-2xl border border-black/[0.04] p-5 hover:shadow-md transition-all duration-300"
+                >
+                  <div
+                    className={`w-9 h-9 rounded-xl bg-gradient-to-br ${kpi.color} flex items-center justify-center mb-3`}
+                  >
                     <Icon className={`w-[18px] h-[18px] ${kpi.iconColor}`} />
                   </div>
                   <p className="text-2xl font-bold text-foreground tracking-tight">{kpi.value}</p>
-                  <p className="text-[11px] text-muted mt-0.5 uppercase tracking-wider font-medium">{kpi.sub}</p>
+                  <p className="text-[11px] text-muted mt-0.5 uppercase tracking-wider font-medium">
+                    {kpi.sub}
+                  </p>
                 </div>
               );
             })}
           </motion.div>
 
           {/* Overview grid - mini cards */}
-          <motion.div variants={fadeUp} className="bg-white rounded-2xl border border-black/[0.04] p-6">
+          <motion.div
+            variants={fadeUp}
+            className="bg-white rounded-2xl border border-black/[0.04] p-6"
+          >
             <h2 className="text-[15px] font-semibold text-foreground mb-4">Visão Geral</h2>
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
               {data.roadmaps.map((rm) => {
@@ -238,11 +318,15 @@ export default function RoadmapsPage() {
                   >
                     <div className="flex items-center gap-1.5 mb-1.5">
                       <div className={`w-1.5 h-1.5 rounded-full ${prio?.dot || "bg-muted"}`} />
-                      <span className={`text-[9px] font-bold uppercase tracking-wider ${st?.color || "text-muted"}`}>
+                      <span
+                        className={`text-[9px] font-bold uppercase tracking-wider ${st?.color || "text-muted"}`}
+                      >
                         {st?.label.split(" ")[0] || rm.status}
                       </span>
                     </div>
-                    <p className="text-[11px] font-semibold text-foreground leading-tight line-clamp-2 mb-1.5">{rm.nome}</p>
+                    <p className="text-[11px] font-semibold text-foreground leading-tight line-clamp-2 mb-1.5">
+                      {rm.nome}
+                    </p>
                     <div className="flex items-center gap-2 text-[9px] text-muted">
                       <span>{rm.totalReunioes}r</span>
                       <span>·</span>
@@ -257,7 +341,9 @@ export default function RoadmapsPage() {
 
           {/* Filters */}
           <motion.div variants={fadeUp} className="flex flex-wrap gap-2 items-center">
-            <span className="text-[11px] font-semibold text-muted uppercase tracking-wider mr-1">Filtrar:</span>
+            <span className="text-[11px] font-semibold text-muted uppercase tracking-wider mr-1">
+              Filtrar:
+            </span>
             {/* Priority filters */}
             {["critica", "alta", "media"].map((p) => {
               const cfg = prioridadeConfig[p];
@@ -266,7 +352,9 @@ export default function RoadmapsPage() {
                   key={p}
                   onClick={() => setFilterPrioridade(filterPrioridade === p ? null : p)}
                   className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-medium transition-all ${
-                    filterPrioridade === p ? cfg.color + " ring-1 ring-current/20" : "text-muted hover:text-foreground bg-white border border-black/[0.04]"
+                    filterPrioridade === p
+                      ? cfg.color + " ring-1 ring-current/20"
+                      : "text-muted hover:text-foreground bg-white border border-black/[0.04]"
                   }`}
                 >
                   <div className={`w-1.5 h-1.5 rounded-full ${cfg.dot}`} />
@@ -281,14 +369,22 @@ export default function RoadmapsPage() {
                 key={cat}
                 onClick={() => setFilterCategoria(filterCategoria === cat ? null : cat)}
                 className={`px-2.5 py-1 rounded-lg text-[11px] font-medium transition-all ${
-                  filterCategoria === cat ? "bg-accent/10 text-accent ring-1 ring-accent/20" : "text-muted hover:text-foreground bg-white border border-black/[0.04]"
+                  filterCategoria === cat
+                    ? "bg-accent/10 text-accent ring-1 ring-accent/20"
+                    : "text-muted hover:text-foreground bg-white border border-black/[0.04]"
                 }`}
               >
                 {cat}
               </button>
             ))}
             {(filterPrioridade || filterCategoria) && (
-              <button onClick={() => { setFilterPrioridade(null); setFilterCategoria(null); }} className="text-[11px] text-red-500 hover:text-red-700 font-medium flex items-center gap-1 ml-1">
+              <button
+                onClick={() => {
+                  setFilterPrioridade(null);
+                  setFilterCategoria(null);
+                }}
+                className="text-[11px] text-red-500 hover:text-red-700 font-medium flex items-center gap-1 ml-1"
+              >
                 <X className="w-3 h-3" /> Limpar
               </button>
             )}
@@ -302,35 +398,67 @@ export default function RoadmapsPage() {
               const prio = prioridadeConfig[rm.prioridade];
               const StatusIcon = st?.icon || Circle;
               const days = daysSince(rm.dataUltima);
-              const currentPhase = activePhase[rm.id] ?? (rm.fases.length - 1);
+              const currentPhase = activePhase[rm.id] ?? rm.fases.length - 1;
 
               return (
-                <motion.div key={rm.id} variants={fadeUp} className="bg-white rounded-2xl border border-black/[0.04] overflow-hidden hover:shadow-md transition-all duration-300">
+                <motion.div
+                  key={rm.id}
+                  variants={fadeUp}
+                  className="bg-white rounded-2xl border border-black/[0.04] overflow-hidden hover:shadow-md transition-all duration-300"
+                >
                   {/* Card header */}
-                  <button onClick={() => setExpandedId(isOpen ? null : rm.id)} className="w-full flex items-start gap-4 p-5 text-left">
-                    <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${catColors[rm.categoria] || "from-slate-500/15 to-slate-600/5"} flex items-center justify-center shrink-0`}>
-                      <Map className={`w-5 h-5 ${catIconColors[rm.categoria] || "text-slate-500"}`} />
+                  <button
+                    onClick={() => setExpandedId(isOpen ? null : rm.id)}
+                    className="w-full flex items-start gap-4 p-5 text-left"
+                  >
+                    <div
+                      className={`w-12 h-12 rounded-xl bg-gradient-to-br ${catColors[rm.categoria] || "from-slate-500/15 to-slate-600/5"} flex items-center justify-center shrink-0`}
+                    >
+                      <Map
+                        className={`w-5 h-5 ${catIconColors[rm.categoria] || "text-slate-500"}`}
+                      />
                     </div>
 
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 mb-1">
-                        <h3 className="text-[15px] font-semibold text-foreground tracking-[-0.01em]">{rm.nome}</h3>
-                        <span className={`text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md ${prio?.color || ""}`}>
+                        <h3 className="text-[15px] font-semibold text-foreground tracking-[-0.01em]">
+                          {rm.nome}
+                        </h3>
+                        <span
+                          className={`text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md ${prio?.color || ""}`}
+                        >
                           {prio?.label}
                         </span>
                       </div>
-                      <p className="text-[12px] text-muted leading-relaxed line-clamp-2 mb-2">{rm.descricao}</p>
+                      <p className="text-[12px] text-muted leading-relaxed line-clamp-2 mb-2">
+                        {rm.descricao}
+                      </p>
                       <div className="flex flex-wrap items-center gap-3 text-[11px] text-muted">
                         <span className={`flex items-center gap-1 font-medium ${st?.color || ""}`}>
                           <StatusIcon className="w-3 h-3" /> {st?.label || rm.status}
                         </span>
-                        <span className="flex items-center gap-1"><CalendarDays className="w-3 h-3" />{rm.totalReunioes} reunioes</span>
-                        <span className="flex items-center gap-1"><ListChecks className="w-3 h-3" />{rm.totalAcoes} acoes</span>
-                        <span className="flex items-center gap-1"><Milestone className="w-3 h-3" />{rm.fases.length} fase{rm.fases.length !== 1 ? "s" : ""}</span>
+                        <span className="flex items-center gap-1">
+                          <CalendarDays className="w-3 h-3" />
+                          {rm.totalReunioes} reunioes
+                        </span>
+                        <span className="flex items-center gap-1">
+                          <ListChecks className="w-3 h-3" />
+                          {rm.totalAcoes} acoes
+                        </span>
+                        <span className="flex items-center gap-1">
+                          <Milestone className="w-3 h-3" />
+                          {rm.fases.length} fase{rm.fases.length !== 1 ? "s" : ""}
+                        </span>
                         {days <= 7 ? (
-                          <span className="flex items-center gap-1 text-emerald-600 font-medium"><Zap className="w-3 h-3" />Ativo esta semana</span>
+                          <span className="flex items-center gap-1 text-emerald-600 font-medium">
+                            <Zap className="w-3 h-3" />
+                            Ativo esta semana
+                          </span>
                         ) : (
-                          <span className="flex items-center gap-1"><Clock className="w-3 h-3" />{days}d desde ultima</span>
+                          <span className="flex items-center gap-1">
+                            <Clock className="w-3 h-3" />
+                            {days}d desde ultima
+                          </span>
                         )}
                       </div>
                     </div>
@@ -338,7 +466,10 @@ export default function RoadmapsPage() {
                     <div className="flex items-center gap-2 shrink-0">
                       <div className="flex -space-x-1.5">
                         {rm.participantesChave.slice(0, 4).map((p, pi) => (
-                          <div key={pi} className="w-6 h-6 rounded-full bg-gradient-to-br from-violet-500/10 to-violet-600/5 border-2 border-white flex items-center justify-center text-[8px] font-bold text-violet-600">
+                          <div
+                            key={pi}
+                            className="w-6 h-6 rounded-full bg-gradient-to-br from-violet-500/10 to-violet-600/5 border-2 border-white flex items-center justify-center text-[8px] font-bold text-violet-600"
+                          >
                             {p.charAt(0)}
                           </div>
                         ))}
@@ -348,7 +479,10 @@ export default function RoadmapsPage() {
                           </div>
                         )}
                       </div>
-                      <motion.div animate={{ rotate: isOpen ? 180 : 0 }} transition={{ duration: 0.2 }}>
+                      <motion.div
+                        animate={{ rotate: isOpen ? 180 : 0 }}
+                        transition={{ duration: 0.2 }}
+                      >
                         <ChevronDown className="w-4 h-4 text-muted/40" />
                       </motion.div>
                     </div>
@@ -365,18 +499,21 @@ export default function RoadmapsPage() {
                         className="overflow-hidden"
                       >
                         <div className="border-t border-black/[0.04]">
-
                           {/* Phase navigation */}
                           {rm.fases.length > 1 && (
                             <div className="px-5 pt-4">
                               <div className="flex items-center gap-1 mb-1">
-                                <span className="text-[10px] font-semibold text-foreground uppercase tracking-wider">Fases</span>
+                                <span className="text-[10px] font-semibold text-foreground uppercase tracking-wider">
+                                  Fases
+                                </span>
                               </div>
                               <div className="flex gap-1.5">
                                 {rm.fases.map((fase, fi) => (
                                   <button
                                     key={fi}
-                                    onClick={() => setActivePhase(prev => ({ ...prev, [rm.id]: fi }))}
+                                    onClick={() =>
+                                      setActivePhase((prev) => ({ ...prev, [rm.id]: fi }))
+                                    }
                                     className={`flex-1 py-2 px-3 rounded-lg text-[11px] font-medium transition-all ${
                                       currentPhase === fi
                                         ? "bg-accent/10 text-accent border border-accent/20"
@@ -387,7 +524,9 @@ export default function RoadmapsPage() {
                                       <span className="font-bold">F{fase.fase}</span>
                                       <span className="opacity-70 truncate">{fase.periodo}</span>
                                     </div>
-                                    <div className="text-[9px] opacity-60 mt-0.5">{fase.marcos.length} marcos</div>
+                                    <div className="text-[9px] opacity-60 mt-0.5">
+                                      {fase.marcos.length} marcos
+                                    </div>
                                   </button>
                                 ))}
                               </div>
@@ -400,53 +539,94 @@ export default function RoadmapsPage() {
                               {/* Phase milestones */}
                               <div>
                                 <p className="text-[11px] font-semibold text-foreground uppercase tracking-wider mb-3">
-                                  Cronologia {rm.fases.length > 1 ? `· Fase ${rm.fases[currentPhase]?.fase}` : ""}
+                                  Cronologia{" "}
+                                  {rm.fases.length > 1
+                                    ? `· Fase ${rm.fases[currentPhase]?.fase}`
+                                    : ""}
                                 </p>
                                 <div className="space-y-0">
-                                  {(rm.fases[currentPhase]?.marcos || rm.cronologia).map((ev, ei, arr) => (
-                                    <div key={ei} className="flex gap-3 group">
-                                      <div className="flex flex-col items-center">
-                                        <div className={`w-2.5 h-2.5 rounded-full mt-1.5 shrink-0 ${ei === arr.length - 1 ? "bg-accent ring-4 ring-accent/10" : "bg-black/[0.12]"}`} />
-                                        {ei < arr.length - 1 && <div className="w-px flex-1 bg-black/[0.06] group-hover:bg-accent/20 transition-colors" />}
-                                      </div>
-                                      <div className="pb-4 min-w-0 flex-1">
-                                        <div className="flex items-center gap-2 mb-0.5">
-                                          <span className="text-[10px] text-muted font-medium bg-[#f5f5f7] px-1.5 py-0.5 rounded">{formatDate(ev.data)}</span>
-                                          {ei === arr.length - 1 && <span className="text-[9px] font-bold text-accent uppercase tracking-wider">Mais recente</span>}
+                                  {(rm.fases[currentPhase]?.marcos || rm.cronologia).map(
+                                    (ev, ei, arr) => (
+                                      <div key={ei} className="flex gap-3 group">
+                                        <div className="flex flex-col items-center">
+                                          <div
+                                            className={`w-2.5 h-2.5 rounded-full mt-1.5 shrink-0 ${ei === arr.length - 1 ? "bg-accent ring-4 ring-accent/10" : "bg-black/[0.12]"}`}
+                                          />
+                                          {ei < arr.length - 1 && (
+                                            <div className="w-px flex-1 bg-black/[0.06] group-hover:bg-accent/20 transition-colors" />
+                                          )}
                                         </div>
-                                        <p className="text-[13px] font-medium text-foreground mt-1">{ev.titulo}</p>
-                                        {ev.resumo && <p className="text-[12px] text-muted leading-relaxed mt-1">{ev.resumo}</p>}
-                                        {/* Show actions for this milestone */}
-                                        {"acoes" in ev && (ev as Phase["marcos"][0]).acoes?.length > 0 && (
-                                          <div className="mt-2 space-y-1">
-                                            {(ev as Phase["marcos"][0]).acoes.slice(0, 3).map((a, ai) => (
-                                              <div key={ai} className="flex items-start gap-1.5">
-                                                <CheckCircle2 className="w-3 h-3 text-emerald-500 mt-0.5 shrink-0" />
-                                                <span className="text-[11px] text-muted">{a}</span>
-                                              </div>
-                                            ))}
-                                            {(ev as Phase["marcos"][0]).acoes.length > 3 && (
-                                              <span className="text-[10px] text-muted/50 pl-4.5">+{(ev as Phase["marcos"][0]).acoes.length - 3} mais</span>
+                                        <div className="pb-4 min-w-0 flex-1">
+                                          <div className="flex items-center gap-2 mb-0.5">
+                                            <span className="text-[10px] text-muted font-medium bg-[#f5f5f7] px-1.5 py-0.5 rounded">
+                                              {formatDate(ev.data)}
+                                            </span>
+                                            {ei === arr.length - 1 && (
+                                              <span className="text-[9px] font-bold text-accent uppercase tracking-wider">
+                                                Mais recente
+                                              </span>
                                             )}
                                           </div>
-                                        )}
+                                          <p className="text-[13px] font-medium text-foreground mt-1">
+                                            {ev.titulo}
+                                          </p>
+                                          {ev.resumo && (
+                                            <p className="text-[12px] text-muted leading-relaxed mt-1">
+                                              {ev.resumo}
+                                            </p>
+                                          )}
+                                          {/* Show actions for this milestone */}
+                                          {"acoes" in ev &&
+                                            (ev as Phase["marcos"][0]).acoes?.length > 0 && (
+                                              <div className="mt-2 space-y-1">
+                                                {(ev as Phase["marcos"][0]).acoes
+                                                  .slice(0, 3)
+                                                  .map((a, ai) => (
+                                                    <div
+                                                      key={ai}
+                                                      className="flex items-start gap-1.5"
+                                                    >
+                                                      <CheckCircle2 className="w-3 h-3 text-emerald-500 mt-0.5 shrink-0" />
+                                                      <span className="text-[11px] text-muted">
+                                                        {a}
+                                                      </span>
+                                                    </div>
+                                                  ))}
+                                                {(ev as Phase["marcos"][0]).acoes.length > 3 && (
+                                                  <span className="text-[10px] text-muted/50 pl-4.5">
+                                                    +{(ev as Phase["marcos"][0]).acoes.length - 3}{" "}
+                                                    mais
+                                                  </span>
+                                                )}
+                                              </div>
+                                            )}
+                                        </div>
                                       </div>
-                                    </div>
-                                  ))}
+                                    )
+                                  )}
                                 </div>
                               </div>
 
                               {/* Key decisions */}
                               {rm.decisoesChave.length > 0 && (
                                 <div>
-                                  <p className="text-[11px] font-semibold text-foreground uppercase tracking-wider mb-2">Decisões-chave</p>
+                                  <p className="text-[11px] font-semibold text-foreground uppercase tracking-wider mb-2">
+                                    Decisões-chave
+                                  </p>
                                   <div className="space-y-2">
                                     {rm.decisoesChave.map((d, di) => (
-                                      <div key={di} className="flex gap-3 p-3 rounded-xl bg-amber-500/[0.04] border border-amber-500/10">
+                                      <div
+                                        key={di}
+                                        className="flex gap-3 p-3 rounded-xl bg-amber-500/[0.04] border border-amber-500/10"
+                                      >
                                         <Flag className="w-3.5 h-3.5 text-amber-500 mt-0.5 shrink-0" />
                                         <div>
-                                          <p className="text-[12px] text-foreground leading-relaxed">{d.decisao}</p>
-                                          <p className="text-[10px] text-muted mt-1">{formatDate(d.data)} · {d.reuniao}</p>
+                                          <p className="text-[12px] text-foreground leading-relaxed">
+                                            {d.decisao}
+                                          </p>
+                                          <p className="text-[10px] text-muted mt-1">
+                                            {formatDate(d.data)} · {d.reuniao}
+                                          </p>
                                         </div>
                                       </div>
                                     ))}
@@ -459,11 +639,15 @@ export default function RoadmapsPage() {
                             <div className="space-y-4">
                               {/* Participants */}
                               <div className="bg-[#f8f9fb] rounded-xl p-4">
-                                <p className="text-[10px] font-semibold text-foreground uppercase tracking-wider mb-2">Participantes-chave</p>
+                                <p className="text-[10px] font-semibold text-foreground uppercase tracking-wider mb-2">
+                                  Participantes-chave
+                                </p>
                                 <div className="space-y-1.5">
                                   {rm.participantesChave.map((p) => (
                                     <div key={p} className="flex items-center gap-2">
-                                      <div className="w-6 h-6 rounded-full bg-gradient-to-br from-violet-500/10 to-violet-600/5 flex items-center justify-center text-[9px] font-bold text-violet-600">{p.charAt(0)}</div>
+                                      <div className="w-6 h-6 rounded-full bg-gradient-to-br from-violet-500/10 to-violet-600/5 flex items-center justify-center text-[9px] font-bold text-violet-600">
+                                        {p.charAt(0)}
+                                      </div>
                                       <span className="text-[12px] text-foreground">{p}</span>
                                     </div>
                                   ))}
@@ -472,14 +656,20 @@ export default function RoadmapsPage() {
 
                               {/* Next steps */}
                               <div className="bg-[#f8f9fb] rounded-xl p-4">
-                                <p className="text-[10px] font-semibold text-foreground uppercase tracking-wider mb-2">Proximos passos</p>
+                                <p className="text-[10px] font-semibold text-foreground uppercase tracking-wider mb-2">
+                                  Proximos passos
+                                </p>
                                 <div className="space-y-1.5">
                                   {rm.proximosPassos.slice(0, 6).map((ps, i) => (
                                     <div key={i} className="flex items-start gap-2">
                                       <ArrowRight className="w-3 h-3 text-accent mt-0.5 shrink-0" />
                                       <div>
-                                        <p className="text-[11px] text-foreground leading-relaxed">{ps.acao}</p>
-                                        <p className="text-[9px] text-muted">{formatDate(ps.data)}</p>
+                                        <p className="text-[11px] text-foreground leading-relaxed">
+                                          {ps.acao}
+                                        </p>
+                                        <p className="text-[9px] text-muted">
+                                          {formatDate(ps.data)}
+                                        </p>
                                       </div>
                                     </div>
                                   ))}
@@ -488,32 +678,49 @@ export default function RoadmapsPage() {
 
                               {/* Tags */}
                               <div className="bg-[#f8f9fb] rounded-xl p-4">
-                                <p className="text-[10px] font-semibold text-foreground uppercase tracking-wider mb-2">Temas</p>
+                                <p className="text-[10px] font-semibold text-foreground uppercase tracking-wider mb-2">
+                                  Temas
+                                </p>
                                 <div className="flex flex-wrap gap-1">
                                   {rm.tagsPrincipais.map((t) => (
-                                    <span key={t} className="text-[10px] font-medium px-2 py-0.5 rounded-md bg-white border border-black/[0.04] text-muted">{t}</span>
+                                    <span
+                                      key={t}
+                                      className="text-[10px] font-medium px-2 py-0.5 rounded-md bg-white border border-black/[0.04] text-muted"
+                                    >
+                                      {t}
+                                    </span>
                                   ))}
                                 </div>
                               </div>
 
                               {/* Stats */}
                               <div className="bg-[#f8f9fb] rounded-xl p-4">
-                                <p className="text-[10px] font-semibold text-foreground uppercase tracking-wider mb-2">Numeros</p>
+                                <p className="text-[10px] font-semibold text-foreground uppercase tracking-wider mb-2">
+                                  Numeros
+                                </p>
                                 <div className="grid grid-cols-2 gap-2">
                                   <div>
-                                    <p className="text-lg font-bold text-foreground">{rm.totalReunioes}</p>
+                                    <p className="text-lg font-bold text-foreground">
+                                      {rm.totalReunioes}
+                                    </p>
                                     <p className="text-[9px] text-muted uppercase">Reunioes</p>
                                   </div>
                                   <div>
-                                    <p className="text-lg font-bold text-foreground">{rm.totalAcoes}</p>
+                                    <p className="text-lg font-bold text-foreground">
+                                      {rm.totalAcoes}
+                                    </p>
                                     <p className="text-[9px] text-muted uppercase">Acoes</p>
                                   </div>
                                   <div>
-                                    <p className="text-lg font-bold text-foreground">{rm.fases.length}</p>
+                                    <p className="text-lg font-bold text-foreground">
+                                      {rm.fases.length}
+                                    </p>
                                     <p className="text-[9px] text-muted uppercase">Fases</p>
                                   </div>
                                   <div>
-                                    <p className="text-lg font-bold text-foreground">{rm.decisoesChave.length}</p>
+                                    <p className="text-lg font-bold text-foreground">
+                                      {rm.decisoesChave.length}
+                                    </p>
                                     <p className="text-[9px] text-muted uppercase">Decisões</p>
                                   </div>
                                 </div>
@@ -535,12 +742,13 @@ export default function RoadmapsPage() {
               <p className="text-muted text-sm">Nenhum roadmap encontrado com esses filtros</p>
             </div>
           )}
-
         </motion.div>
       </main>
 
       <footer className="border-t border-black/[0.04] py-6 mt-12">
-        <p className="text-center text-[11px] text-muted/50">Grupo +351 · Roadmaps de Governança · Acesso restrito por link</p>
+        <p className="text-center text-[11px] text-muted/50">
+          Grupo +351 · Roadmaps de Governança · Acesso restrito por link
+        </p>
       </footer>
     </div>
   );
