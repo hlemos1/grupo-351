@@ -14,12 +14,20 @@ export function formatMonth(dateStr: string) {
 }
 
 export function daysSince(dateStr: string) {
-  const d = new Date(dateStr + "T12:00:00");
-  return Math.floor((Date.now() - d.getTime()) / (1000 * 60 * 60 * 24));
+  // Compara datas-calendário em UTC para não depender da hora do dia nem do fuso.
+  const then = new Date(dateStr + "T00:00:00Z").getTime();
+  const now = new Date();
+  const today = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
+  return Math.round((today - then) / (1000 * 60 * 60 * 24));
 }
 
 export function slugify(name: string) {
-  return name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+  return name
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
 }
 
 export function cleanName(name: string) {
@@ -66,7 +74,8 @@ export function healthScore(project: {
 }
 
 export function healthColor(score: number) {
-  if (score >= 70) return { ring: "stroke-emerald-500", text: "text-emerald-600", bg: "bg-emerald-500" };
+  if (score >= 70)
+    return { ring: "stroke-emerald-500", text: "text-emerald-600", bg: "bg-emerald-500" };
   if (score >= 40) return { ring: "stroke-amber-500", text: "text-amber-600", bg: "bg-amber-500" };
   return { ring: "stroke-red-500", text: "text-red-500", bg: "bg-red-500" };
 }
